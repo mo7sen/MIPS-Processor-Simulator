@@ -108,7 +108,7 @@ public class Assembler
 					syn = syn.replaceAll("a+", a);
 				if(s!=null)
 					syn = syn.replaceAll("s+", s);
-				System.out.println(syn);
+				InstructionMemory.add(syn);
 			}
 			byteCount += 4;
 	}
