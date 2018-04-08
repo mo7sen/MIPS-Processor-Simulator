@@ -40,5 +40,6 @@ public class Main
 //        String trial = "hello bitch";
 //        System.out.println(trial.substring(0,5));
 //        System.out.println(trial.substring(5,11));
+        System.out.println(SignExtend.extendUnsigned(Integer.toBinaryString((int)'c'), 8));
     }
 }

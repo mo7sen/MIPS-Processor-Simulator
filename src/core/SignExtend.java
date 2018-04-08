@@ -7,15 +7,23 @@ public class SignExtend extends ComponentVisual
 {
 	SignExtend()
 	{
-		this.setImage(new Image());
+		//this.setImage(new Image());
 		this.setLinesIn(1);
 		this.setLinesOut(1);
 	}
-	public static String extend(String num)
+	public static String extendSigned(String num, int size)
 	{
-		while(num.length() < 32)
+		while(num.length() < size)
 		{
 			num = num.charAt(0) + num;
+		}
+		return num;
+	}
+	public static String extendUnsigned(String num, int size)
+	{
+		while(num.length() < size)
+		{
+			num = "0" + num;
 		}
 		return num;
 	}

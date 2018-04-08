@@ -29,11 +29,39 @@ public class Memory
 		saveHWord(data.substring(16,32),address);
 	}
 
+	public static void saveString(String data)
+	{
+		char[] datach = data.toCharArray();
+		for(char c : datach)
+		{
+			Character.digit('c',2);
+			//saveByte();
+		}
+	}
+
 	public static String loadByte(Pointer address)
 	{
 		String ret = "";
 		for(int i = 0; i < 8; i++)
 			ret += (device[address.address][(address.offset * 8) + i])?"1":"0";
+		return ret;
+	}
+
+	public static String loadHWord(Pointer address)
+	{
+		String ret = "";
+		ret += loadByte(address);
+		address.moveByte(1);
+		ret += loadByte(address);
+		return ret;
+	}
+
+	public static String loadWord(Pointer address)
+	{
+		String ret = "";
+		ret += loadHWord(address);
+		address.moveByte(1);
+		ret += loadHWord(address);
 		return ret;
 	}
 
