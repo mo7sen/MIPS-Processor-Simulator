@@ -1,16 +1,14 @@
-package core;
+package core.Hardware;
 
 import java.util.ArrayList;
 
-public class Memory
-{
+public class Memory{
 	private static boolean device[][] = new boolean[2621440][32];
 	private static ArrayList<Variable> variables = new ArrayList<>();
 	private static ArrayList<Integer> usedMemory = new ArrayList<>();
 	private static Pointer instantiationPointer = new Pointer(0);
 
-	public static void saveByte(String data, Pointer address)
-	{
+	public static void saveByte(String data, Pointer address){
 		for (int i = 0; i < 8; i++)
 			device[address.address][(address.offset*8)+i] = (data.charAt(i) == '1');
 	}
@@ -31,10 +29,10 @@ public class Memory
 
 	public static String loadByte(Pointer address)
 	{
-		String ret = "";
+		StringBuilder ret = new StringBuilder();
 		for(int i = 0; i < 8; i++)
-			ret += (device[address.address][(address.offset * 8) + i])?"1":"0";
-		return ret;
+			ret.append((device[address.address][(address.offset * 8) + i]) ? "1" : "0");
+		return ret.toString();
 	}
 
 	static class Pointer
@@ -43,20 +41,17 @@ public class Memory
 		int offset;
 		void moveByte(int bytes)
 		{
-			if(bytes + offset >= 4)
-			{
+			if(bytes + offset >= 4){
 				address+=1;
 				bytes-=4;
 				moveByte(bytes);
 			}
-			else if (bytes + offset < 0)
-			{
+			else if (bytes + offset < 0){
 				address-=1;
 				bytes+=4;
 				moveByte(bytes);
 			}
-			else
-			{
+			else{
 				offset += bytes;
 			}
 		}

@@ -1,7 +1,6 @@
-package core;
+package core.Assembler;
 
-public enum Syntax
-{
+public enum Syntax {
 	ArithLog,
 	DivMult,
 	Shift,

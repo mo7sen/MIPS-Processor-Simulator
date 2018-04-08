@@ -1,62 +1,56 @@
-package core;
+package core.Assembler;
+
+import core.Hardware.Instruction;
+import core.Hardware.InstructionMemory;
+import core.Hardware.Label;
+import core.Hardware.Registers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Assembler
-{
+public class Assembler{
 	private static int byteCount;
 	static ArrayList<Label> labels = new ArrayList<>();
 
-	private static Label findLabel(String name)
-	{
-		for(Label l: labels)
-		{
-			if(l.getName().equals(name))
-				return l;
+	private static Label findLabel(String name) {
+		for(Label label: labels){
+			if(label.getName().equals(name))
+				return label;
 		}
 		return null;
 	}
 
-	static void assembleProgram(String s)
-	{
+	public static void assembleProgram(String s) {
 		String[] ss = s.split("\\n+");
-
 		byteCount = 0;
 		Arrays.stream(ss).forEach(Assembler::scanForLabels);
 		byteCount = 0;
 		Arrays.stream(ss).forEach(Assembler::assembleLine);
 	}
 
-	static void scanForLabels(String s)
-	{
+	public static void scanForLabels(String s){
 		s.trim();
 		int currentByte = byteCount;
-		if(s.contains(":"))
-		{
+		if(s.contains(":")){
 			String[] ss = s.split(":");
 			labels.add(new Label(ss[0].trim(),Integer.toBinaryString(byteCount)));
 			if(ss.length > 1)
 				scanForLabels(ss[1].trim());
-
 		}
 		if( byteCount == currentByte)
 			byteCount+=4;
 	}
 
-	private static void assembleLine(String str)
-	{
+	private static void assembleLine(String str) {
 		String s,t,d,imm,a;
 		str = str.trim();
 		s = t = d = imm = a = null;
 			String[] ss = str.replaceAll(",\\s+|\\s+", " ").split("\\s");
 			Instruction i = Instruction.searchInstruction(ss[0]);
-			if (i != null)
-			{
+			if (i != null){
 				String syn = i.getSyntaxAsString(i);
 				syn = syn.replaceAll("f+|o+", i.opc);
-				switch (i.syn)
-				{
+				switch (i.syn){
 					case ArithLog:
 					case JumpR:
 					case DivMult:
@@ -64,26 +58,26 @@ public class Assembler
 					case MoveFrom:
 					case MoveTo:
 					case Shift:
-						s = (i.syn == Syntax.JumpR || i.syn == Syntax.DivMult || i.syn == Syntax.MoveTo)?Registers.findRegister(ss[1]).address :(i.syn == Syntax.ShiftV)?Registers.findRegister(ss[3]).address:(i.syn != Syntax.MoveFrom && i.syn != Syntax.Shift)?Registers.findRegister(ss[2]).address:"00000";
-						t = (i.syn == Syntax.JumpR || i.syn == Syntax.MoveFrom || i.syn == Syntax.MoveTo) ? "00000" : (i.syn == Syntax.DivMult || i.syn == Syntax.ShiftV || i.syn == Syntax.Shift) ? Registers.findRegister(ss[2]).address : Registers.findRegister(ss[3]).address;
-						d = (i.syn == Syntax.JumpR || i.syn == Syntax.DivMult || i.syn == Syntax.MoveTo) ? "00000" : Registers.findRegister(ss[1]).address;
+						s = (i.syn == Syntax.JumpR || i.syn == Syntax.DivMult || i.syn == Syntax.MoveTo)? Registers.findRegister(ss[1]).getAddress() :(i.syn == Syntax.ShiftV)?Registers.findRegister(ss[3]).getAddress():(i.syn != Syntax.MoveFrom && i.syn != Syntax.Shift)?Registers.findRegister(ss[2]).getAddress():"00000";
+						t = (i.syn == Syntax.JumpR || i.syn == Syntax.MoveFrom || i.syn == Syntax.MoveTo) ? "00000" : (i.syn == Syntax.DivMult || i.syn == Syntax.ShiftV || i.syn == Syntax.Shift) ? Registers.findRegister(ss[2]).getAddress() : Registers.findRegister(ss[3]).getAddress();
+						d = (i.syn == Syntax.JumpR || i.syn == Syntax.DivMult || i.syn == Syntax.MoveTo) ? "00000" : Registers.findRegister(ss[1]).getAddress();
 						a = (i.syn == Syntax.Shift)?Integer.toBinaryString(Integer.parseInt(ss[3])):"00000";
 						break;
 					case LoadI:
 					case ArithLogI:
-						t = Registers.findRegister(ss[1]).address;
-						s = (i.syn == Syntax.LoadI) ?"00000" :Registers.findRegister(ss[2]).address;
+						t = Registers.findRegister(ss[1]).getAddress();
+						s = (i.syn == Syntax.LoadI) ?"00000" :Registers.findRegister(ss[2]).getAddress();
 						imm = (i.syn == Syntax.LoadI) ?Integer.toBinaryString(Integer.parseInt(ss[2])):Integer.toBinaryString(Integer.parseInt(ss[3]));
 						break;
 					case LoadStore:
-						t = Registers.findRegister(ss[1]).address;
+						t = Registers.findRegister(ss[1]).getAddress();
 						imm = Integer.toBinaryString(Integer.parseInt(ss[2].split("\\(")[0]));
-						s = Registers.findRegister(ss[2].split("\\(")[1].split("\\)")[0]).address;
+						s = Registers.findRegister(ss[2].split("\\(")[1].split("\\)")[0]).getAddress();
 						break;
 					case BranchZ:
 					case Branch:
-						s = Registers.findRegister(ss[1]).address;
-						t = Registers.findRegister(ss[2]).address;
+						s = Registers.findRegister(ss[1]).getAddress();
+						t = Registers.findRegister(ss[2]).getAddress();
 						Label l = findLabel(ss[3].trim());
 						if(l!=null)
 							imm = Integer.toBinaryString((Integer.parseInt(l.getAddress(),2) - byteCount)/4 - 1 );

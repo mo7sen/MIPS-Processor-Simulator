@@ -1,4 +1,7 @@
-package core;
+package core.Hardware;
+
+import core.Assembler.Encoding;
+import core.Assembler.Syntax;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -7,9 +10,9 @@ public class Instruction
 {
 	private static ArrayList<Instruction> instructions = new ArrayList<>();
 	String name;
-	Syntax syn;
+	public Syntax syn;
 	Encoding enc;
-	String opc;
+	public String opc;
 	public Instruction(String name, Syntax syn, Encoding enc, String opc)
 	{
 		this.name = name;

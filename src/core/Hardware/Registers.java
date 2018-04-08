@@ -1,18 +1,18 @@
-package core;
+package core.Hardware;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Registers
 {
 	static ArrayList<Registers> registers = new ArrayList<>();
 	String name;
 	String alias;
+
+
 	String address;
 	int currentValue;
-	public Registers(String name, String alias, String address)
-	{
+	public Registers(String name, String alias, String address) {
 		this.name = name;
 		this.alias = alias;
 		this.address = address;
@@ -21,11 +21,10 @@ public class Registers
 
 
 
-	static Registers findRegister(String s)
-	{
-		for (Registers r: registers)
-			if(r.name.equals(s))
-				return r;
+	public static Registers findRegister(String s) {
+		for (Registers register: registers)
+			if(register.name.equals(s))
+				return register;
 		for (Registers r: registers)
 			if(r.alias.equals(s))
 				return r;
@@ -34,25 +33,28 @@ public class Registers
 	}
 
 
-	public static void initialize(String file)
-	{
-		try
-		{
+	public static void initialize(String file) {
+		try {
 			FileReader fileReader = new FileReader(new File(file));
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			String line;
-			while((line = bufferedReader.readLine())!= null)
-			{
+			while((line = bufferedReader.readLine())!= null) {
 				String[] parts = line.split(",");
 				registers.add(new Registers(parts[0], parts[1], parts[2]));
 			}
-		} catch (FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e)
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }
 

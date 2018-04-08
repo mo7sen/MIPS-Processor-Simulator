@@ -1,22 +1,18 @@
-package core;
+package core.Hardware;
 
-public class Label
-{
+public class Label{
 	String name;
 	String address;
-	public Label(String name, String address)
-	{
+	public Label(String name, String address){
 		this.name = name;
 		while(address.length() < 32)
 			address = "0" + address;
 		this.address = address;
 	}
-	public String getName()
-	{
+	public String getName(){
 		return this.name;
 	}
-	public String getAddress()
-	{
+	public String getAddress(){
 		return this.address;
 	}
 }
