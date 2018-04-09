@@ -17,6 +17,10 @@ public class SignExtend extends ComponentVisual
 		{
 			num = num.charAt(0) + num;
 		}
+                while(num.length() > size)
+                {
+                        num = num.substring(1);
+                }
 		return num;
 	}
 	public static String extendUnsigned(String num, int size)
@@ -25,6 +29,10 @@ public class SignExtend extends ComponentVisual
 		{
 			num = "0" + num;
 		}
+                while(num.length() > size)
+                {
+                        num = num.substring(1);
+                }
 		return num;
 	}
 }
