@@ -9,6 +9,18 @@ public class Memory
 	private static ArrayList<Integer> usedMemory = new ArrayList<>();
 	private static Pointer instantiationPointer = new Pointer(0);
 
+	private static Variable findVariable(String var)
+	{
+		for(Variable v : variables)
+		{
+			if(v.name.equals(var))
+			{
+				return v;
+			}
+		}
+		return null;
+	}
+
 	public static void saveByte(String data, Pointer address)
 	{
 		for (int i = 0; i < 8; i++)
@@ -29,14 +41,41 @@ public class Memory
 		saveHWord(data.substring(16,32),address);
 	}
 
-	public static void saveString(String data)
+	public static void saveString(String data , String name)
 	{
 		char[] datach = data.toCharArray();
+		variables.add(new Variable(name, instantiationPointer));
+
 		for(char c : datach)
 		{
-			Character.digit('c',2);
-			//saveByte();
+			if(c != 0)
+			{
+				saveByte(SignExtend.extendUnsigned(Integer.toBinaryString((int) c), 8), instantiationPointer);
+				instantiationPointer.moveByte(1);
+			}
+			else
+				break;
 		}
+		saveByte("00000000",instantiationPointer);
+		instantiationPointer.moveByte(1);
+	}
+	public static String readString(String name)
+	{
+		String res = "";
+		char c;
+		Pointer address = findVariable(name).address;
+		while(true)
+		{
+			c = (char) Integer.parseInt(loadByte(address),2);
+			if((int)c != 0)
+			{
+				res += c;
+				address.moveByte(1);
+			}
+			else
+				break;
+		}
+		return res;
 	}
 
 	public static String loadByte(Pointer address)
@@ -63,42 +102,6 @@ public class Memory
 		address.moveByte(1);
 		ret += loadHWord(address);
 		return ret;
-	}
-
-	static class Pointer
-	{
-		int address;
-		int offset;
-		void moveByte(int bytes)
-		{
-			if(bytes + offset >= 4)
-			{
-				address+=1;
-				bytes-=4;
-				moveByte(bytes);
-			}
-			else if (bytes + offset < 0)
-			{
-				address-=1;
-				bytes+=4;
-				moveByte(bytes);
-			}
-			else
-			{
-				offset += bytes;
-			}
-		}
-		Pointer(int address)
-		{
-			this.address = address;
-			this.offset = address%4;
-		}
-	}
-
-	class Variable
-	{
-		String name, type;
-		int address;
 	}
 
 
@@ -154,3 +157,45 @@ public class Memory
 
 
 }
+class Pointer
+{
+	int address;
+	int offset;
+	void moveByte(int bytes)
+	{
+		if(bytes + offset >= 4)
+		{
+			address+=1;
+			bytes-=4;
+			moveByte(bytes);
+		}
+		else if (bytes + offset < 0)
+		{
+			address-=1;
+			bytes+=4;
+			moveByte(bytes);
+		}
+		else
+		{
+			offset += bytes;
+		}
+	}
+	Pointer(int address)
+	{
+		this.address = address;
+		this.offset = address%4;
+	}
+}
+
+class Variable
+{
+	String name;
+	Pointer address;
+	Variable(String name, Pointer address)
+	{
+		this.name = name;
+		this.address.offset = address.offset;
+		this.address.address = address.address;
+	}
+}
+
