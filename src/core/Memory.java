@@ -6,13 +6,12 @@ public class Memory
 {
 	private static boolean device[][] = new boolean[2621440][32];
 	private static ArrayList<Variable> variables = new ArrayList<>();
-	private static ArrayList<Integer> usedMemory = new ArrayList<>();
 	private static Pointer instantiationPointer = new Pointer(0);
 
 	private static Variable findVariable(String var)
 	{
 		for(Variable v : variables)
-		{
+                {
 			if(v.name.equals(var))
 			{
 				return v;
@@ -59,6 +58,19 @@ public class Memory
 		saveByte("00000000",instantiationPointer);
 		instantiationPointer.moveByte(1);
 	}
+        
+        public static void saveInt(int data, String name)
+        {
+            variables.add(new Variable(name, instantiationPointer));
+            saveWord(SignExtend.extendUnsigned(Integer.toBinaryString(data),32), instantiationPointer);
+            instantiationPointer.moveByte(1);
+        }
+        
+        public static int readInt(String name)
+        {
+            Pointer address = findVariable(name).address;
+            return Integer.parseUnsignedInt(loadWord(address),2);
+        }
 	public static String readString(String name)
 	{
 		String res = "";
@@ -103,37 +115,7 @@ public class Memory
 		ret += loadHWord(address);
 		return ret;
 	}
-
-
-
-
-
-
-
-
-
-
-
-	void initializeMemory() {}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 	static void showMemory()
 	{
 		for(int i = 0; i < 2621440; i++)
@@ -154,8 +136,6 @@ public class Memory
 			}
 		}
 	}
-
-
 }
 class Pointer
 {
@@ -191,11 +171,9 @@ class Variable
 {
 	String name;
 	Pointer address;
-	Variable(String name, Pointer address)
+	Variable(String name, Pointer a)
 	{
 		this.name = name;
-		this.address.offset = address.offset;
-		this.address.address = address.address;
+		this.address = new Pointer(a.address + a.offset);
 	}
 }
-
