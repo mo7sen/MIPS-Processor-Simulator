@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class InstructionMemory
 {
-	private static ArrayList<String> inMem = new ArrayList<>();
+	public static ArrayList<String> inMem = new ArrayList<>();
 	public static void add(String ins)
 	{
 		inMem.add(ins);

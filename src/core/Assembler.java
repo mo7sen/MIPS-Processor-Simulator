@@ -48,9 +48,14 @@ public class Assembler
 	{
 		String s,t,d,imm,a;
 		str = str.trim();
+		if(str.split(":").length > 1)
+		{
+			assembleLine(str.split(":",2)[1]);
+			return;
+		}
 		s = t = d = imm = a = null;
 			String[] ss = str.replaceAll(",\\s+|\\s+", " ").split("\\s");
-			Instruction i = Instruction.searchInstruction(ss[0]);
+			Instruction i = Instruction.searchInstruction(ss[0].trim());
 			if (i != null)
 			{
 				String syn = i.getSyntaxAsString(i);
@@ -93,10 +98,14 @@ public class Assembler
 						imm = l2.getAddress().substring(4,30);
 						break;
 				}
-				while (a!=null && a.length() < 5)
-					a = "0" + a;
-				while (imm!=null && imm.length() < 16)
-					imm = "0" + imm;
+
+				if (a!=null)
+					a = SignExtend.extendUnsigned(a, 5);
+				if (imm!=null)
+					imm = SignExtend.extendUnsigned(imm,16);
+				if  (imm!= null && i.syn == Syntax.Jump)
+					imm = SignExtend.extendUnsigned(imm,26);
+
 
 				if(imm!=null)
 					syn = syn.replaceAll("i+", imm);
@@ -108,9 +117,14 @@ public class Assembler
 					syn = syn.replaceAll("a+", a);
 				if(s!=null)
 					syn = syn.replaceAll("s+", s);
-				InstructionMemory.add(syn);
+				if(syn != null)
+				{
+					InstructionMemory.add(syn);
+					System.out.println(syn);
+				}
 			}
-			byteCount += 4;
+
+		byteCount += 4;
 	}
 }
 class Label

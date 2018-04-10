@@ -3,14 +3,22 @@ package core;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class SignExtend extends ComponentVisual
+public class SignExtend
 {
-	SignExtend()
+	Data input, output;
+	SignExtend(){}
+
+	public void bindInput(Data input)
 	{
-		//this.setImage(new Image());
-		this.setLinesIn(1);
-		this.setLinesOut(1);
+		this.input = input;
 	}
+
+	public Data getOutput()
+	{
+		output.write(extendSigned(input.read(),32));
+		return output;
+	}
+
 	public static String extendSigned(String num, int size)
 	{
 		while(num.length() < size)
@@ -23,6 +31,7 @@ public class SignExtend extends ComponentVisual
                 }
 		return num;
 	}
+
 	public static String extendUnsigned(String num, int size)
 	{
 		while(num.length() < size)
