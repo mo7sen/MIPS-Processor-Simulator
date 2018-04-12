@@ -5,62 +5,57 @@ import java.util.Arrays;
 
 public class Assembler
 {
-	private static int byteCount;
 	static ArrayList<Label> labels = new ArrayList<>();
+	static ArrayList<String> codeLines;
 
 	private static Label findLabel(String name)
 	{
-		for(Label l: labels)
+		for(Label lbl: labels)
 		{
-			if(l.getName().equals(name))
-				return l;
+			if(lbl.getName().equals(name))
+				return lbl;
 		}
 		return null;
 	}
 
 	static void assembleProgram(String s)
 	{
-		String[] ss = s.split("\\n+");
-
-		byteCount = 0;
-		Arrays.stream(ss).forEach(Assembler::scanForLabels);
-		byteCount = 0;
-		Arrays.stream(ss).forEach(Assembler::assembleLine);
+		codeLines = new ArrayList<>(Arrays.asList(s.replaceAll(":", ":\n").split("\\n+")));
+		labels.clear();
+		scanForLabels();
+		assembleLines();
 	}
 
-	static void scanForLabels(String s)
+	static void scanForLabels()
 	{
-		s.trim();
-		int currentByte = byteCount;
-		if(s.contains(":"))
+		for (int i = 0; i < codeLines.size();)
 		{
-			String[] ss = s.split(":");
-			labels.add(new Label(ss[0].trim(),Integer.toBinaryString(byteCount)));
-			if(ss.length > 1)
-				scanForLabels(ss[1].trim());
-
-		}
-		if( byteCount == currentByte)
-			byteCount+=4;
-	}
-
-	private static void assembleLine(String str)
-	{
-		String s,t,d,imm,a;
-		str = str.trim();
-		if(str.split(":").length > 1)
-		{
-			assembleLine(str.split(":",2)[1]);
-			return;
-		}
-		s = t = d = imm = a = null;
-			String[] ss = str.replaceAll(",\\s+|\\s+", " ").split("\\s");
-			Instruction i = Instruction.searchInstruction(ss[0].trim());
-			if (i != null)
+			if(codeLines.get(i).contains(":"))
 			{
-				String syn = i.getSyntaxAsString(i);
-				syn = syn.replaceAll("f+|o+", i.opc);
-				switch (i.syn)
+				labels.add(new Label(codeLines.get(i).split(":")[0].trim(), Integer.toBinaryString(i * 4)));
+				codeLines.set(i,"");
+				continue;
+			}
+			i++;
+		}
+		codeLines.removeIf(String::isEmpty);
+	}
+
+	private static void assembleLines()
+	{
+		for(int i = 0; i < codeLines.size(); i++)
+		{
+			String str = null;
+			String s, t, d, imm, a;
+			str = codeLines.get(i).trim();
+			s = t = d = imm = a = null;
+			String[] ss = str.replaceAll(",\\s+|\\s+", " ").split("\\s");
+			Instruction instruction = Instruction.searchInstruction(ss[0].trim());
+			if (instruction != null)
+			{
+				String syn = instruction.getSyntaxAsString(instruction);
+				syn = syn.replaceAll("f+|o+", instruction.opc);
+				switch (instruction.syn)
 				{
 					case ArithLog:
 					case JumpR:
@@ -69,16 +64,16 @@ public class Assembler
 					case MoveFrom:
 					case MoveTo:
 					case Shift:
-						s = (i.syn == Syntax.JumpR || i.syn == Syntax.DivMult || i.syn == Syntax.MoveTo)?Registers.findRegister(ss[1]).address :(i.syn == Syntax.ShiftV)?Registers.findRegister(ss[3]).address:(i.syn != Syntax.MoveFrom && i.syn != Syntax.Shift)?Registers.findRegister(ss[2]).address:"00000";
-						t = (i.syn == Syntax.JumpR || i.syn == Syntax.MoveFrom || i.syn == Syntax.MoveTo) ? "00000" : (i.syn == Syntax.DivMult || i.syn == Syntax.ShiftV || i.syn == Syntax.Shift) ? Registers.findRegister(ss[2]).address : Registers.findRegister(ss[3]).address;
-						d = (i.syn == Syntax.JumpR || i.syn == Syntax.DivMult || i.syn == Syntax.MoveTo) ? "00000" : Registers.findRegister(ss[1]).address;
-						a = (i.syn == Syntax.Shift)?Integer.toBinaryString(Integer.parseInt(ss[3])):"00000";
+						s = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? Registers.findRegister(ss[1]).address : (instruction.syn == Syntax.ShiftV) ? Registers.findRegister(ss[3]).address : (instruction.syn != Syntax.MoveFrom && instruction.syn != Syntax.Shift) ? Registers.findRegister(ss[2]).address : "00000";
+						t = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.MoveFrom || instruction.syn == Syntax.MoveTo) ? "00000" : (instruction.syn == Syntax.DivMult || instruction.syn == Syntax.ShiftV || instruction.syn == Syntax.Shift) ? Registers.findRegister(ss[2]).address : Registers.findRegister(ss[3]).address;
+						d = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? "00000" : Registers.findRegister(ss[1]).address;
+						a = (instruction.syn == Syntax.Shift) ? Integer.toBinaryString(Integer.parseInt(ss[3])) : "00000";
 						break;
 					case LoadI:
 					case ArithLogI:
 						t = Registers.findRegister(ss[1]).address;
-						s = (i.syn == Syntax.LoadI) ?"00000" :Registers.findRegister(ss[2]).address;
-						imm = (i.syn == Syntax.LoadI) ?Integer.toBinaryString(Integer.parseInt(ss[2])):Integer.toBinaryString(Integer.parseInt(ss[3]));
+						s = (instruction.syn == Syntax.LoadI) ? "00000" : Registers.findRegister(ss[2]).address;
+						imm = (instruction.syn == Syntax.LoadI) ? Integer.toBinaryString(Integer.parseInt(ss[2])) : Integer.toBinaryString(Integer.parseInt(ss[3]));
 						break;
 					case LoadStore:
 						t = Registers.findRegister(ss[1]).address;
@@ -90,41 +85,40 @@ public class Assembler
 						s = Registers.findRegister(ss[1]).address;
 						t = Registers.findRegister(ss[2]).address;
 						Label l = findLabel(ss[3].trim());
-						if(l!=null)
-							imm = Integer.toBinaryString((Integer.parseInt(l.getAddress(),2) - byteCount)/4 - 1 );
+						if (l != null)
+							imm = Integer.toBinaryString((Integer.parseInt(l.getAddress(), 2)/4) - (i + 1));
 					case Jump:
 						Label l2 = findLabel(ss[1]);
-						if(l2!=null)
-						imm = l2.getAddress().substring(4,30);
+						if (l2 != null)
+							imm = l2.getAddress().substring(4, 30);
 						break;
 				}
 
-				if (a!=null)
+				if (a != null)
 					a = SignExtend.extendUnsigned(a, 5);
-				if (imm!=null)
-					imm = SignExtend.extendUnsigned(imm,16);
-				if  (imm!= null && i.syn == Syntax.Jump)
-					imm = SignExtend.extendUnsigned(imm,26);
+				if (imm != null)
+					imm = SignExtend.extendUnsigned(imm, 16);
+				if (imm != null && instruction.syn == Syntax.Jump)
+					imm = SignExtend.extendUnsigned(imm, 26);
 
 
-				if(imm!=null)
+				if (imm != null)
 					syn = syn.replaceAll("i+", imm);
-				if(d!=null)
+				if (d != null)
 					syn = syn.replaceAll("d+", d);
-				if(t!=null)
-				syn = syn.replaceAll("t+", t);
-				if(a!=null)
+				if (t != null)
+					syn = syn.replaceAll("t+", t);
+				if (a != null)
 					syn = syn.replaceAll("a+", a);
-				if(s!=null)
+				if (s != null)
 					syn = syn.replaceAll("s+", s);
-				if(syn != null)
+				if (syn != null)
 				{
 					InstructionMemory.add(syn);
 					System.out.println(syn);
 				}
 			}
-
-		byteCount += 4;
+		}
 	}
 }
 class Label
@@ -147,26 +141,9 @@ class Label
 		return this.address;
 	}
 }
+
 enum Encoding
-{
-	Register,
-	Immediate,
-	Jump
-}
+{Register,Immediate,Jump}
+
 enum Syntax
-{
-	ArithLog,
-	DivMult,
-	Shift,
-	ShiftV,
-	JumpR,
-	MoveFrom,
-	MoveTo,
-	ArithLogI,
-	LoadI,
-	Branch,
-	BranchZ,
-	LoadStore,
-	Jump,
-	Trap
-}
+{ArithLog,DivMult,Shift,ShiftV,JumpR,MoveFrom,MoveTo,ArithLogI,LoadI,Branch,BranchZ,LoadStore,Jump,Trap}
