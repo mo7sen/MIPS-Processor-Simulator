@@ -39,6 +39,17 @@ public class Memory
 		address.moveByte(1);
 		saveHWord(data.substring(16,32),address);
 	}
+	
+	public static void saveArrayEmpty(int sizeBytes,  String name) 
+	{
+		variables.add(new Variable(name, instantiationPointer));
+		instantiationPointer.moveByte(sizeBytes);
+	} 
+	
+	
+	
+		
+	
 
 	public static void saveString(String data , String name)
 	{

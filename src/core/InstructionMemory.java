@@ -4,7 +4,13 @@ import java.util.ArrayList;
 
 public class InstructionMemory
 {
-	private static ArrayList<String> inMem = new ArrayList<>();
+	static Data input, output;
+	public static ArrayList<String> inMem = new ArrayList<>();
+
+	public static void getOutput()
+	{
+		output = new Data(read(Integer.parseInt(input.read())));
+	}
 	public static void add(String ins)
 	{
 		inMem.add(ins);
