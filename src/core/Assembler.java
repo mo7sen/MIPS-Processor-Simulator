@@ -7,7 +7,10 @@ public class Assembler
 {
 	static ArrayList<Label> labels = new ArrayList<>();
 	static ArrayList<String> codeLines;
+	static Arraylist<String> directiveLines;
+	
 
+	
 	private static Label findLabel(String name) // finds the address of a label
 	{
 		for(Label lbl: labels)
@@ -20,7 +23,10 @@ public class Assembler
 
 	static void assembleProgram(String s)
 	{
-		codeLines = new ArrayList<>(Arrays.asList(s.replaceAll(":", ":\n").split("\\n+")));	//Labels now take a whole line for themselves
+		if(s.contains(".text"));
+			String[] fn = s.split(".text");
+		directiveLines = new ArrayList<>(Arrays.asList(fn[0].trim().split("\\n+)));
+		codeLines = new ArrayList<>(Arrays.asList(fn[1].trim().replaceAll(":", ":\n").split("\\n+")));	//Labels now take a whole line for themselves
 		labels.clear();
 		scanForLabels();
 		assembleLines();
@@ -28,7 +34,7 @@ public class Assembler
 
 	static void scanForLabels()
 	{
-		for (int i = 0; i < codeLines.size();)
+		for (int i = 0; i < codeLines.size())
 		{
 			if(codeLines.get(i).contains(":"))
 			{
@@ -40,7 +46,38 @@ public class Assembler
 		}
 		codeLines.removeIf(String::isEmpty);
 	}
-
+										  
+static void scanForDirectives()
+{
+	for(int j=0; j<directiveLines.size;j++)
+	{
+		String varName = null;
+		String directiveCode = null;
+		String newLine = directiveLines.get(i);
+		if(newLine.contains(":"))
+		{
+			varName = newline.split(":")[0].trim();
+			if(newLine.contains("."))
+			directiveCode=newline.split(".",2)[1].split("\\s+")[0];
+		}
+		switch ( directiveCode)
+		{
+			case "align":
+				break;
+			case "ascii":
+				break;
+			case "asciiz":
+				break;
+			case "byte":
+				break;
+			case "double":
+				break;
+			case "float":
+				break;
+		}
+	}
+		
+}
 	private static void assembleLines()
 	{
 		for(int i = 0; i < codeLines.size(); i++)
@@ -147,3 +184,4 @@ enum Encoding
 
 enum Syntax
 {ArithLog,DivMult,Shift,ShiftV,JumpR,MoveFrom,MoveTo,ArithLogI,LoadI,Branch,BranchZ,LoadStore,Jump,Trap}
+
