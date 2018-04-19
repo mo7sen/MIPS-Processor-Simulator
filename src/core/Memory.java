@@ -7,6 +7,7 @@ public class Memory
 	private static boolean device[][] = new boolean[2621440][32];
 	private static ArrayList<Variable> variables = new ArrayList<>();
 	private static Pointer instantiationPointer = new Pointer(0);
+	public static Data address, readData, writeData, memRead, memWrite;
 
 	private static Variable findVariable(String var)
 	{
@@ -18,6 +19,11 @@ public class Memory
 			}
 		}
 		return null;
+	}
+
+	public static void refresh()
+	{
+
 	}
 
 	public static void saveByte(String data, Pointer address)

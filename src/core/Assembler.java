@@ -64,8 +64,8 @@ public class Assembler
 					case MoveFrom:
 					case MoveTo:
 					case Shift:
-						s = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? Registers.findRegister(ss[1]).address : (instruction.syn == Syntax.ShiftV) ? Registers.findRegister(ss[3]).address : (instruction.syn != Syntax.MoveFrom && instruction.syn != Syntax.Shift) ? Registers.findRegister(ss[2]).address : "00000";
-						t = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.MoveFrom || instruction.syn == Syntax.MoveTo) ? "00000" : (instruction.syn == Syntax.DivMult || instruction.syn == Syntax.ShiftV || instruction.syn == Syntax.Shift) ? Registers.findRegister(ss[2]).address : Registers.findRegister(ss[3]).address;
+						s = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? Registers.findRegister(ss[1]).address : (instruction.syn == Syntax.ShiftV) ? Registers.findRegister(ss[3]).address : (instruction.syn != Syntax.MoveFrom) ? Registers.findRegister(ss[2]).address : "00000";
+						t = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.MoveFrom || instruction.syn == Syntax.MoveTo || instruction.syn == Syntax.Shift) ? "00000" : (instruction.syn == Syntax.DivMult || instruction.syn == Syntax.ShiftV ) ? Registers.findRegister(ss[2]).address : Registers.findRegister(ss[3]).address;
 						d = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? "00000" : Registers.findRegister(ss[1]).address;
 						a = (instruction.syn == Syntax.Shift) ? Integer.toBinaryString(Integer.parseInt(ss[3])) : "00000";
 						break;
@@ -115,7 +115,6 @@ public class Assembler
 				if (syn != null)
 				{
 					InstructionMemory.add(syn);
-					System.out.println(syn);
 				}
 			}
 		}

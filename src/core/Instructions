@@ -1,50 +1,43 @@
-add,100000,ArithLog,Register
-addu,100001,ArithLog,Register
-addi,001000,ArithLogI,Immediate
-addiu,001001,ArithLogI,Immediate
-and,100100,ArithLog,Register
-andi,001100,ArithLogI,Immediate
-div,011010,DivMult,Register
-divu,011011,DivMult,Register
-mult,011000,DivMult,Register
-multu,011001,DivMult,Register
-nor,100111,ArithLog,Register
-or,100101,ArithLog,Register
-ori,001101,ArithLogI,Immediate
-sll,000000,Shift,Register
-sllv,000100,ShiftV,Register
-sra,000011,Shift,Register
-srav,000111,ShiftV,Register
-srl,000010,Shift,Register
-srlv,000110,ShiftV,Register
-sub,100010,ArithLog,Register
-subu,100011,ArithLog,Register
-xor,100110,ArithLog,Register
-xori,001110,ArithLogI,Immediate
-lhi,011001,LoadI,Immediate
-llo,011000,LoadI,Immediate
-slt,101010,ArithLog,Register
-sltu,101001,ArithLog,Register
-slti,001010,ArithLogI,Immediate
-sltiu,001011,ArithLogI,Immediate
-beq,000100,Branch,Immediate
-bgtz,000111,BranchZ,Immediate
-blez,000110,BranchZ,Immediate
-bne,000101,Branch,Immediate
-j,000010,Jump,Jump
-jal,000011,Jump,Jump
-jalr,001001,JumpR,Register
-jr,001000,JumpR,Register
-lb,100000,LoadStore,Immediate
-lbu,100100,LoadStore,Immediate
-lh,100001,LoadStore,Immediate
-lhu,100101,LoadStore,Immediate
-lw,100011,LoadStore,Immediate
-sb,101000,LoadStore,Immediate
-sh,101001,LoadStore,Immediate
-sw,101011,LoadStore,Immediate
-mfhi,010000,MoveFrom,Register
-mflo,010010,MoveFrom,Register
-mthi,010001,MoveTo,Register
-mtlo,010011,MoveTo,Register
-trap,011010,Trap,Jump
+add,100000,ArithLog,Register        // rd = rs + rt
+addu,100001,ArithLog,Register       // rd = rs + rt "UNSIGNED"
+addi,001000,ArithLogI,Immediate     // rd = rs + constant
+addiu,001001,ArithLogI,Immediate    // rd = rs + constant
+and,100100,ArithLog,Register        // rd = rs & rt
+andi,001100,ArithLogI,Immediate     // rd = rs & (unsigned) constant
+div,011010,DivMult,Register         // hi = rs % rt; lo = rs / rt;
+divu,011011,DivMult,Register        // hi = rs % rt; lo = rs / rt;
+mult,011000,DivMult,Register        // hilo = rs * rt
+multu,011001,DivMult,Register       // hilo = rs * rt
+nor,100111,ArithLog,Register        // rd = ~(rs | rt)
+or,100101,ArithLog,Register         // rd = rs | rt
+ori,001101,ArithLogI,Immediate      // rd = rs | (unsigned) constant
+lui,001111,LoadStore,Immediate      // rd = constant << 16
+sll,000000,Shift,Register           // rd = rt << amount
+sllv,000100,ShiftV,Register         // rd = rt << rs
+sra,000011,Shift,Register           // "SIGNED" rt >> amount
+srav,000111,ShiftV,Register         // rd = "SIGNED" rt >> rs
+srl,000010,Shift,Register           // rd = "UNSIGNED" rt >> amount
+srlv,000110,ShiftV,Register         // rd = "UNSIGNED" rt >> rs
+sub,100010,ArithLog,Register        // rd = rs - rt
+subu,100011,ArithLog,Register       // rd = rs - rt "UNSIGNED"
+xor,100110,ArithLog,Register        // rd = rs ^ rt
+xori,001110,ArithLogI,Immediate     // rd = rs ^ (unsigned) constant
+slt,101010,ArithLog,Register        // rd = (rs < rt)
+sltu,101001,ArithLog,Register       // rd = (rs < rt)
+slti,001010,ArithLogI,Immediate     // rd = (rs < constant)
+sltiu,001011,ArithLogI,Immediate    // rd = (rs < constant)
+beq,000100,Branch,Immediate         // if (rs == rt) goto label
+bne,000101,Branch,Immediate         // if (rs != rt) goto label
+j,000010,Jump,Jump                  // goto label
+jal,000011,Jump,Jump                // label()
+jr,001000,JumpR,Register            // (Used w/$31 to translate return)
+lb,100000,LoadStore,Immediate       // Load Byte
+lbu,100100,LoadStore,Immediate      // Load Byte "UNSIGNED"
+lh,100001,LoadStore,Immediate       // Load Half-Word
+lhu,100101,LoadStore,Immediate      // Load Half-Word "UNSIGNED"
+lw,100011,LoadStore,Immediate       // Load Word
+sb,101000,LoadStore,Immediate       // Save Byte
+sh,101001,LoadStore,Immediate       // Save Half-Word
+sw,101011,LoadStore,Immediate       // save Word
+mfhi,010000,MoveFrom,Register       // rd = hi
+mflo,010010,MoveFrom,Register       // rd = lo

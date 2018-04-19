@@ -2,7 +2,7 @@ package core;
 
 public class ALU
 {
-	static Data input1, input2, ALUOp, output;
+	static Data input1, input2, ALUOp, output, zero;
 
 	public static void doOp()
 	{
@@ -25,6 +25,9 @@ public class ALU
 				break;
 			case 7:     //Set less-than
 				output.write(SignExtend.extendUnsigned((in1 < in2)?"1":"0",32));
+				break;
+			case 12:    // NOR
+				output.write(SignExtend.extendUnsigned(Integer.toBinaryString(~( in1 | in2 )), 32));
 				default:
 		}
 	}
