@@ -74,6 +74,16 @@ static void scanForDirectives()
 				break;
 			case "float":
 				break;
+			case "half":
+				break;	
+			case "space":
+                           	break;
+			case "text":
+				break;
+			case "word":
+				break;
+		
+		
 		}
 	}
 		
