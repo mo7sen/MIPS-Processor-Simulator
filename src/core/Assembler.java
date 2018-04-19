@@ -46,7 +46,7 @@ public class Assembler
 		}
 		codeLines.removeIf(String::isEmpty);
 	}
-										  
+
 static void scanForDirectives()
 {
 	for(int j=0; j<directiveLines.size();j++)
@@ -66,6 +66,7 @@ static void scanForDirectives()
 
 				break;
 			case "ascii":
+
 				break;
 			case "asciiz":
 				break;
