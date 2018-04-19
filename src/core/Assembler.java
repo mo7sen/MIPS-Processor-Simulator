@@ -7,7 +7,7 @@ public class Assembler
 {
 	static ArrayList<Label> labels = new ArrayList<>();
 	static ArrayList<String> codeLines;
-	static Arraylist<String> directiveLines;
+	static ArrayList<String> directiveLines;
 	
 
 	
@@ -25,7 +25,7 @@ public class Assembler
 	{
 		if(s.contains(".text"));
 			String[] fn = s.split(".text");
-		directiveLines = new ArrayList<>(Arrays.asList(fn[0].trim().split("\\n+)));
+		directiveLines = new ArrayList<>(Arrays.asList(fn[0].trim().split("\\n+")));
 		codeLines = new ArrayList<>(Arrays.asList(fn[1].trim().replaceAll(":", ":\n").split("\\n+")));	//Labels now take a whole line for themselves
 		labels.clear();
 		scanForLabels();
@@ -34,7 +34,7 @@ public class Assembler
 
 	static void scanForLabels()
 	{
-		for (int i = 0; i < codeLines.size())
+		for (int i = 0; i < codeLines.size();)
 		{
 			if(codeLines.get(i).contains(":"))
 			{
@@ -49,16 +49,16 @@ public class Assembler
 										  
 static void scanForDirectives()
 {
-	for(int j=0; j<directiveLines.size;j++)
+	for(int j=0; j<directiveLines.size();j++)
 	{
 		String varName = null;
 		String directiveCode = null;
-		String newLine = directiveLines.get(i);
+		String newLine = directiveLines.get(j);
 		if(newLine.contains(":"))
 		{
-			varName = newline.split(":")[0].trim();
+			varName = newLine.split(":")[0].trim();
 			if(newLine.contains("."))
-			directiveCode=newline.split(".",2)[1].split("\\s+")[0];
+			directiveCode=newLine.split(".",2)[1].split("\\s+")[0];
 		}
 		switch ( directiveCode)
 		{

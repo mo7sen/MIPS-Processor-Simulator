@@ -57,7 +57,7 @@ public class Memory
 		
 	
 
-	public static void saveString(String data , String name)
+	public static void saveString(String data, String name, boolean nullTerminated)
 	{
 		char[] datach = data.toCharArray();
 		variables.add(new Variable(name, instantiationPointer));
@@ -72,8 +72,11 @@ public class Memory
 			else
 				break;
 		}
-		saveByte("00000000",instantiationPointer);
-		instantiationPointer.moveByte(1);
+		if(nullTerminated)
+		{
+			saveByte("00000000", instantiationPointer);
+			instantiationPointer.moveByte(1);
+		}
 	}
         
         public static void saveInt(int data, String name)

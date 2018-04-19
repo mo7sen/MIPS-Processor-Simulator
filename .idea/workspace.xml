@@ -17,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Memory.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Memory.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/core/Memory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state relative-caret-position="715">
+              <caret line="78" column="9" lean-forward="false" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -30,8 +30,8 @@
       <file leaf-file-name="Assembler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/Assembler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="871">
-              <caret line="68" column="185" lean-forward="false" selection-start-line="68" selection-start-column="185" selection-end-line="68" selection-end-column="185" />
+            <state relative-caret-position="13">
+              <caret line="36" column="45" lean-forward="false" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -116,11 +116,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ALU.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ALU.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/ALU.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="442">
-              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -161,13 +161,13 @@
         <option value="$PROJECT_DIR$/src/core/Instruction.java" />
         <option value="$PROJECT_DIR$/src/core/Instructions" />
         <option value="$PROJECT_DIR$/src/core/SignExtend.java" />
-        <option value="$PROJECT_DIR$/src/core/Memory.java" />
         <option value="$PROJECT_DIR$/src/core/Registers.java" />
         <option value="$PROJECT_DIR$/src/core/Shifter.java" />
         <option value="$PROJECT_DIR$/src/core/Controller.java" />
-        <option value="$PROJECT_DIR$/src/core/Assembler.java" />
         <option value="$PROJECT_DIR$/src/core/MasterController.java" />
         <option value="$PROJECT_DIR$/src/core/ALU.java" />
+        <option value="$PROJECT_DIR$/src/core/Assembler.java" />
+        <option value="$PROJECT_DIR$/src/core/Memory.java" />
       </list>
     </option>
   </component>
@@ -198,8 +198,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -223,11 +223,18 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="MIPS-Processor-Simulator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MIPS-Processor-Simulator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="Assembler.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -324,12 +331,13 @@
       <workItem from="1523719765034" duration="6838000" />
       <workItem from="1523789604586" duration="3784000" />
       <workItem from="1523992342415" duration="2044000" />
-      <workItem from="1524133937702" duration="1193000" />
+      <workItem from="1524133937702" duration="2373000" />
+      <workItem from="1524137323009" duration="342000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115251000" />
+    <option name="totallyTimeSpent" value="116773000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -653,14 +661,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/Memory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/core/Registers.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
@@ -707,14 +707,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/Assembler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="871">
-          <caret line="68" column="185" lean-forward="false" selection-start-line="68" selection-start-column="185" selection-end-line="68" selection-end-column="185" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/core/MasterController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="78">
@@ -729,7 +721,23 @@
     <entry file="file://$PROJECT_DIR$/src/core/ALU.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/Assembler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13">
+          <caret line="36" column="45" lean-forward="false" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/Memory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="715">
+          <caret line="78" column="9" lean-forward="false" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
           <folding />
         </state>
       </provider>
