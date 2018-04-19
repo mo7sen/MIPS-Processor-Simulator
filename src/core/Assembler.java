@@ -7,8 +7,11 @@ public class Assembler
 {
 	static ArrayList<Label> labels = new ArrayList<>();
 	static ArrayList<String> codeLines;
+	static Arraylist<String> directiveLines;
+	
 
-	private static Label findLabel(String name)
+	
+	private static Label findLabel(String name) // finds the address of a label
 	{
 		for(Label lbl: labels)
 		{
@@ -20,7 +23,10 @@ public class Assembler
 
 	static void assembleProgram(String s)
 	{
-		codeLines = new ArrayList<>(Arrays.asList(s.replaceAll(":", ":\n").split("\\n+")));
+		if(s.contains(".text"));
+			String[] fn = s.split(".text");
+		directiveLines = new ArrayList<>(Arrays.asList(fn[0].trim().split("\\n+)));
+		codeLines = new ArrayList<>(Arrays.asList(fn[1].trim().replaceAll(":", ":\n").split("\\n+")));	//Labels now take a whole line for themselves
 		labels.clear();
 		scanForLabels();
 		assembleLines();
@@ -28,7 +34,7 @@ public class Assembler
 
 	static void scanForLabels()
 	{
-		for (int i = 0; i < codeLines.size();)
+		for (int i = 0; i < codeLines.size())
 		{
 			if(codeLines.get(i).contains(":"))
 			{
@@ -40,7 +46,48 @@ public class Assembler
 		}
 		codeLines.removeIf(String::isEmpty);
 	}
-
+										  
+static void scanForDirectives()
+{
+	for(int j=0; j<directiveLines.size;j++)
+	{
+		String varName = null;
+		String directiveCode = null;
+		String newLine = directiveLines.get(i);
+		if(newLine.contains(":"))
+		{
+			varName = newline.split(":")[0].trim();
+			if(newLine.contains("."))
+			directiveCode=newline.split(".",2)[1].split("\\s+")[0];
+		}
+		switch ( directiveCode)
+		{
+			case "align":
+				break;
+			case "ascii":
+				break;
+			case "asciiz":
+				break;
+			case "byte":
+				break;
+			case "double":
+				break;
+			case "float":
+				break;
+			case "half":
+				break;	
+			case "space":
+                           	break;
+			case "text":
+				break;
+			case "word":
+				break;
+		
+		
+		}
+	}
+		
+}
 	private static void assembleLines()
 	{
 		for(int i = 0; i < codeLines.size(); i++)
@@ -69,25 +116,25 @@ public class Assembler
 						d = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? "00000" : Registers.findRegister(ss[1]).address;
 						a = (instruction.syn == Syntax.Shift) ? Integer.toBinaryString(Integer.parseInt(ss[3])) : "00000";
 						break;
-					case LoadI:
-					case ArithLogI:
+					case LoadI:	//Immediate
+					case ArithLogI:	//Immediate
 						t = Registers.findRegister(ss[1]).address;
 						s = (instruction.syn == Syntax.LoadI) ? "00000" : Registers.findRegister(ss[2]).address;
 						imm = (instruction.syn == Syntax.LoadI) ? Integer.toBinaryString(Integer.parseInt(ss[2])) : Integer.toBinaryString(Integer.parseInt(ss[3]));
 						break;
-					case LoadStore:
+					case LoadStore:	//Immediate
 						t = Registers.findRegister(ss[1]).address;
 						imm = Integer.toBinaryString(Integer.parseInt(ss[2].split("\\(")[0]));
 						s = Registers.findRegister(ss[2].split("\\(")[1].split("\\)")[0]).address;
 						break;
-					case BranchZ:
-					case Branch:
+					case BranchZ:	//Immediate
+					case Branch:	//Immediate
 						s = Registers.findRegister(ss[1]).address;
 						t = Registers.findRegister(ss[2]).address;
 						Label l = findLabel(ss[3].trim());
 						if (l != null)
 							imm = Integer.toBinaryString((Integer.parseInt(l.getAddress(), 2)/4) - (i + 1));
-					case Jump:
+					case Jump:	//Jump
 						Label l2 = findLabel(ss[1]);
 						if (l2 != null)
 							imm = l2.getAddress().substring(4, 30);
@@ -146,3 +193,4 @@ enum Encoding
 
 enum Syntax
 {ArithLog,DivMult,Shift,ShiftV,JumpR,MoveFrom,MoveTo,ArithLogI,LoadI,Branch,BranchZ,LoadStore,Jump,Trap}
+
