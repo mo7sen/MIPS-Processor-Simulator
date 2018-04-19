@@ -38,7 +38,7 @@ public class Instruction
 			String line;
 			while((line = bufferedReader.readLine())!= null)
 			{
-				String[] parts = line.split(",");
+				String[] parts = line.split("//")[0].trim().split(",");
 				instructions.add(new Instruction(parts[0], Syntax.valueOf(parts[2]), Encoding.valueOf(parts[3]), parts[1]));
 			}
 		} catch (FileNotFoundException e)

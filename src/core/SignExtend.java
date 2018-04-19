@@ -1,19 +1,11 @@
 package core;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 public class SignExtend
 {
-	Data input, output;
+	static Data input, output;
 	SignExtend(){}
 
-	public void bindInput(Data input)
-	{
-		this.input = input;
-	}
-
-	public Data getOutput()
+	public static Data getOutput()
 	{
 		output.write(extendSigned(input.read(),32));
 		return output;
