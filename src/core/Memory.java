@@ -7,6 +7,7 @@ public class Memory
 	private static boolean device[][] = new boolean[2621440][32];
 	private static ArrayList<Variable> variables = new ArrayList<>();
 	private static Pointer instantiationPointer = new Pointer(0);
+	public static Data address, readData, writeData, memRead, memWrite;
 
 	private static Variable findVariable(String var)
 	{
@@ -18,6 +19,11 @@ public class Memory
 			}
 		}
 		return null;
+	}
+
+	public static void refresh()
+	{
+
 	}
 
 	public static void saveByte(String data, Pointer address)
@@ -51,7 +57,7 @@ public class Memory
 		
 	
 
-	public static void saveString(String data , String name)
+	public static void saveString(String data, String name, boolean nullTerminated)
 	{
 		char[] datach = data.toCharArray();
 		variables.add(new Variable(name, instantiationPointer));
@@ -66,8 +72,11 @@ public class Memory
 			else
 				break;
 		}
-		saveByte("00000000",instantiationPointer);
-		instantiationPointer.moveByte(1);
+		if(nullTerminated)
+		{
+			saveByte("00000000", instantiationPointer);
+			instantiationPointer.moveByte(1);
+		}
 	}
         
         public static void saveInt(int data, String name)

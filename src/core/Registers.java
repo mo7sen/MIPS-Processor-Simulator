@@ -1,25 +1,38 @@
 package core;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Registers
 {
+	public Data readReg1, readReg2, writeReg, writeData, readData1, readData2, regWriteTrig;
 	static ArrayList<Registers> registers = new ArrayList<>();
-	String name;
-	String alias;
-	String address;
+	String name, alias, address;
 	int currentValue;
 	public Registers(String name, String alias, String address)
 	{
 		this.name = name;
 		this.alias = alias;
 		this.address = address;
-		currentValue = 0;
+		if(name.equals("$sp"))
+			currentValue = 2621439 * 4;
+			else
+				currentValue = 0;
 	}
 
+	public void setValue(int newValue)
+	{
+		this.currentValue = newValue;
+	}
 
+	static void refresh()
+	{
+
+	}
 
 	static Registers findRegister(String s)
 	{
@@ -33,8 +46,18 @@ public class Registers
 
 	}
 
+	static void setRegisterValue(String registerName, int newValue)
+	{
+		for (Registers r: registers)
+			if(r.name.equals(registerName))
+				r.setValue(newValue);
+		for (Registers r: registers)
+			if(r.alias.equals(registerName))
+				r.setValue(newValue);
+	}
 
-	public static void initialize(String file)
+
+	public static void initialize(String file)          //Reading all the Registers from a file with the data needed in it
 	{
 		try
 		{

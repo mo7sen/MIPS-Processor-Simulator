@@ -4,22 +4,7 @@ public class MasterController
 {
 	private static int PC = 0;
 	public static int offsetLines = 0;
-	public static String codeFile = "fact:\n" +
-                "addi $sp, $sp, 8\n" +
-                "sw $ra, 4($sp)\n" +
-                "sw $a0, 0($sp)\n" +
-                "slti $t0, $a0, 1\n" +
-                "beq $t0, $zero, L1\n" +
-                "addi $v0, $zero, 1\n" +
-                "addi $sp, $sp, 8\n" +
-                "jr $ra\n" +
-                "L1: addi $a0, $a0, 1\n" +
-                "jal fact\n" +
-                "lw $a0, 0($sp)\n" +
-                "lw $ra, 4($sp)\n" +
-                "addi $sp, $sp, 8\n" +
-                "mult $v0, $a0, $v0\n" +
-                "jr $ra";
+	public static String codeFile = "sub $t5, $t1, $t7";
 
 	public static void initiate()
 	{
@@ -39,6 +24,6 @@ public class MasterController
 
 	private static void execute(Data codeLine)
 	{
-
+		System.out.println(codeLine.read());
 	}
 }
