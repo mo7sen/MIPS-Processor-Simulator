@@ -30,19 +30,18 @@ public class Memory
 	{
 		for (int i = 0; i < 8; i++)
 			device[address.address][(address.offset*8)+i] = (data.charAt(i) == '1');
+		address.moveByte(1);
 	}
 
 	public static void saveHWord(String data, Pointer address)
 	{
 		saveByte(data.substring(0,8), address);
-		address.moveByte(1);
 		saveByte(data.substring(8,16),address);
 	}
 
 	public static void saveWord(String data, Pointer address)
 	{
 		saveHWord(data.substring(0,16),address);
-		address.moveByte(1);
 		saveHWord(data.substring(16,32),address);
 	}
 	
@@ -67,7 +66,6 @@ public class Memory
 			if(c != 0)
 			{
 				saveByte(SignExtend.extendUnsigned(Integer.toBinaryString((int) c), 8), instantiationPointer);
-				instantiationPointer.moveByte(1);
 			}
 			else
 				break;
@@ -75,22 +73,20 @@ public class Memory
 		if(nullTerminated)
 		{
 			saveByte("00000000", instantiationPointer);
-			instantiationPointer.moveByte(1);
 		}
 	}
         
-        public static void saveInt(int data, String name)
-        {
-            variables.add(new Variable(name, instantiationPointer));
-            saveWord(SignExtend.extendUnsigned(Integer.toBinaryString(data),32), instantiationPointer);
-            instantiationPointer.moveByte(1);
-        }
+	public static void saveInt(int data, String name)
+	{
+		variables.add(new Variable(name, instantiationPointer));
+		saveWord(SignExtend.extendUnsigned(Integer.toBinaryString(data),32), instantiationPointer);
+	}
         
-        public static int readInt(String name)
-        {
-            Pointer address = findVariable(name).address;
-            return Integer.parseUnsignedInt(loadWord(address),2);
-        }
+	public static int readInt(String name)
+	{
+		Pointer address = findVariable(name).address;
+		return Integer.parseUnsignedInt(loadWord(address),2);
+	}
 	public static String readString(String name)
 	{
 		String res = "";
