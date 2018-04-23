@@ -8,6 +8,7 @@ public class Assembler
 	static ArrayList<Label> labels = new ArrayList<>();
 	static ArrayList<String> codeLines;
 	static ArrayList<String> directiveLines;
+	static ArrayList<String> pseudoIns = new ArrayList<>(Arrays.asList(new String[]{"move","clear","li","la","b","bal","bgt","blt","bge","ble","bgtu","beqz","beq","bne","mul","div","rem","jalr","not","nop"}));
 	
 
 	
@@ -21,6 +22,14 @@ public class Assembler
 		return null;
 	}
 
+	private static boolean isPseudo(String s)
+	{
+		for(String in: pseudoIns)
+			if(s.equals(in))
+				return true;
+		return false;
+	}
+
 	static void assembleProgram(String s)
 	{
 		if(s.contains(".text"));
@@ -29,12 +38,13 @@ public class Assembler
 		codeLines = new ArrayList<>(Arrays.asList(fn[1].trim().replaceAll(":", ":\n").split("\\n+")));	//Labels now take a whole line for themselves
 		labels.clear();
 		scanForLabels();
+		replacePseudo();
 		assembleLines();
 	}
 
 	static void scanForLabels()
 	{
-		for (int i = 0; i < codeLines.size();)
+		for (int i = 0; i < codeLines.size())
 		{
 			if(codeLines.get(i).contains(":"))
 			{
@@ -46,25 +56,80 @@ public class Assembler
 		}
 		codeLines.removeIf(String::isEmpty);
 	}
-										  
+
+	static void replacePseudo()
+	{
+		int i = 0;
+		for(String codeLine: codeLines)
+		{
+			String[] sliced = codeLine.split("\\s+");
+			if(isPseudo(sliced[0]))
+				switch(sliced[0])
+				{
+					case "move":
+						break;
+					case "clear":
+						break;
+					case "li":
+						break;
+					case "la":
+						break;
+					case "b":
+						break;
+					case "bal":
+						break;
+					case "bgt":
+						break;
+					case "blt":
+						break;
+					case "bge":
+						break;
+					case "ble":
+						break;
+					case "bgtu":
+						break;
+					case "beqz":
+						break;
+					case "beq":
+						break;
+					case "bne":
+						break;
+					case "mul":
+						break;
+					case "div":
+						break;
+					case "rem":
+						break;
+					case "jalr":
+						break;
+					case "not":
+						break;
+					case "nop":
+				}
+
+		}
+	}
+
 static void scanForDirectives()
 {
 	for(int j=0; j<directiveLines.size();j++)
 	{
 		String varName = null;
-		String directiveCode = null;
-		String newLine = directiveLines.get(j);
+		String directiveName = null;
+		String newLine = directiveLines.get(i);
 		if(newLine.contains(":"))
 		{
 			varName = newLine.split(":")[0].trim();
 			if(newLine.contains("."))
-			directiveCode=newLine.split(".",2)[1].split("\\s+")[0];
+			directiveName=newLine.split(".",2)[1].split("\\s+")[0];
 		}
-		switch ( directiveCode)
+		switch ( directiveName)
 		{
 			case "align":
+
 				break;
 			case "ascii":
+
 				break;
 			case "asciiz":
 				break;
