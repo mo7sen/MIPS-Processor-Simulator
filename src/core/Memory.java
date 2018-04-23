@@ -8,6 +8,7 @@ public class Memory
 	private static ArrayList<Variable> variables = new ArrayList<>();
 	private static Pointer instantiationPointer = new Pointer(0);
 	public static Data address, readData, writeData, memRead, memWrite;
+	public static int startingMemoryOffset = 0;
 
 	private static Variable findVariable(String var)
 	{
@@ -24,6 +25,14 @@ public class Memory
 	public static void refresh()
 	{
 
+	}
+
+	public static void initialize()
+	{
+		instantiationPointer = new Pointer(startingMemoryOffset);
+		for(int i = 0; i < 2621440; i++)
+			for(int j = 0; j < 32; j++)
+				device[i][j] = false;
 	}
 
 	public static void saveByte(String data, Pointer address)
@@ -53,8 +62,23 @@ public class Memory
 	
 	
 	
-		
-	
+	public static void saveB(String name, String data)
+	{
+		variables.add(new Variable(name, instantiationPointer));
+		saveByte(data, instantiationPointer);
+	}
+
+	public static void saveW(String name, String data)
+	{
+		variables.add(new Variable(name, instantiationPointer));
+		saveWord(data, instantiationPointer);
+	}
+
+	public static void saveH(String name, String data)
+	{
+		variables.add((new Variable(name, instantiationPointer)));
+		saveHWord(data, instantiationPointer);
+	}
 
 	public static void saveString(String data, String name, boolean nullTerminated)
 	{
