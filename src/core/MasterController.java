@@ -12,6 +12,7 @@ public class MasterController
 		System.out.println("Instructions initialized");
 		Registers.initialize("src/core/Registers");
 		System.out.println("Registers initialized");
+		Memory.initialize();
 
 		Assembler.assembleProgram(codeFile);
 
