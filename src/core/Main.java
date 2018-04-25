@@ -7,6 +7,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 
+import java.math.BigInteger;
+
 
 public class Main
 {
@@ -43,11 +45,11 @@ public class Main
 //        String trial = "hello bitch";
 //        System.out.println(trial.substring(0,5));
 //        System.out.println(trial.substring(5,11));
-        StringProperty str = new SimpleStringProperty("hello world this is mo7sen");
-        StringProperty str2 = new SimpleStringProperty();
-        str2.bind(Bindings.createStringBinding(() -> str.get().substring(0,8), str));
-        System.out.println(str2.get());
-        str.set("1100110011001100");
-        System.out.println(str2.get());
+        int i1 = 15, i2 = -15;
+        String s1 = Integer.toBinaryString(i1);
+        String s2 = Integer.toBinaryString(i2);
+        String bigInteger =  new BigInteger(s1,2).multiply(new BigInteger(s2,2)).toString(2);
+        System.out.println(new BigInteger(String.valueOf(0)).compareTo(new BigInteger(String.valueOf(2))));
+        System.out.println(bigInteger);
     }
 }
