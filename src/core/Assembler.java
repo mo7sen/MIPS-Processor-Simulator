@@ -59,52 +59,103 @@ public class Assembler
 
 	static void replacePseudo()
 	{
-		int i = 0;
-		for(String codeLine: codeLines)
+		for(int i=0;i<codeLines.size();i++)
 		{
-			String[] sliced = codeLine.split("\\s+");
+			String[] pseudoData =null;
+			String newLine =codeLines.get(i);
+			String[] sliced = newLine.split("\\s+");
 			if(isPseudo(sliced[0]))
 				switch(sliced[0])
 				{
 					case "move":
+						pseudoData = sliced[1].split(",");
+						codeLines.set(i,"addiu "+pseudoData[0]+","+pseudoData[1]+"0");
 						break;
 					case "clear":
+						pseudoData = sliced[1].split("\\s+");
+						codeLines.set(i,"addu "+pseudoData[0]+"$zero,$zero");
 						break;
-					case "li":
+					/*case "li":
+
 						break;
 					case "la":
-						break;
+						pseudoData = sliced[1].split(",");
+						codeLines.set(i,"ori "
+						break;*/
 					case "b":
+						pseudoData = sliced[1].split("\\s+");
+						codeLines.set(i,"beq $zero, $zero,"+pseudoData);
 						break;
-					case "bal":
-						break;
+					/*case "bal":
+
+						break;*/
 					case "bgt":
+						pseudoData = sliced[1].split(",");
+						codeLines.set(i,"bne $at, $zero,"+pseudoData[2]);
+						codeLines.add(i,"slt $at,"+pseudoData[1]+","+pseudoData[0]);
 						break;
 					case "blt":
+						pseudoData = sliced[1].split(",");
+						codeLines.set(i,"bne $at, $zero,"+pseudoData[2]);
+						codeLines.add(i,"slt $at,"+pseudoData[0]+","+pseudoData[1]);
+
 						break;
 					case "bge":
+						pseudoData = sliced[1].split(",");
+						codeLines.set(i,"beq $at, $zero,"+pseudoData[2]);
+						codeLines.add("slt $at,"+pseudoData[0]+","+pseudoData[1]);
 						break;
 					case "ble":
+						pseudoData=sliced[1].split(",");
+						codeLines.set(i,"beq $at,$zero,"+pseudoData[2]);
+						codeLines.add(i,"slt $at,"+pseudoData[1]+','+pseudoData[0]);
 						break;
 					case "bgtu":
+						pseudoData=sliced[1].split(",");
+						codeLines.set(i,"bne $at, $zero,"+pseudoData[2]);
+						codeLines.add(i,"sltu $at,"+pseudoData[1]+','+pseudoData[0]);
 						break;
 					case "beqz":
+						pseudoData=sliced[1].split(",");
+						codeLines.set(i,"beq"+pseudoData[0]+",$zero,"+pseudoData[1]);
 						break;
 					case "beq":
+						pseudoData=sliced[1].split(",");
+						codeLines.set(i,"beq "+pseudoData[0]+", $at,"+pseudoData[2]);
+						codeLines.add(i,"ori ,$at, $zero"+pseudoData[1]);
 						break;
 					case "bne":
+						pseudoData=sliced[1].split(",");
+						codeLines.set(i,"beq "+pseudoData[0]+", $at,"+pseudoData[2]);
+						codeLines.add(i,"ori ,$at, $zero"+pseudoData[1]);
 						break;
 					case "mul":
+						pseudoData=sliced[1].split(",");
+						codeLines.set(i,"mflo "+pseudoData[0]);
+						codeLines.add(i,"mult "+pseudoData[1]+","+pseudoData[2]);
 						break;
 					case "div":
+						pseudoData=sliced[1].split(",");
+						codeLines.set(i,"mflo "+pseudoData[0]);
+						codeLines.add(i,"div "+pseudoData[1]+","+pseudoData[2]);
 						break;
 					case "rem":
+						pseudoData=sliced[1].split(",");
+						codeLines.set(i,"mfhi "+pseudoData[0]);
+						codeLines.add(i,"div "+pseudoData[1]+","+pseudoData[2])
+
 						break;
 					case "jalr":
+						pseudoData=sliced[1].split("\\s+",2);
+						codeLines.set(i,"jalr"+pseudoData[1]+",$ra");
 						break;
 					case "not":
+						pseudoData=sliced[1].split(",");
+
+						codeLines.set(i,"nor "+pseudoData[0]+","+pseudoData[1]+",$zero");
 						break;
 					case "nop":
+						codeLines.set(i,"sll $zero, $zero, 0");
 				}
 
 		}
@@ -116,6 +167,8 @@ static void scanForDirectives()
 	{
 		String varName = null;
 		String directiveName = null;
+		String directiveData = null;
+
 		String newLine = directiveLines.get(j);
 		if(newLine.contains(":"))
 		{
@@ -125,27 +178,33 @@ static void scanForDirectives()
 		}
 		switch ( directiveName)
 		{
-			case "align":
+			/*case "align":
 
-				break;
+				break;*/
 			case "ascii":
-
+				directiveData=newLine.split(".",2)[1].split("\"")[1];
+				Memory.saveString(directiveData,varName,false);
 				break;
 			case "asciiz":
+				directiveData=newLine.split(".",2)[1].split("\"")[1];
+				Memory.saveString(directiveData,varName,true);
 				break;
 			case "byte":
+				for(String b: directiveData.split(","))
+				Memory.saveB(varName,b.trim());
 				break;
-			case "double":
-				break;
-			case "float":
-				break;
+
 			case "half":
-				break;	
-			case "space":
-                           	break;
-			case "text":
+				for(String b: directiveData.split(","))
+				Memory.saveH(varName,b.trim());
 				break;
+			/*case "space":
+
+				break;*/
+
 			case "word":
+				for(String b: directiveData.split(","))
+					Memory.saveW(varName,b.trim());
 				break;
 		
 		
