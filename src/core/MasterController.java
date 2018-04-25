@@ -10,21 +10,20 @@ public class MasterController
 	{
 		Instruction.initialize("src/core/Instructions");
 		System.out.println("Instructions initialized");
-		Registers.initialize("src/core/Registers");
-		System.out.println("Registers initialized");
+		RegisterFile.initialize("src/core/Register");
+		System.out.println("Register initialized");
 		Memory.initialize();
 
 		Assembler.assembleProgram(codeFile);
 
 		while(PC < InstructionMemory.inMem.size() * 4)
 		{
-			execute(new Data(InstructionMemory.inMem.get(PC/4 + offsetLines)));
+//			execute(new Data(InstructionMemory.inMem.get(PC/4 + offsetLines)));
 			PC += 4;
 		}
 	}
 
-	private static void execute(Data codeLine)
-	{
-		System.out.println(codeLine.read());
-	}
+//	private static void execute(Data codeLine)
+//	{
+//	}
 }

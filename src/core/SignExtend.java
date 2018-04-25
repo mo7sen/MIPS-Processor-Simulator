@@ -1,14 +1,40 @@
 package core;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class SignExtend
 {
-	static Data input, output;
-	SignExtend(){}
-
-	public static Data getOutput()
+	StringProperty in, out, signFlag;
+	SignExtend()
 	{
-		output.write(extendSigned(input.read(),32));
-		return output;
+		in = new SimpleStringProperty();
+		out = new SimpleStringProperty();
+		signFlag = new SimpleStringProperty();
+	}
+
+	void bindIn(StringProperty stringProperty)
+	{
+		in.bind(stringProperty);
+	}
+
+	void bindSignFlag(StringProperty stringProperty)
+	{
+		signFlag.bind(stringProperty);
+	}
+
+	void getOut()
+	{
+		if(signFlag.get().equals("1"))
+		{
+			out.set(extendSigned(in.get(), 32));
+		}
+		else
+		{
+			out.set(extendUnsigned(in.get(), 32));
+		}
 	}
 
 	public static String extendSigned(String num, int size)

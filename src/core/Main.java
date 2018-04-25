@@ -1,10 +1,12 @@
 package core;
 
-import javax.rmi.CORBA.Util;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.BitSet;
+import com.sun.org.apache.xpath.internal.operations.And;
+import javafx.beans.binding.Binding;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
+
 
 public class Main
 {
@@ -12,7 +14,7 @@ public class Main
     public static void main(String[] args)
     {
 
-        MasterController.initiate();
+        //MasterController.initiate();
 //        String code = "fact:\n" +
 //                "addi $sp, $sp, 8\n" +
 //                "sw $ra, 4($sp)\n" +
@@ -41,5 +43,11 @@ public class Main
 //        String trial = "hello bitch";
 //        System.out.println(trial.substring(0,5));
 //        System.out.println(trial.substring(5,11));
+        StringProperty str = new SimpleStringProperty("hello world this is mo7sen");
+        StringProperty str2 = new SimpleStringProperty();
+        str2.bind(Bindings.createStringBinding(() -> str.get().substring(0,8), str));
+        System.out.println(str2.get());
+        str.set("1100110011001100");
+        System.out.println(str2.get());
     }
 }

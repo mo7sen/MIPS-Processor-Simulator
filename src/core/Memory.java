@@ -1,5 +1,10 @@
 package core;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.ArrayList;
 
 public class Memory
@@ -7,8 +12,20 @@ public class Memory
 	private static boolean device[][] = new boolean[2621440][32];
 	private static ArrayList<Variable> variables = new ArrayList<>();
 	private static Pointer instantiationPointer = new Pointer(0);
-	public static Data address, readData, writeData, memRead, memWrite;
 	public static int startingMemoryOffset = 0;
+	static StringProperty   addressIn = new SimpleStringProperty(),
+							dataOut = new SimpleStringProperty(),
+							dataIn = new SimpleStringProperty(),
+							memReadFlag = new SimpleStringProperty(),
+							memWriteFlag = new SimpleStringProperty();
+
+	static void execute()
+	{
+		if(memReadFlag.get().equals("1"))
+			saveWord(dataIn.get(), new Pointer(Integer.parseInt(addressIn.get(),2)));
+		if(memWriteFlag.get().equals("1"))
+			dataOut.set(loadWord(new Pointer(Integer.parseInt(addressIn.get(),2))));
+	}
 
 	private static Variable findVariable(String var)
 	{
@@ -202,7 +219,7 @@ class Pointer
 	}
 	Pointer(int address)
 	{
-		this.address = address;
+		this.address = address/4;
 		this.offset = address%4;
 	}
 }

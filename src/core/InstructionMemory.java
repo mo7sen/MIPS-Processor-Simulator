@@ -1,16 +1,26 @@
 package core;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.ArrayList;
 
 public class InstructionMemory
 {
-	static Data input, output;
+	static StringProperty addressIn = new SimpleStringProperty();
+	static StringProperty instOut = new SimpleStringProperty();
+
+	static void bindIn(StringProperty stringProperty)
+	{
+		addressIn.bind(stringProperty);
+	}
+
+	static void getOut()
+	{
+		instOut.set(read(Integer.parseInt(addressIn.get(), 2)));
+	}
 	public static ArrayList<String> inMem = new ArrayList<>();
 
-	public static void getOutput()
-	{
-		output = new Data(read(Integer.parseInt(input.read())));
-	}
 	public static void add(String ins)
 	{
 		inMem.add(ins);
