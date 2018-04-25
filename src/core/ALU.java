@@ -1,34 +1,52 @@
 package core;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class ALU
 {
-	static Data input1, input2, ALUOp, output, zero;
 
-	public static void doOp()
+	static StringProperty input1 = new SimpleStringProperty(),
+			input2 = new SimpleStringProperty(),
+			ALUOp = new SimpleStringProperty(),
+			output = new SimpleStringProperty(),
+			zero = new SimpleStringProperty(),
+			arithmetic = new SimpleStringProperty(),
+			shiftDirection = new SimpleStringProperty(),
+			signed = new SimpleStringProperty(),
+			shift = new SimpleStringProperty();
+
+	static void bindInput1(StringProperty stringProperty)
 	{
-		int in1 = Integer.parseInt(input1.read(),2);
-		int in2 = Integer.parseInt(input2.read(),2);
+		input1.bind(stringProperty);
+	}
+	static void bindInput2(StringProperty stringProperty)
+	{
+		input2.bind(stringProperty);
+	}
+	static void bindALUOp(StringProperty stringProperty)
+	{
+		ALUOp.bind(stringProperty);
+	}
+	static void bindArithmetic(StringProperty stringProperty)
+	{
+		arithmetic.bind(stringProperty);
+	}
+	static void bindShiftDirection(StringProperty stringProperty)
+	{
+		shiftDirection.bind(stringProperty);
+	}
+	static void bindSigned(StringProperty stringProperty)
+	{
+		signed.bind(stringProperty);
+	}
+	static void bindShift(StringProperty stringProperty)
+	{
+		shift.bind(stringProperty);
+	}
 
-		switch (Integer.parseInt(ALUOp.read(),2))
-		{
-			case 0:     //AND
-				output.write(SignExtend.extendUnsigned(Integer.toBinaryString(in1 & in2),32));
-				break;
-			case 1:     //OR
-				output.write(SignExtend.extendUnsigned(Integer.toBinaryString(in1 | in2),32));
-				break;
-			case 2:     //add
-				output.write(SignExtend.extendUnsigned(Integer.toBinaryString(in1 + in2),32));
-				break;
-			case 6:     //sub
-				output.write(SignExtend.extendUnsigned(Integer.toBinaryString(in1 - in2),32));
-				break;
-			case 7:     //Set less-than
-				output.write(SignExtend.extendUnsigned((in1 < in2)?"1":"0",32));
-				break;
-			case 12:    // NOR
-				output.write(SignExtend.extendUnsigned(Integer.toBinaryString(~( in1 | in2 )), 32));
-				default:
-		}
+	static void execute()
+	{
+
 	}
 }

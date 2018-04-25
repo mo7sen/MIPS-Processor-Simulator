@@ -44,7 +44,7 @@ public class Assembler
 
 	static void scanForLabels()
 	{
-		for (int i = 0; i < codeLines.size())
+		for (int i = 0; i < codeLines.size();)
 		{
 			if(codeLines.get(i).contains(":"))
 			{
@@ -168,6 +168,7 @@ static void scanForDirectives()
 		String varName = null;
 		String directiveName = null;
 		String directiveData = null;
+
 		String newLine = directiveLines.get(j);
 		if(newLine.contains(":"))
 		{
@@ -234,26 +235,26 @@ static void scanForDirectives()
 					case MoveFrom:
 					case MoveTo:
 					case Shift:
-						s = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? Registers.findRegister(ss[1]).address : (instruction.syn == Syntax.ShiftV) ? Registers.findRegister(ss[3]).address : (instruction.syn != Syntax.MoveFrom) ? Registers.findRegister(ss[2]).address : "00000";
-						t = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.MoveFrom || instruction.syn == Syntax.MoveTo || instruction.syn == Syntax.Shift) ? "00000" : (instruction.syn == Syntax.DivMult || instruction.syn == Syntax.ShiftV ) ? Registers.findRegister(ss[2]).address : Registers.findRegister(ss[3]).address;
-						d = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? "00000" : Registers.findRegister(ss[1]).address;
+						s = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? RegisterFile.findRegister(ss[1]).address : (instruction.syn == Syntax.ShiftV) ? RegisterFile.findRegister(ss[3]).address : (instruction.syn != Syntax.MoveFrom) ? RegisterFile.findRegister(ss[2]).address : "00000";
+						t = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.MoveFrom || instruction.syn == Syntax.MoveTo || instruction.syn == Syntax.Shift) ? "00000" : (instruction.syn == Syntax.DivMult || instruction.syn == Syntax.ShiftV ) ? RegisterFile.findRegister(ss[2]).address : RegisterFile.findRegister(ss[3]).address;
+						d = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? "00000" : RegisterFile.findRegister(ss[1]).address;
 						a = (instruction.syn == Syntax.Shift) ? Integer.toBinaryString(Integer.parseInt(ss[3])) : "00000";
 						break;
 					case LoadI:	//Immediate
 					case ArithLogI:	//Immediate
-						t = Registers.findRegister(ss[1]).address;
-						s = (instruction.syn == Syntax.LoadI) ? "00000" : Registers.findRegister(ss[2]).address;
+						t = RegisterFile.findRegister(ss[1]).address;
+						s = (instruction.syn == Syntax.LoadI) ? "00000" : RegisterFile.findRegister(ss[2]).address;
 						imm = (instruction.syn == Syntax.LoadI) ? Integer.toBinaryString(Integer.parseInt(ss[2])) : Integer.toBinaryString(Integer.parseInt(ss[3]));
 						break;
 					case LoadStore:	//Immediate
-						t = Registers.findRegister(ss[1]).address;
+						t = RegisterFile.findRegister(ss[1]).address;
 						imm = Integer.toBinaryString(Integer.parseInt(ss[2].split("\\(")[0]));
-						s = Registers.findRegister(ss[2].split("\\(")[1].split("\\)")[0]).address;
+						s = RegisterFile.findRegister(ss[2].split("\\(")[1].split("\\)")[0]).address;
 						break;
 					case BranchZ:	//Immediate
 					case Branch:	//Immediate
-						s = Registers.findRegister(ss[1]).address;
-						t = Registers.findRegister(ss[2]).address;
+						s = RegisterFile.findRegister(ss[1]).address;
+						t = RegisterFile.findRegister(ss[2]).address;
 						Label l = findLabel(ss[3].trim());
 						if (l != null)
 							imm = Integer.toBinaryString((Integer.parseInt(l.getAddress(), 2)/4) - (i + 1));
