@@ -60,7 +60,7 @@ public class Assembler
 	static void replacePseudo()
 	{
 		for(int i=0;i<codeLines.size();i++)
-		{
+		{	String c_lo =null;
 			String[] pseudoData =null;
 			String newLine =codeLines.get(i);
 			String[] sliced = newLine.split("\\s+");
@@ -75,13 +75,49 @@ public class Assembler
 						pseudoData = sliced[1].split("\\s+");
 						codeLines.set(i,"addu "+pseudoData[0]+"$zero,$zero");
 						break;
-					/*case "li":
+					case "li":
+						pseudoData = sliced[1].split(",");
+						int dec_1 = Integer.parseInt(pseudoData[1]);
+						String y =Integer.toBinaryString(dec_1);
+						if(y.length()<=16){
+						if(dec_1>=0)
+						{
+							for(int l =y.length();l<16;l++)
+							{
+							 c_lo="0"+y;
+							}
+						}
+						else for(int l =y.length();l<16;l++)
+						{
+							 c_lo="1"+y;
+						}}
+						else{
+							int s=y.length()-16;
+							 c_lo= y.substring(s);
 
+						}
+						codeLines.set(i,"addiu "+pseudoData[0]+",$zero,"+c_lo);
 						break;
 					case "la":
 						pseudoData = sliced[1].split(",");
-						codeLines.set(i,"ori "
-						break;*/
+						int dec = Integer.parseInt(pseudoData[1]);
+						String x =Integer.toBinaryString(dec);
+						if(dec>=0)
+						{
+							for(int l =x.length();l<31;l++)
+							{
+								x="0"+x;
+							}
+						}
+						else for(int l =x.length();l<31;l++)
+						{
+							x="1"+x;
+						}
+						String A_hi=x.substring(0,17);
+						String A_lo=x.substring(16);
+						codeLines.set(i,"ori "+pseudoData[0]+","+pseudoData[0]+','+A_lo);
+						codeLines.add(i,"lui"+pseudoData[0]+','+A_hi);
+						break;
 					case "b":
 						pseudoData = sliced[1].split("\\s+");
 						codeLines.set(i,"beq $zero, $zero,"+pseudoData);
@@ -190,27 +226,31 @@ static void scanForDirectives()
 				Memory.saveString(directiveData,varName,true);
 				break;
 			case "byte":
+				directiveData=newLine.split(".",2)[1].split("\\s+",2)[1];
 				for(String b: directiveData.split(","))
 				Memory.saveB(varName,b.trim());
 				break;
 
 			case "half":
+				directiveData=newLine.split(".",2)[1].split("\\s+",2)[1];
 				for(String b: directiveData.split(","))
 				Memory.saveH(varName,b.trim());
 				break;
-			/*case "space":
-
-				break;*/
-
+			case "space":
+				directiveData=newLine.split(".",2)[1].split("\\s+",2)[1];
+				int value = Integer.parseInt(directiveData);
+				Memory.saveArrayEmpty(value,varName);
+				break;
 			case "word":
+				directiveData=newLine.split(".",2)[1].split("\\s+",2)[1];
 				for(String b: directiveData.split(","))
 					Memory.saveW(varName,b.trim());
 				break;
-		
-		
+
+
 		}
 	}
-		
+
 }
 	private static void assembleLines()
 	{
