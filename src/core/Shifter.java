@@ -20,7 +20,7 @@ public class Shifter
 		in.bind(stringProperty);
 	}
 
-	void getOut()
+	void execute()
 	{
 		out.set(Integer.toBinaryString(Integer.parseInt(in.get(),2) << 2));
 	}

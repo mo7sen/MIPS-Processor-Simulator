@@ -62,8 +62,8 @@ public class Assembler
 		for(int i=0;i<codeLines.size();i++)
 		{
 			String[] pseudoData =null;
-			String newLine =codeLines.get(i);
-			String[] sliced = newLine.split("\\s+");
+			String newLine =codeLines.get(i).trim();
+			String[] sliced = newLine.split("\\s+", 2);
 			if(isPseudo(sliced[0]))
 				switch(sliced[0])
 				{
@@ -142,7 +142,7 @@ public class Assembler
 					case "rem":
 						pseudoData=sliced[1].split(",");
 						codeLines.set(i,"mfhi "+pseudoData[0]);
-						codeLines.add(i,"div "+pseudoData[1]+","+pseudoData[2])
+						codeLines.add(i,"div "+pseudoData[1]+","+pseudoData[2]);
 
 						break;
 					case "jalr":
@@ -178,9 +178,7 @@ static void scanForDirectives()
 		}
 		switch ( directiveName)
 		{
-			/*case "align":
 
-				break;*/
 			case "ascii":
 				directiveData=newLine.split(".",2)[1].split("\"")[1];
 				Memory.saveString(directiveData,varName,false);
@@ -198,9 +196,9 @@ static void scanForDirectives()
 				for(String b: directiveData.split(","))
 				Memory.saveH(varName,b.trim());
 				break;
-			/*case "space":
+			case "space":
 
-				break;*/
+				break;
 
 			case "word":
 				for(String b: directiveData.split(","))

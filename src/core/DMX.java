@@ -35,8 +35,7 @@ public class DMX
 		for(StringProperty stringProperty : selectBits)
 			selection += stringProperty.get();
 		for(StringProperty stringProperty : outputs)
-			if(stringProperty.isBound())
-				stringProperty.unbind();
+			stringProperty.set(null);
 		selection = new StringBuilder(selection).reverse().toString();
 		outputs.get(Integer.parseInt(selection, 2)).bind(input);
 	}
