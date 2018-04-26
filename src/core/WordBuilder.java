@@ -16,7 +16,7 @@ public class WordBuilder
 	static void execute()
 	{
 		int offset = Integer.parseInt(offsetIn.get());
-		String reserveValue = null, wordFinal = null, wordReserved = null;
+		String reserveValue = null, wordReserved = null;
 		if(hOp.get().equals("1"))
 		{
 			reserveValue = placeReserveHalf[offset];
@@ -24,12 +24,12 @@ public class WordBuilder
 				return;
 		}
 		else
-		{
 			reserveValue = placeReserveByte[offset];
-		}
-		wordReserved = Integer.toBinaryString(Integer.parseInt(reserveValue,2) & Integer.parseUnsignedInt(halfIn.get(),2));
+		wordReserved = Integer.toBinaryString(Integer.parseInt(reserveValue,2) & Integer.parseUnsignedInt(wordIn.get(),2));
+		if(hOp.get().equals("1"))
+			wordOut.set(Integer.toBinaryString((Integer.parseInt(halfIn.get(),2) << ((3 - offset) * 8)) | Integer.parseInt(wordReserved)));
 
-
-
+		else
+			wordOut.set(Integer.toBinaryString((Integer.parseInt(byteIn.get(),2) << ((3 - offset) * 8)) | Integer.parseInt(wordReserved)));
 	}
 }
