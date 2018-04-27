@@ -1,5 +1,6 @@
 package core;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -47,6 +48,10 @@ public class ALU
 
 	static void execute()
 	{
+		switch (Integer.parseUnsignedInt(ALUOp.get(), 2))
+		{
 
+		}
+		zero.set((Integer.parseInt(output.get()) == 0)?"1":"0");
 	}
 }

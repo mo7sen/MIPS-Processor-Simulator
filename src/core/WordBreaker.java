@@ -17,6 +17,15 @@ public class WordBreaker
 	static void execute()
 	{
 		int offset = Integer.parseUnsignedInt(offsetIn.get(), 2);
-
+		if(signedFlag.get().equals("1"))
+		{
+			byteOut.set(SignExtend.extendSigned(Integer.toBinaryString(Integer.parseInt(wordIn.get()) & Integer.parseInt(bytePicker[offset])), 32));
+			halfOut.set(SignExtend.extendSigned(Integer.toBinaryString(Integer.parseInt(wordIn.get()) & Integer.parseInt(halfPicker[offset])), 32));
+		}
+		else
+		{
+			byteOut.set(SignExtend.extendUnsigned(Integer.toBinaryString(Integer.parseInt(wordIn.get()) & Integer.parseInt(bytePicker[offset])), 32));
+			halfOut.set(SignExtend.extendUnsigned(Integer.toBinaryString(Integer.parseInt(wordIn.get()) & Integer.parseInt(halfPicker[offset])), 32));
+		}
 	}
 }
