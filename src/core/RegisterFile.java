@@ -67,9 +67,9 @@ class Register
 		this.alias = alias;
 		this.address = address;
 		if(name.equals("$sp"))
-			currentValue = Integer.toBinaryString(2621439 * 4);
+			currentValue = SignExtend.extendUnsigned(Integer.toBinaryString(2621439 * 4), 32);
 		else
-			currentValue = Integer.toBinaryString(0);
+			currentValue = "00000000000000000000000000000000";
 	}
 
 	public void setValue(String newValue)

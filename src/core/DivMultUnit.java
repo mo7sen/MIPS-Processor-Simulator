@@ -4,6 +4,8 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.math.BigInteger;
+
 public class DivMultUnit
 {
 	static StringProperty input1 = new SimpleStringProperty();
@@ -18,12 +20,19 @@ public class DivMultUnit
 	static StringProperty signed = new SimpleStringProperty();
 	static StringProperty hi = new SimpleStringProperty();
 	static StringProperty lo = new SimpleStringProperty();
+	static String hiLo = null;
+
 	static void execute()
 	{
 		if(write.get().equals("1"))
 		{
-			hi.set(inHi.get());
-			lo.set(inLo.get());
+
+			if(inHi.get()!=null)
+				hi.set(inHi.get());
+
+			if(inLo.get()!=null)
+				lo.set(inLo.get());
+
 		}
 
 		if(active.get().equals("1"))
@@ -32,18 +41,35 @@ public class DivMultUnit
 			{
 				if(signed.get().equals("1"))
 				{
-					hi = Integer.toBinaryString(Integer.parseInt(input1, 2)Integer.parseInt(input2, 2));
-					lo = Integer.toBinaryString(Integer.parseInt(input1, 2)Integer.parseInt(input2, 2));
+					hi.set(Integer.toBinaryString(Integer.parseInt(input1.get(), 2)%Integer.parseInt(input2.get(), 2)));
+					lo.set(Integer.toBinaryString(Integer.parseInt(input1.get(), 2)/Integer.parseInt(input2.get(), 2)));
 				}
 				else
 				{
-					hi = Integer.toBinaryString(Integer.parseUnsignedInt(input1, 2)Integer.parseUnsignedInt(input2, 2));
-					lo = Integer.toBinaryString(Integer.parseUnsignedInt(input1, 2)Integer.parseUnsignedInt(input2, 2));
+					hi.set(Integer.toBinaryString(Integer.parseUnsignedInt(input1.get(), 2)%Integer.parseUnsignedInt(input2.get(), 2)));
+					lo.set(Integer.toBinaryString(Integer.parseUnsignedInt(input1.get(), 2)/Integer.parseUnsignedInt(input2.get(), 2)));
 				}
 			}
 			else
 			{
+				if(signed.get().equals("1"))
+				{
+					BigInteger multResult = new BigInteger(input1.get(),2).multiply(new BigInteger(input2.get(),2));
+					if(multResult.compareTo(new BigInteger(String.valueOf(0)))==1)
+						hiLo = SignExtend.extendUnsigned(multResult.toString(2), 64);
+					else
+						hiLo = SignExtend.extendSigned(multResult.toString(2), 64);
 
+					hi.set(hiLo.substring(0, 32));
+					lo.set(hiLo.substring(32));
+				}
+				else
+				{
+					BigInteger multResult = new BigInteger(String.valueOf(Integer.parseUnsignedInt(input1.get(),2))).multiply(new BigInteger(String.valueOf(Integer.parseUnsignedInt(input2.get(),2))));
+					hiLo = SignExtend.extendUnsigned(multResult.toString(2), 64);
+					hi.set(hiLo.substring(0, 32));
+					lo.set(hiLo.substring(32));
+				}
 			}
 		}
 		if(!outHi.isBound())

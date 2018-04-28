@@ -5,7 +5,6 @@ import javafx.beans.property.StringProperty;
 
 public class ProgramCounter
 {
-	static StringProperty address = new SimpleStringProperty();
-
-
+	static StringProperty addressIn = new SimpleStringProperty();
+	static StringProperty addressOut = new SimpleStringProperty();
 }
