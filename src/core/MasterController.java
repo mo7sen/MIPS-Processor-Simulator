@@ -6,21 +6,24 @@ public class MasterController
 	public static int offsetLines = 0;
 	public static String codeFile = "sub $t5, $t1, $t7";
 
-	public static void initiate()
+	public static void prepareMips()
 	{
-		Instruction.initialize("src/core/Instructions");
-		System.out.println("Instructions initialized");
-		RegisterFile.initialize("src/core/Register");
-		System.out.println("Register initialized");
-		Memory.initialize();
+		ComponentManager.provoke();
+	}
 
+	public static void run()
+	{
 		Assembler.assembleProgram(codeFile);
+	}
 
-		while(PC < InstructionMemory.inMem.size() * 4)
-		{
-//			execute(new Data(InstructionMemory.inMem.get(PC/4 + offsetLines)));
-			PC += 4;
-		}
+	public static void execute()
+	{
+
+	}
+
+	public static void reset()
+	{
+
 	}
 
 //	private static void execute(Data codeLine)

@@ -12,6 +12,7 @@ import java.math.BigInteger;
 
 public class Main
 {
+    static StringProperty s1, s0;
 
     public static void main(String[] args)
     {
@@ -33,7 +34,7 @@ public class Main
 //                "addi $sp, $sp, 8\n" +
 //                "mult $v0, $a0, $v0\n" +
 //                "jr $ra";
-       // String code = "addi $a0, $a0, 1";
+        // String code = "addi $a0, $a0, 1";
 
 //        Assembler.assembleProgram(code);
 //        System.out.println(Integer.toBinaryString(-8));
@@ -45,11 +46,17 @@ public class Main
 //        String trial = "hello bitch";
 //        System.out.println(trial.substring(0,5));
 //        System.out.println(trial.substring(5,11));
-        int i1 = 15, i2 = -15;
-        String s1 = Integer.toBinaryString(i1);
-        String s2 = Integer.toBinaryString(i2);
-        String bigInteger =  new BigInteger(s1,2).multiply(new BigInteger(s2,2)).toString(2);
-        System.out.println(new BigInteger(String.valueOf(0)).compareTo(new BigInteger(String.valueOf(2))));
-        System.out.println(bigInteger);
+
+        StringProperty stot = new SimpleStringProperty();
+        s1 = new SimpleStringProperty();
+
+        s0 = new SimpleStringProperty("0");
+        stot.bind(s0);
+        s1.bind(s0);
+        System.out.println(stot.get());
+        System.out.println(s1.get());
+        s0.set("1");
+        System.out.println(stot.get());
+        System.out.println(s1.get());
     }
 }

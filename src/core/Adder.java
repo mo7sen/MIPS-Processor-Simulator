@@ -21,6 +21,6 @@ public class Adder
 
 	void getOut()
 	{
-		out.set(Integer.toBinaryString(Integer.parseInt(in1.get(),2) + Integer.parseInt(in2.get(), 2)));
+		out.set(SignExtend.extendUnsigned(Integer.toBinaryString(Integer.parseUnsignedInt(in1.get(),2) + Integer.parseUnsignedInt(in2.get(), 2)),32));
 	}
 }
