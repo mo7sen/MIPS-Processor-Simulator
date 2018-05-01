@@ -37,7 +37,6 @@ public class MUX
 			selection += stringProperty.get();
 		if(output.isBound())
 			output.unbind();
-		selection = new StringBuilder(selection).reverse().toString();
 		output.bind(inputs.get(Integer.parseInt(selection, 2)));
 	}
 }

@@ -25,7 +25,7 @@ public class SignExtend
 		signFlag.bind(stringProperty);
 	}
 
-	void getOut()
+	void execute()
 	{
 		if(signFlag.get().equals("1"))
 		{

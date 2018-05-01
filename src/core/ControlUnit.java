@@ -41,6 +41,7 @@ public class ControlUnit
 				link.set("0");
 				equal.set("1");
 				lui.set("0");
+				break;
 
 			case "001000":
 				regDst.set("0");
