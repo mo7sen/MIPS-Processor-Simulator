@@ -253,6 +253,14 @@ public class ALUControl
 				mRead.set("1");
 				regWrite.set("0");
 				break;
+			case "0000":
+				shift.set("1");
+				jumpR.set("0");
+				mWrite.set("0");
+				shiftDir.set("1");
+				signed.set("1");
+				mRead.set("0");
+				regWrite.set("1");
 		}
 
 	}
