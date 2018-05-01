@@ -34,11 +34,6 @@ public class ComponentManager
 
 	public static void provoke()
 	{
-		Instruction.initialize("src/core/Instructions");
-		System.out.println("Instructions initialized");
-		RegisterFile.initialize("src/core/Register");
-		System.out.println("Register initialized");
-		Memory.initialize();
 
 		signedFlag.bindInputs(ControlUnit.signed, ALUControl.signed);
 		jumpRFlag.bindInputs(ALUControl.jumpR, ControlUnit.jump);

@@ -10,21 +10,23 @@ public class RegisterFile
 {
 	static ArrayList<Register> registers = new ArrayList<>();
 
-	static StringProperty readReg1 = new SimpleStringProperty();
-	static StringProperty readReg2 = new SimpleStringProperty();
-	static StringProperty writeReg = new SimpleStringProperty();
-	static StringProperty writeData = new SimpleStringProperty();
-	static StringProperty readData1 = new SimpleStringProperty();
-	static StringProperty readData2 = new SimpleStringProperty();
-	static StringProperty regWrite = new SimpleStringProperty();
+	static StringProperty readReg1 = new SimpleStringProperty("00000");
+	static StringProperty readReg2 = new SimpleStringProperty("00000");
+	static StringProperty writeReg = new SimpleStringProperty("00000");
+	static StringProperty writeData = new SimpleStringProperty("00000000000000000000000000000000");
+	static StringProperty readData1 = new SimpleStringProperty("00000000000000000000000000000000");
+	static StringProperty readData2 = new SimpleStringProperty("00000000000000000000000000000000");
+	static StringProperty regWrite = new SimpleStringProperty("0");
 
 	static void execute()
 	{
 		readData1.set(findRegister(readReg1.get()).currentValue);
 		readData2.set(findRegister(readReg2.get()).currentValue);
 
-		if(regWrite.equals("1"))
+		if(regWrite.get().equals("1"))
+		{
 			findRegister(writeReg.get()).setValue(writeData.get());
+		}
 	}
 
 	static Register findRegister(String s)

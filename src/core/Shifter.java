@@ -11,8 +11,8 @@ public class Shifter
 
 	Shifter()
 	{
-		in = new SimpleStringProperty();
-		out = new SimpleStringProperty();
+		in = new SimpleStringProperty("00000000000000000000000000000000");
+		out = new SimpleStringProperty("00000000000000000000000000000000");
 	}
 
 	void bindIn(StringProperty stringProperty)

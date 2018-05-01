@@ -9,16 +9,16 @@ public class MUX
 {
 	ArrayList<StringProperty> inputs = new ArrayList<>();
 	ArrayList<StringProperty> selectBits = new ArrayList<>();
-	StringProperty output = new SimpleStringProperty();
+	StringProperty output = new SimpleStringProperty("00000000000000000000000000000000");
 	public MUX(int n)
 	{
 		for(int i = 0; i < n; i ++)
 		{
-			selectBits.add(new SimpleStringProperty());
+			selectBits.add(new SimpleStringProperty("0"));
 		}
 		for(int i = 0; i < Math.pow(2,n); i++)
 		{
-			inputs.add(new SimpleStringProperty());
+			inputs.add(new SimpleStringProperty("00000000000000000000000000000000"));
 		}
 	}
 

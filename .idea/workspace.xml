@@ -17,101 +17,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MasterController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MasterController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/MasterController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-              <folding>
-                <element signature="e#201#202#0" expanded="true" />
-                <element signature="e#234#235#0" expanded="true" />
-                <element signature="e#264#265#0" expanded="true" />
-                <element signature="e#306#307#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ComponentManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/ComponentManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="832">
-              <caret line="64" column="0" lean-forward="true" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ALUControl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/ALUControl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1142">
-              <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MUX.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/MUX.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="38" column="28" lean-forward="false" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Adder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/Adder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="23" column="150" lean-forward="true" selection-start-line="23" selection-start-column="150" selection-end-line="23" selection-end-column="150" />
+            <state relative-caret-position="156">
+              <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SignExtend.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/SignExtend.java">
+      <file leaf-file-name="ProgramCounter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/ProgramCounter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="29" column="38" lean-forward="true" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
+            <state relative-caret-position="91">
+              <caret line="8" column="98" lean-forward="false" selection-start-line="8" selection-start-column="98" selection-end-line="8" selection-end-column="98" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#449#450#0" expanded="true" />
-                <element signature="e#479#480#0" expanded="true" />
-                <element signature="e#533#534#0" expanded="true" />
-                <element signature="e#569#570#0" expanded="true" />
+                <element signature="e#369#370#0" expanded="true" />
+                <element signature="e#412#413#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Shifter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/Shifter.java">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="22" column="18" lean-forward="false" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
-              <folding>
-                <element signature="e#390#391#0" expanded="true" />
-                <element signature="e#463#464#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="104">
+              <caret line="8" column="51" lean-forward="false" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DivMultUnit.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/DivMultUnit.java">
+      <file leaf-file-name="RegisterFile.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/RegisterFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="21" column="17" lean-forward="false" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="26" />
+            <state relative-caret-position="299">
+              <caret line="27" column="67" lean-forward="false" selection-start-line="27" selection-start-column="67" selection-end-line="27" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -119,13 +63,77 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DMX.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/DMX.java">
+      <file leaf-file-name="Assembler.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/core/Assembler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="18" column="32" lean-forward="false" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+            <state relative-caret-position="481">
+              <caret line="38" column="59" lean-forward="false" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Instructions" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/Instructions">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="23" column="68" lean-forward="false" selection-start-line="23" selection-start-column="68" selection-end-line="23" selection-end-column="68" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ControlUnit.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/ControlUnit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="754">
+              <caret line="59" column="22" lean-forward="false" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InstructionMemory.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/InstructionMemory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="169">
+              <caret line="19" column="26" lean-forward="false" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#419#420#0" expanded="true" />
+                <element signature="e#456#457#0" expanded="true" />
+                <element signature="e#725#726#0" expanded="true" />
+                <element signature="e#746#747#0" expanded="true" />
+                <element signature="e#789#790#0" expanded="true" />
+                <element signature="e#824#825#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WordBreaker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/WordBreaker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="338">
+              <caret line="27" column="94" lean-forward="false" selection-start-line="27" selection-start-column="94" selection-end-line="27" selection-end-column="94" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Memory.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/Memory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2899">
+              <caret line="230" column="40" lean-forward="false" selection-start-line="230" selection-start-column="26" selection-end-line="230" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#5139#5140#0" expanded="true" />
+                <element signature="e#5230#5231#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -140,6 +148,11 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>findva</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -163,30 +176,30 @@
         <option value="$PROJECT_DIR$/src/core/Instruction.java" />
         <option value="$PROJECT_DIR$/src/core/Instructions" />
         <option value="$PROJECT_DIR$/src/core/Controller.java" />
-        <option value="$PROJECT_DIR$/src/core/NotGate.java" />
-        <option value="$PROJECT_DIR$/src/core/OrGate.java" />
-        <option value="$PROJECT_DIR$/src/core/AndGate.java" />
-        <option value="$PROJECT_DIR$/src/core/InstructionMemory.java" />
-        <option value="$PROJECT_DIR$/src/core/Memory.java" />
         <option value="$PROJECT_DIR$/src/core/Registers.java" />
         <option value="$PROJECT_DIR$/src/core/Register.java" />
-        <option value="$PROJECT_DIR$/src/core/Assembler.java" />
-        <option value="$PROJECT_DIR$/src/core/ProgramCounter.java" />
-        <option value="$PROJECT_DIR$/src/core/DMX.java" />
-        <option value="$PROJECT_DIR$/src/core/Shifter.java" />
-        <option value="$PROJECT_DIR$/src/core/WordBuilder.java" />
-        <option value="$PROJECT_DIR$/src/core/WordBreaker.java" />
-        <option value="$PROJECT_DIR$/src/core/RegisterFile.java" />
-        <option value="$PROJECT_DIR$/src/core/ALUControl.java" />
-        <option value="$PROJECT_DIR$/src/core/ControlUnit.java" />
-        <option value="$PROJECT_DIR$/src/core/ALU.java" />
-        <option value="$PROJECT_DIR$/src/core/Main.java" />
+        <option value="$PROJECT_DIR$/src/core/ComponentManager.java" />
+        <option value="$PROJECT_DIR$/src/core/AndGate.java" />
         <option value="$PROJECT_DIR$/src/core/DivMultUnit.java" />
+        <option value="$PROJECT_DIR$/src/core/MUX.java" />
+        <option value="$PROJECT_DIR$/src/core/NotGate.java" />
+        <option value="$PROJECT_DIR$/src/core/OrGate.java" />
+        <option value="$PROJECT_DIR$/src/core/ProgramCounter.java" />
+        <option value="$PROJECT_DIR$/src/core/Shifter.java" />
         <option value="$PROJECT_DIR$/src/core/SignExtend.java" />
         <option value="$PROJECT_DIR$/src/core/Adder.java" />
-        <option value="$PROJECT_DIR$/src/core/MUX.java" />
-        <option value="$PROJECT_DIR$/src/core/ComponentManager.java" />
+        <option value="$PROJECT_DIR$/src/core/ControlUnit.java" />
+        <option value="$PROJECT_DIR$/src/core/DMX.java" />
+        <option value="$PROJECT_DIR$/src/core/WordBuilder.java" />
+        <option value="$PROJECT_DIR$/src/core/ALUControl.java" />
+        <option value="$PROJECT_DIR$/src/core/ALU.java" />
+        <option value="$PROJECT_DIR$/src/core/RegisterFile.java" />
+        <option value="$PROJECT_DIR$/src/core/InstructionMemory.java" />
+        <option value="$PROJECT_DIR$/src/core/WordBreaker.java" />
         <option value="$PROJECT_DIR$/src/core/MasterController.java" />
+        <option value="$PROJECT_DIR$/src/core/Main.java" />
+        <option value="$PROJECT_DIR$/src/core/Memory.java" />
+        <option value="$PROJECT_DIR$/src/core/Assembler.java" />
       </list>
     </option>
   </component>
@@ -216,7 +229,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
@@ -237,21 +250,35 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="MIPS-Processor-Simulator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MIPS-Processor-Simulator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="Memory.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </path>
+            <path>
+              <item name="MIPS-Processor-Simulator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MIPS-Processor-Simulator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="RegisterFile.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ArchitectureUML.png" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -349,11 +376,17 @@
       <workItem from="1524951175281" duration="595000" />
       <workItem from="1525014934728" duration="4910000" />
       <workItem from="1525026654603" duration="12782000" />
+      <workItem from="1525102236240" duration="2444000" />
+      <workItem from="1525111289903" duration="9821000" />
+      <workItem from="1525127118986" duration="4670000" />
+      <workItem from="1525161867925" duration="1313000" />
+      <workItem from="1525189799525" duration="20000" />
+      <workItem from="1525190715502" duration="15000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="173283000" />
+    <option name="totallyTimeSpent" value="191566000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -366,11 +399,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15270413" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3361612" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1484375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32979852" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -474,26 +508,13 @@
     <entry file="file://$PROJECT_DIR$/src/core/LinePivot.java" />
     <entry file="file://$PROJECT_DIR$/src/core/Encoding.java" />
     <entry file="file://$PROJECT_DIR$/src/core/Syntax.java" />
-    <entry file="uml://JAVA/core" />
     <entry file="file://$PROJECT_DIR$/src/core/Data.java" />
-    <entry file="file://$PROJECT_DIR$/src/core/Registers">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="31" column="13" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/core/Multiplexor.java" />
     <entry file="file://$PROJECT_DIR$/src/core/MasterController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="54" lean-forward="false" selection-start-line="6" selection-start-column="54" selection-end-line="6" selection-end-column="54" />
-          <folding>
-            <element signature="e#201#202#0" expanded="true" />
-            <element signature="e#234#235#0" expanded="true" />
-            <element signature="e#264#265#0" expanded="true" />
-            <element signature="e#306#307#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -510,6 +531,8 @@
           <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#5139#5140#0" expanded="true" />
+            <element signature="e#5230#5231#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -518,47 +541,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-340">
           <caret line="728" column="21" lean-forward="false" selection-start-line="728" selection-start-column="21" selection-end-line="728" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/NotGate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#272#273#0" expanded="false" />
-            <element signature="e#302#303#0" expanded="false" />
-            <element signature="e#329#330#0" expanded="false" />
-            <element signature="e#398#399#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/OrGate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#495#496#0" expanded="false" />
-            <element signature="e#554#555#0" expanded="false" />
-            <element signature="e#585#586#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/InstructionMemory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="19" column="57" lean-forward="false" selection-start-line="19" selection-start-column="57" selection-end-line="19" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#351#352#0" expanded="false" />
-            <element signature="e#388#389#0" expanded="false" />
-            <element signature="e#414#415#0" expanded="false" />
-            <element signature="e#476#477#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -572,93 +554,222 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/Register.java" />
-    <entry file="file://$PROJECT_DIR$/src/core/ProgramCounter.java">
+    <entry file="file://$PROJECT_DIR$/src/core/AndGate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="11" column="53" lean-forward="false" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/DivMultUnit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="21" column="90" lean-forward="false" selection-start-line="21" selection-start-column="90" selection-end-line="21" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/MUX.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="11" column="87" lean-forward="false" selection-start-line="11" selection-start-column="87" selection-end-line="11" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/NotGate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
-          <caret line="8" column="66" lean-forward="false" selection-start-line="8" selection-start-column="66" selection-end-line="8" selection-end-column="66" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="8" column="37" lean-forward="false" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/RegisterFile.java">
+    <entry file="file://$PROJECT_DIR$/src/core/OrGate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="66" column="27" lean-forward="true" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="117">
+          <caret line="9" column="37" lean-forward="false" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/Memory.java">
+    <entry file="file://$PROJECT_DIR$/src/core/Shifter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="24" column="47" lean-forward="false" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="156">
+          <caret line="14" column="73" lean-forward="false" selection-start-line="14" selection-start-column="73" selection-end-line="14" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/SignExtend.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="12" column="55" lean-forward="false" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/Adder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="21" column="16" lean-forward="false" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/DMX.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="35" column="46" lean-forward="false" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/ALU.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="635">
-          <caret line="87" column="64" lean-forward="false" selection-start-line="87" selection-start-column="64" selection-end-line="87" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#615#616#0" expanded="false" />
-            <element signature="e#649#650#0" expanded="false" />
-            <element signature="e#707#708#0" expanded="false" />
-            <element signature="e#741#742#0" expanded="false" />
-            <element signature="e#798#799#0" expanded="false" />
-            <element signature="e#831#832#0" expanded="false" />
-            <element signature="e#893#894#0" expanded="false" />
-            <element signature="e#931#932#0" expanded="false" />
-            <element signature="e#997#998#0" expanded="false" />
-            <element signature="e#1039#1040#0" expanded="false" />
-            <element signature="e#1097#1098#0" expanded="false" />
-            <element signature="e#1131#1132#0" expanded="false" />
-            <element signature="e#1188#1189#0" expanded="false" />
-            <element signature="e#1221#1222#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="96">
+          <caret line="70" column="39" lean-forward="false" selection-start-line="70" selection-start-column="39" selection-end-line="70" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/AndGate.java">
+    <entry file="file://$PROJECT_DIR$/src/core/ALUControl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#555#556#0" expanded="false" />
-            <element signature="e#586#587#0" expanded="false" />
-            <element signature="e#645#646#0" expanded="false" />
-            <element signature="e#676#677#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="481">
+          <caret line="37" column="42" lean-forward="false" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/ControlUnit.java">
+    <entry file="file://$PROJECT_DIR$/src/core/WordBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="40" column="30" lean-forward="true" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
+        <state relative-caret-position="351">
+          <caret line="27" column="99" lean-forward="false" selection-start-line="27" selection-start-column="99" selection-end-line="27" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/Registers">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="13" column="7" lean-forward="false" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/ComponentManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="25" column="38" lean-forward="false" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/RegisterFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="27" column="67" lean-forward="false" selection-start-line="27" selection-start-column="67" selection-end-line="27" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/Assembler.java">
+    <entry file="file://$PROJECT_DIR$/src/core/InstructionMemory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="869">
-          <caret line="125" column="30" lean-forward="false" selection-start-line="125" selection-start-column="30" selection-end-line="125" selection-end-column="30" />
+        <state relative-caret-position="169">
+          <caret line="19" column="26" lean-forward="false" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
           <folding>
-            <element signature="e#9230#9231#0" expanded="false" />
-            <element signature="e#9253#9254#0" expanded="false" />
-            <element signature="e#9284#9285#0" expanded="false" />
-            <element signature="e#9310#9311#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#419#420#0" expanded="true" />
+            <element signature="e#456#457#0" expanded="true" />
+            <element signature="e#725#726#0" expanded="true" />
+            <element signature="e#746#747#0" expanded="true" />
+            <element signature="e#789#790#0" expanded="true" />
+            <element signature="e#824#825#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/WordBreaker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="27" column="94" lean-forward="false" selection-start-line="27" selection-start-column="94" selection-end-line="27" selection-end-column="94" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/ProgramCounter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="8" column="98" lean-forward="false" selection-start-line="8" selection-start-column="98" selection-end-line="8" selection-end-column="98" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#369#370#0" expanded="true" />
+            <element signature="e#412#413#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/core">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>core</OriginalElement>
+          <nodes>
+            <node x="" y="">core.AndGate</node>
+            <node x="" y="">core.InstructionMemory</node>
+            <node x="" y="">core.Syntax</node>
+            <node x="" y="">core.SignExtend</node>
+            <node x="" y="">core.ControlUnit</node>
+            <node x="" y="">core.Encoding</node>
+            <node x="" y="">core.Label</node>
+            <node x="" y="">core.Memory</node>
+            <node x="" y="">core.Instruction</node>
+            <node x="" y="">core.Pointer</node>
+            <node x="" y="">core.NotGate</node>
+            <node x="" y="">core.ALUControl</node>
+            <node x="" y="">core.Shifter</node>
+            <node x="" y="">core.WordBreaker</node>
+            <node x="" y="">core.MasterController</node>
+            <node x="" y="">core.Variable</node>
+            <node x="" y="">core.RegisterFile</node>
+            <node x="" y="">core.Assembler</node>
+            <node x="" y="">core.WordBuilder</node>
+            <node x="" y="">core.Main</node>
+            <node x="" y="">core.ALU</node>
+            <node x="" y="">core.ProgramCounter</node>
+            <node x="" y="">core.Adder</node>
+            <node x="" y="">core.ComponentManager</node>
+            <node x="" y="">core.OrGate</node>
+            <node x="" y="">core.MUX</node>
+            <node x="" y="">core.DMX</node>
+            <node x="" y="">core.DivMultUnit</node>
+            <node x="" y="">core.Register</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="1023.0" y="348.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="8" column="51" lean-forward="false" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/MasterController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/Memory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2899">
+          <caret line="230" column="40" lean-forward="false" selection-start-line="230" selection-start-column="26" selection-end-line="230" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5139#5140#0" expanded="true" />
+            <element signature="e#5230#5231#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -667,132 +778,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
           <caret line="23" column="68" lean-forward="false" selection-start-line="23" selection-start-column="68" selection-end-line="23" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="50" column="40" lean-forward="false" selection-start-line="50" selection-start-column="40" selection-end-line="50" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/DMX.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="18" column="32" lean-forward="false" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/Shifter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="22" column="18" lean-forward="false" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
-          <folding>
-            <element signature="e#390#391#0" expanded="true" />
-            <element signature="e#463#464#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/WordBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/WordBreaker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="27" column="62" lean-forward="false" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/SignExtend.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="29" column="38" lean-forward="true" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#449#450#0" expanded="true" />
-            <element signature="e#479#480#0" expanded="true" />
-            <element signature="e#533#534#0" expanded="true" />
-            <element signature="e#569#570#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/DivMultUnit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="21" column="17" lean-forward="false" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/Adder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="23" column="150" lean-forward="true" selection-start-line="23" selection-start-column="150" selection-end-line="23" selection-end-column="150" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/MUX.java">
+    <entry file="file://$PROJECT_DIR$/src/core/ControlUnit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="38" column="28" lean-forward="false" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
+        <state relative-caret-position="754">
+          <caret line="59" column="22" lean-forward="false" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/ALUControl.java">
+    <entry file="file://$PROJECT_DIR$/src/core/Assembler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1142">
-          <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/ComponentManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="832">
-          <caret line="64" column="0" lean-forward="true" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/MasterController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="e#201#202#0" expanded="true" />
-            <element signature="e#234#235#0" expanded="true" />
-            <element signature="e#264#265#0" expanded="true" />
-            <element signature="e#306#307#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="481">
+          <caret line="38" column="59" lean-forward="false" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="59" />
+          <folding />
         </state>
       </provider>
     </entry>

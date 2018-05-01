@@ -5,20 +5,20 @@ import javafx.beans.property.StringProperty;
 
 public class ALUControl
 {
-	static StringProperty controlIn = new SimpleStringProperty();
-	static StringProperty functIn = new SimpleStringProperty();
-	static StringProperty ALUOpOut = new SimpleStringProperty();
-	static StringProperty shift = new SimpleStringProperty();
-	static StringProperty jumpR = new SimpleStringProperty();
-	static StringProperty div = new SimpleStringProperty();
-	static StringProperty divMult = new SimpleStringProperty();
-	static StringProperty lo = new SimpleStringProperty();
-	static StringProperty mWrite = new SimpleStringProperty();
-	static StringProperty shiftDir = new SimpleStringProperty();
-	static StringProperty signed = new SimpleStringProperty();
-	static StringProperty aShift = new SimpleStringProperty();
-	static StringProperty mRead = new SimpleStringProperty();
-	static StringProperty regWrite = new SimpleStringProperty();
+	static StringProperty controlIn = new SimpleStringProperty("000");
+	static StringProperty functIn = new SimpleStringProperty("000000");
+	static StringProperty ALUOpOut = new SimpleStringProperty("0000");
+	static StringProperty shift = new SimpleStringProperty("0");
+	static StringProperty jumpR = new SimpleStringProperty("0");
+	static StringProperty div = new SimpleStringProperty("0");
+	static StringProperty divMult = new SimpleStringProperty("0");
+	static StringProperty lo = new SimpleStringProperty("0");
+	static StringProperty mWrite = new SimpleStringProperty("0");
+	static StringProperty shiftDir = new SimpleStringProperty("0");
+	static StringProperty signed = new SimpleStringProperty("0");
+	static StringProperty aShift = new SimpleStringProperty("0");
+	static StringProperty mRead = new SimpleStringProperty("0");
+	static StringProperty regWrite = new SimpleStringProperty("0");
 
 	public static void execute()
 	{
@@ -35,6 +35,7 @@ public class ALUControl
 				signed.set("0");
 				mRead.set("0");
 				regWrite.set("0");
+				ALUOpOut.setValue("0010");
 				break;
 			case "001"://sub
 				shift.set("0");

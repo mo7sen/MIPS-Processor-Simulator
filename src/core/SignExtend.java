@@ -10,9 +10,9 @@ public class SignExtend
 	StringProperty in, out, signFlag;
 	SignExtend()
 	{
-		in = new SimpleStringProperty();
-		out = new SimpleStringProperty();
-		signFlag = new SimpleStringProperty();
+		in = new SimpleStringProperty("0000000000000000");
+		out = new SimpleStringProperty("00000000000000000000000000000000");
+		signFlag = new SimpleStringProperty("0");
 	}
 
 	void bindIn(StringProperty stringProperty)
