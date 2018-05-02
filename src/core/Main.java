@@ -6,7 +6,7 @@ public class Main
     {
         MasterController.prepareMips();
         MasterController.run();
-        MasterController.executeStep();
+        MasterController.executeAll();
 //        System.out.println(InstructionMemory.instOut.get());
 
 //        System.out.println(InstructionMemory.instOut.get());
@@ -17,8 +17,8 @@ public class Main
 //        MasterController.executeStep();
 //        System.out.println(RegisterFile.writeReg.get());
 //        MasterController.executeStep();
-//        System.out.println(RegisterFile.findRegister("$t2").currentValue);
-//        System.out.println(RegisterFile.findRegister("$t3").currentValue);
+        System.out.println(RegisterFile.findRegister("$s0").currentValue);
+        System.out.println(RegisterFile.findRegister("$t0").currentValue);
 //        System.out.println(RegisterFile.findRegister("$t5").currentValue);
 //        System.out.println(ProgramCounter.addressIn.get());
     }
