@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DMX
 {
-	StringProperty input = new SimpleStringProperty();
+	StringProperty input = new SimpleStringProperty("00000000000000000000000000000000");
 	ArrayList<StringProperty> selectBits = new ArrayList<>();
 	ArrayList<StringProperty> outputs = new ArrayList<>();
 
@@ -16,11 +16,11 @@ public class DMX
 	{
 		for(int i = 0; i < n; i ++)
 		{
-			selectBits.add(new SimpleStringProperty());
+			selectBits.add(new SimpleStringProperty("0"));
 		}
 		for(int i = 0; i < Math.pow(2,n); i++)
 		{
-			outputs.add(new SimpleStringProperty());
+			outputs.add(new SimpleStringProperty("00000000000000000000000000000000"));
 		}
 	}
 
@@ -34,8 +34,6 @@ public class DMX
 		String selection = "";
 		for(StringProperty stringProperty : selectBits)
 			selection += stringProperty.get();
-		for(StringProperty stringProperty : outputs)
-			stringProperty.set(null);
 		selection = new StringBuilder(selection).reverse().toString();
 		outputs.get(Integer.parseInt(selection, 2)).bind(input);
 	}

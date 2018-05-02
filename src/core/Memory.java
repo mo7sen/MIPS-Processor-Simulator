@@ -10,30 +10,30 @@ import java.util.ArrayList;
 public class Memory
 {
 	private static boolean device[][] = new boolean[2621440][32];
-	private static ArrayList<Variable> variables = new ArrayList<>();
+	static ArrayList<Variable> variables = new ArrayList<>();
 	private static Pointer instantiationPointer = new Pointer(0);
 	public static int startingMemoryOffset = 0;
-	static StringProperty   addressIn = new SimpleStringProperty(),
-							dataOut = new SimpleStringProperty(),
-							dataIn = new SimpleStringProperty(),
-							memReadFlag = new SimpleStringProperty(),
-							memWriteFlag = new SimpleStringProperty();
+	static StringProperty   addressIn = new SimpleStringProperty("00000000000000000000000000000000"),
+							dataOut = new SimpleStringProperty("00000000000000000000000000000000"),
+							dataIn = new SimpleStringProperty("00000000000000000000000000000000"),
+							memReadFlag = new SimpleStringProperty("0"),
+							memWriteFlag = new SimpleStringProperty("0");
 
 	static void execute()
 	{
 		if(memReadFlag.get().equals("1"))
-			saveWord(dataIn.get(), new Pointer(Integer.parseInt(addressIn.get(),2)));
-		if(memWriteFlag.get().equals("1"))
 			dataOut.set(loadWord(new Pointer(Integer.parseInt(addressIn.get(),2))));
+		if(memWriteFlag.get().equals("1"))
+			saveWord(dataIn.get(), new Pointer(Integer.parseInt(addressIn.get(),2)));
 	}
 
-	private static Variable findVariable(String var)
+	static Variable findVariable(String var)
 	{
-		for(Variable v : variables)
-                {
-			if(v.name.equals(var))
+		for(int i = 0; i < variables.size(); i++)
+		{
+			if(variables.get(i).name.equals(var))
 			{
-				return v;
+				return variables.get(i);
 			}
 		}
 		return null;
@@ -101,6 +101,7 @@ public class Memory
 	{
 		char[] datach = data.toCharArray();
 		variables.add(new Variable(name, instantiationPointer));
+//		System.out.println(instantiationPointer.toString());
 
 		for(char c : datach)
 		{
@@ -132,17 +133,21 @@ public class Memory
 	{
 		String res = "";
 		char c;
-		Pointer address = findVariable(name).address;
-		while(true)
+
+		Variable v = Memory.findVariable(name);
+		if(v != null)
 		{
-			c = (char) Integer.parseInt(loadByte(address),2);
-			if((int)c != 0)
+			Pointer address = v.address;
+			while (true)
 			{
-				res += c;
-				address.moveByte(1);
+				c = (char) Integer.parseInt(loadByte(address), 2);
+				if ((int) c != 0)
+				{
+					res += c;
+					address.moveByte(1);
+				} else
+					break;
 			}
-			else
-				break;
 		}
 		return res;
 	}
@@ -222,6 +227,10 @@ class Pointer
 		this.address = address/4;
 		this.offset = address%4;
 	}
+	public String toString()
+	{
+		return SignExtend.extendUnsigned(Integer.toBinaryString((address * 4) + offset), 32);
+	}
 }
 
 class Variable
@@ -231,6 +240,6 @@ class Variable
 	Variable(String name, Pointer a)
 	{
 		this.name = name;
-		this.address = new Pointer(a.address + a.offset);
+		this.address = new Pointer(a.address*4 + a.offset);
 	}
 }

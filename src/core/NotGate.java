@@ -5,8 +5,8 @@ import javafx.beans.property.StringProperty;
 
 public class NotGate
 {
-	StringProperty in = new SimpleStringProperty(),
-	out = new SimpleStringProperty();
+	StringProperty in = new SimpleStringProperty("0"),
+	out = new SimpleStringProperty("0");
 
 	public void bindIn(StringProperty stringProperty)
 	{

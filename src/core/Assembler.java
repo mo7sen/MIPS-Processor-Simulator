@@ -6,8 +6,8 @@ import java.util.Arrays;
 public class Assembler
 {
 	static ArrayList<Label> labels = new ArrayList<>();
-	static ArrayList<String> codeLines;
-	static ArrayList<String> directiveLines;
+	static ArrayList<String> codeLines = new ArrayList<>();
+	static ArrayList<String> directiveLines = new ArrayList<>();
 	static ArrayList<String> pseudoIns = new ArrayList<>(Arrays.asList(new String[]{"move","clear","li","la","b","bal","bgt","blt","bge","ble","bgtu","beqz","beq","bne","mul","div","rem","jalr","not","nop"}));
 	
 
@@ -32,13 +32,20 @@ public class Assembler
 
 	static void assembleProgram(String s)
 	{
-		if(s.contains(".text"));
-			String[] fn = s.split(".text");
-		directiveLines = new ArrayList<>(Arrays.asList(fn[0].trim().split("\\n+")));
-		codeLines = new ArrayList<>(Arrays.asList(fn[1].trim().replaceAll(":", ":\n").split("\\n+")));	//Labels now take a whole line for themselves
+		if(s.contains(".text"))
+		{
+			String[] fn = s.split(".data");
+			directiveLines = new ArrayList<>(Arrays.asList(fn[0].trim().split("\\n+")));
+			codeLines = new ArrayList<>(Arrays.asList(fn[1].trim().replaceAll(":", ":\n").split("\\n+")));    //Labels now take a whole line for themselves
+		}
+		else if(!s.contains(".data"))
+		{
+			codeLines = new ArrayList<>(Arrays.asList(s.trim().replaceAll(":", ":\n").split("\\n+")));
+		}
 		labels.clear();
-		scanForLabels();
+		scanForDirectives();
 		replacePseudo();
+		scanForLabels();
 		assembleLines();
 	}
 
@@ -60,8 +67,8 @@ public class Assembler
 	static void replacePseudo()
 	{
 		for(int i=0;i<codeLines.size();i++)
-		{	String c_lo =null;
-			String[] pseudoData =null;
+		{
+			String[] pseudoData;
 			String newLine =codeLines.get(i).trim();
 			String[] sliced = newLine.split("\\s+", 2);
 			if(isPseudo(sliced[0]))
@@ -69,62 +76,33 @@ public class Assembler
 				{
 					case "move":
 						pseudoData = sliced[1].split(",");
-						codeLines.set(i,"addiu "+pseudoData[0]+","+pseudoData[1]+"0");
+						codeLines.set(i,"addiu "+pseudoData[0]+","+pseudoData[1]+", 0");
 						break;
 					case "clear":
 						pseudoData = sliced[1].split("\\s+");
 						codeLines.set(i,"addu "+pseudoData[0]+"$zero,$zero");
 						break;
 					case "li":
-						pseudoData = sliced[1].split(",");
-						int dec_1 = Integer.parseInt(pseudoData[1]);
-						String y =Integer.toBinaryString(dec_1);
-						if(y.length()<=16){
-						if(dec_1>=0)
-						{
-							for(int l =y.length();l<16;l++)
-							{
-							 c_lo="0"+y;
-							}
-						}
-						else for(int l =y.length();l<16;l++)
-						{
-							 c_lo="1"+y;
-						}}
-						else{
-							int s=y.length()-16;
-							 c_lo= y.substring(s);
 
-						}
-						codeLines.set(i,"addiu "+pseudoData[0]+",$zero,"+c_lo);
+						pseudoData = sliced[1].replaceAll(","," ").trim().split("\\s+");
+						String immediateIn = SignExtend.extendUnsigned(Integer.toBinaryString(Integer.parseInt(pseudoData[1])),32);
+						int immediateHi = Integer.parseInt(immediateIn.substring(0,16), 2),
+								immediateLo = Integer.parseInt(immediateIn.substring(16), 2);
+						codeLines.set(i , "ori " + pseudoData[0]+ ", " + pseudoData[0] + ", " + immediateLo);
+						codeLines.add(i , "lui " + pseudoData[0] + "," +immediateHi);
 						break;
 					case "la":
 						pseudoData = sliced[1].split(",");
-						int dec = Integer.parseInt(pseudoData[1]);
-						String x =Integer.toBinaryString(dec);
-						if(dec>=0)
-						{
-							for(int l =x.length();l<31;l++)
-							{
-								x="0"+x;
-							}
-						}
-						else for(int l =x.length();l<31;l++)
-						{
-							x="1"+x;
-						}
-						String A_hi=x.substring(0,17);
-						String A_lo=x.substring(16);
-						codeLines.set(i,"ori "+pseudoData[0]+","+pseudoData[0]+','+A_lo);
-						codeLines.add(i,"lui"+pseudoData[0]+','+A_hi);
+						String varAddress = Memory.findVariable(pseudoData[1].trim()).address.toString();
+						int Address_Hi = Integer.parseInt(varAddress.substring(0, 16),2),
+								Address_Lo = Integer.parseInt(varAddress.substring(16),2);
+						codeLines.set(i , "ori " + pseudoData[0]+ ", " + pseudoData[0] + ", " + Address_Lo);
+						codeLines.add(i , "lui " + pseudoData[0] + "," +Address_Hi);
 						break;
 					case "b":
 						pseudoData = sliced[1].split("\\s+");
 						codeLines.set(i,"beq $zero, $zero,"+pseudoData);
 						break;
-					/*case "bal":
-
-						break;*/
 					case "bgt":
 						pseudoData = sliced[1].split(",");
 						codeLines.set(i,"bne $at, $zero,"+pseudoData[2]);
@@ -157,13 +135,19 @@ public class Assembler
 						break;
 					case "beq":
 						pseudoData=sliced[1].split(",");
-						codeLines.set(i,"beq "+pseudoData[0]+", $at,"+pseudoData[2]);
-						codeLines.add(i,"ori ,$at, $zero"+pseudoData[1]);
+						if(pseudoData[1].matches("-?\\d+"))
+						{
+							codeLines.set(i, "beq " + pseudoData[0] + ", $at," + pseudoData[2]);
+							codeLines.add(i, "ori $at, $zero, " + pseudoData[1]);
+						}
 						break;
 					case "bne":
-						pseudoData=sliced[1].split(",");
-						codeLines.set(i,"beq "+pseudoData[0]+", $at,"+pseudoData[2]);
-						codeLines.add(i,"ori ,$at, $zero"+pseudoData[1]);
+						pseudoData = sliced[1].split(",");
+						if(pseudoData[1].matches("-?\\d+"))
+						{
+							codeLines.set(i, "bne " + pseudoData[0] + ", $at," + pseudoData[2]);
+							codeLines.add(i, "ori ,$at, $zero" + pseudoData[1]);
+						}
 						break;
 					case "mul":
 						pseudoData=sliced[1].split(",");
@@ -179,11 +163,6 @@ public class Assembler
 						pseudoData=sliced[1].split(",");
 						codeLines.set(i,"mfhi "+pseudoData[0]);
 						codeLines.add(i,"div "+pseudoData[1]+","+pseudoData[2]);
-
-						break;
-					case "jalr":
-						pseudoData=sliced[1].split("\\s+",2);
-						codeLines.set(i,"jalr"+pseudoData[1]+",$ra");
 						break;
 					case "not":
 						pseudoData=sliced[1].split(",");
@@ -201,52 +180,54 @@ static void scanForDirectives()
 {
 	for(int j=0; j<directiveLines.size();j++)
 	{
+		String directiveType = null;
 		String varName = null;
-		String directiveName = null;
-		String directiveData = null;
+		String varData = null;
 
-		String newLine = directiveLines.get(j);
+		String newLine = directiveLines.get(j).trim();
 		if(newLine.contains(":"))
 		{
 			varName = newLine.split(":")[0].trim();
-			if(newLine.contains("."))
-			directiveName=newLine.split(".",2)[1].split("\\s+")[0];
-		}
-		switch ( directiveName)
-		{
 
-			case "ascii":
-				directiveData=newLine.split(".",2)[1].split("\"")[1];
-				Memory.saveString(directiveData,varName,false);
-				break;
-			case "asciiz":
-				directiveData=newLine.split(".",2)[1].split("\"")[1];
-				Memory.saveString(directiveData,varName,true);
-				break;
-			case "byte":
-				directiveData=newLine.split(".",2)[1].split("\\s+",2)[1];
-				for(String b: directiveData.split(","))
-				Memory.saveB(varName,b.trim());
-				break;
+			if (newLine.contains("."))
+				directiveType = newLine.split("\\.", 2)[1].split("\\s+")[0].trim();
 
-			case "half":
-				directiveData=newLine.split(".",2)[1].split("\\s+",2)[1];
-				for(String b: directiveData.split(","))
-				Memory.saveH(varName,b.trim());
-				break;
-			case "space":
-				directiveData=newLine.split(".",2)[1].split("\\s+",2)[1];
-				int value = Integer.parseInt(directiveData);
-				Memory.saveArrayEmpty(value,varName);
-				break;
+			switch (directiveType)
+			{
+				case "ascii":
+					varData = newLine.split("\\.", 2)[1].split("\"")[1];
+					Memory.saveString(varData, varName, false);
+					break;
+				case "asciiz":
+					varData = newLine.split("\\.", 2)[1].split("\"")[1];
+					Memory.saveString(varData, varName, true);
+					break;
+				case "byte":
+					varData = newLine.split("\\.", 2)[1].split("\\s+", 2)[1];
+					for (String b : varData.split(","))
+						Memory.saveB(varName, b.trim());
+					break;
 
-			case "word":
-				directiveData=newLine.split(".",2)[1].split("\\s+",2)[1];
-				for(String b: directiveData.split(","))
-					Memory.saveW(varName,b.trim());
-				break;
+				case "half":
+					varData = newLine.split("\\.", 2)[1].split("\\s+", 2)[1];
+					for (String b : varData.split(","))
+						Memory.saveH(varName, b.trim());
+					break;
+				case "space":
+					varData = newLine.split("\\.", 2)[1].split("\\s+", 2)[1];
+					int value = Integer.parseInt(varData);
+					Memory.saveArrayEmpty(value, varName);
+					break;
 
+				case "word":
+					varData = newLine.split("\\.", 2)[1].split("\\s+", 2)[1];
+					for (String b : varData.split(","))
+						Memory.saveW(varName, b.trim());
+					break;
+				default:
+					System.out.println(directiveType);
 
+			}
 		}
 	}
 
@@ -255,11 +236,10 @@ static void scanForDirectives()
 	{
 		for(int i = 0; i < codeLines.size(); i++)
 		{
-			String str = null;
+			String str = codeLines.get(i).trim();
 			String s, t, d, imm, a;
-			str = codeLines.get(i).trim();
 			s = t = d = imm = a = null;
-			String[] ss = str.replaceAll(",\\s+|\\s+", " ").split("\\s");
+			String[] ss = str.replaceAll(",\\s+|\\s+|,", " ").split("\\s");
 			Instruction instruction = Instruction.searchInstruction(ss[0].trim());
 			if (instruction != null)
 			{

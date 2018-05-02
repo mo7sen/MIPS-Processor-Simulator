@@ -5,9 +5,9 @@ import javafx.beans.property.StringProperty;
 
 public class OrGate
 {
-	StringProperty in1 = new SimpleStringProperty(),
-	in2 = new SimpleStringProperty(),
-	out = new SimpleStringProperty();
+	StringProperty in1 = new SimpleStringProperty("0"),
+	in2 = new SimpleStringProperty("0"),
+	out = new SimpleStringProperty("0");
 
 	public void bindInputs(StringProperty stringProperty1, StringProperty stringProperty2)
 	{

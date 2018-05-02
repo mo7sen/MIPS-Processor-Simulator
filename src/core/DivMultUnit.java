@@ -8,18 +8,18 @@ import java.math.BigInteger;
 
 public class DivMultUnit
 {
-	static StringProperty input1 = new SimpleStringProperty();
-	static StringProperty input2 = new SimpleStringProperty();
-	static StringProperty inHi = new SimpleStringProperty();
-	static StringProperty inLo = new SimpleStringProperty();
-	static StringProperty write = new SimpleStringProperty();
-	static StringProperty div = new SimpleStringProperty();
-	static StringProperty outHi = new SimpleStringProperty();
-	static StringProperty outLo = new SimpleStringProperty();
-	static StringProperty active = new SimpleStringProperty();
-	static StringProperty signed = new SimpleStringProperty();
-	static StringProperty hi = new SimpleStringProperty();
-	static StringProperty lo = new SimpleStringProperty();
+	static StringProperty input1 = new SimpleStringProperty("00000000000000000000000000000000");
+	static StringProperty input2 = new SimpleStringProperty("00000000000000000000000000000000");
+	static StringProperty inHi = new SimpleStringProperty("00000000000000000000000000000000");
+	static StringProperty inLo = new SimpleStringProperty("00000000000000000000000000000000");
+	static StringProperty write = new SimpleStringProperty("0");
+	static StringProperty div = new SimpleStringProperty("0");
+	static StringProperty outHi = new SimpleStringProperty("00000000000000000000000000000000");
+	static StringProperty outLo = new SimpleStringProperty("00000000000000000000000000000000");
+	static StringProperty active = new SimpleStringProperty(")");
+	static StringProperty signed = new SimpleStringProperty("0");
+	static StringProperty hi = new SimpleStringProperty("00000000000000000000000000000000");
+	static StringProperty lo = new SimpleStringProperty("00000000000000000000000000000000");
 	static String hiLo = null;
 
 	static void execute()

@@ -7,19 +7,20 @@ import java.util.ArrayList;
 
 public class InstructionMemory
 {
-	static StringProperty addressIn = new SimpleStringProperty();
-	static StringProperty instOut = new SimpleStringProperty();
+	static StringProperty addressIn = new SimpleStringProperty("00000000000000000000000000000000");
+	static StringProperty instOut = new SimpleStringProperty("00000000000000000000000000000000");
+	public static ArrayList<String> inMem = new ArrayList<>();
 
 	static void bindIn(StringProperty stringProperty)
 	{
 		addressIn.bind(stringProperty);
 	}
 
-	static void getOut()
+	static void execute()
 	{
-		instOut.set(read(Integer.parseInt(addressIn.get(), 2)));
+//		if(inMem.size() - 1 >= Integer.parseInt(addressIn.get(), 2))
+			instOut.set(read(Integer.parseInt(addressIn.get(), 2)));
 	}
-	public static ArrayList<String> inMem = new ArrayList<>();
 
 	public static void add(String ins)
 	{
@@ -27,7 +28,7 @@ public class InstructionMemory
 	}
 	public static String read(int address)
 	{
-		return inMem.get(address/4);
+			return inMem.get(address/4);
 	}
 	public static void reset()
 	{

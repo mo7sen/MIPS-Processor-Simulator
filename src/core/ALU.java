@@ -7,15 +7,15 @@ import javafx.beans.property.StringProperty;
 public class ALU
 {
 
-	static StringProperty input1 = new SimpleStringProperty(),
-			input2 = new SimpleStringProperty(),
-			ALUOp = new SimpleStringProperty(),
-			output = new SimpleStringProperty(),
-			zero = new SimpleStringProperty(),
-			arithmetic = new SimpleStringProperty(),
-			shiftDirection = new SimpleStringProperty(),
-			signed = new SimpleStringProperty(),
-			shift = new SimpleStringProperty();
+	static StringProperty input1 = new SimpleStringProperty("00000000000000000000000000000000"),
+			input2 = new SimpleStringProperty("00000000000000000000000000000000"),
+			ALUOp = new SimpleStringProperty("000"),
+			output = new SimpleStringProperty("00000000000000000000000000000000"),
+			zero = new SimpleStringProperty("0"),
+			arithmetic = new SimpleStringProperty("0"),
+			shiftDirection = new SimpleStringProperty("0"),
+			signed = new SimpleStringProperty("0"),
+			shift = new SimpleStringProperty("0");
 
 	static void bindInput1(StringProperty stringProperty)
 	{
@@ -82,6 +82,8 @@ public class ALU
 			case 13://xor   1101
 				semiResult = in1 ^ in2;
 				break;
+			default:
+				semiResult = in1;
 		}
 		if(Integer.parseUnsignedInt(shift.get(),2) != 0)
 		{

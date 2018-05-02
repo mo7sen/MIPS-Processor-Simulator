@@ -5,20 +5,20 @@ import javafx.beans.property.StringProperty;
 
 public class ALUControl
 {
-	static StringProperty controlIn = new SimpleStringProperty();
-	static StringProperty functIn = new SimpleStringProperty();
-	static StringProperty ALUOpOut = new SimpleStringProperty();
-	static StringProperty shift = new SimpleStringProperty();
-	static StringProperty jumpR = new SimpleStringProperty();
-	static StringProperty div = new SimpleStringProperty();
-	static StringProperty divMult = new SimpleStringProperty();
-	static StringProperty lo = new SimpleStringProperty();
-	static StringProperty mWrite = new SimpleStringProperty();
-	static StringProperty shiftDir = new SimpleStringProperty();
-	static StringProperty signed = new SimpleStringProperty();
-	static StringProperty aShift = new SimpleStringProperty();
-	static StringProperty mRead = new SimpleStringProperty();
-	static StringProperty regWrite = new SimpleStringProperty();
+	static StringProperty controlIn = new SimpleStringProperty("000");
+	static StringProperty functIn = new SimpleStringProperty("000000");
+	static StringProperty ALUOpOut = new SimpleStringProperty("0000");
+	static StringProperty shift = new SimpleStringProperty("0");
+	static StringProperty jumpR = new SimpleStringProperty("0");
+	static StringProperty div = new SimpleStringProperty("0");
+	static StringProperty divMult = new SimpleStringProperty("0");
+	static StringProperty lo = new SimpleStringProperty("0");
+	static StringProperty mWrite = new SimpleStringProperty("0");
+	static StringProperty shiftDir = new SimpleStringProperty("0");
+	static StringProperty signed = new SimpleStringProperty("0");
+	static StringProperty aShift = new SimpleStringProperty("0");
+	static StringProperty mRead = new SimpleStringProperty("0");
+	static StringProperty regWrite = new SimpleStringProperty("0");
 
 	public static void execute()
 	{
@@ -35,6 +35,7 @@ public class ALUControl
 				signed.set("0");
 				mRead.set("0");
 				regWrite.set("0");
+				ALUOpOut.setValue("0010");
 				break;
 			case "001"://sub
 				shift.set("0");
@@ -44,6 +45,7 @@ public class ALUControl
 				signed.set("0");
 				mRead.set("0");
 				regWrite.set("0");
+				ALUOpOut.setValue("0110");
 				break;
 			case "011"://slt
 				shift.set("0");
@@ -53,6 +55,7 @@ public class ALUControl
 				signed.set("0");
 				mRead.set("0");
 				regWrite.set("0");
+				ALUOpOut.setValue("0111");
 				break;
 			case "100"://and
 				shift.set("0");
@@ -62,6 +65,7 @@ public class ALUControl
 				signed.set("0");
 				mRead.set("0");
 				regWrite.set("0");
+				ALUOpOut.setValue("0000");
 				break;
 			case "101"://or
 				shift.set("0");
@@ -71,6 +75,7 @@ public class ALUControl
 				signed.set("0");
 				mRead.set("0");
 				regWrite.set("0");
+				ALUOpOut.setValue("0001");
 				break;
 			case "111"://xor
 				shift.set("0");
@@ -80,6 +85,7 @@ public class ALUControl
 				signed.set("0");
 				mRead.set("0");
 				regWrite.set("0");
+				ALUOpOut.setValue("1101");
 				break;
 		}
 	}
@@ -87,16 +93,8 @@ public class ALUControl
 	private static void executeRFormat()
 	{
 		switch(functIn.get())
-		{ case "100000":
-			shift.set("1");
-			jumpR.set("0");
-			mWrite.set("0");
-			shiftDir.set("1");
-			signed.set("1");
-			mRead.set("0");
-			regWrite.set("1");
-			break;
-			case "10011":
+		{
+			case "100000":
 				shift.set("1");
 				jumpR.set("0");
 				mWrite.set("0");
@@ -104,6 +102,17 @@ public class ALUControl
 				signed.set("1");
 				mRead.set("0");
 				regWrite.set("1");
+				ALUOpOut.setValue("0010");
+				break;
+			case "100111":
+				shift.set("1");
+				jumpR.set("0");
+				mWrite.set("0");
+				shiftDir.set("1");
+				signed.set("1");
+				mRead.set("0");
+				regWrite.set("1");
+				ALUOpOut.setValue("1100");
 				break;
 			case "001000":
 				jumpR.set("1");
@@ -118,15 +127,17 @@ public class ALUControl
 				signed.set("1");
 				mRead.set("0");
 				regWrite.set("1");
+				ALUOpOut.setValue("0111");
 				break;
 			case "100010":
-			shift.set("1");
-			jumpR.set("0");
-			mWrite.set("0");
-			shiftDir.set("1");
-			signed.set("1");
-			mRead.set("0");
-			regWrite.set("1");
+				shift.set("1");
+				jumpR.set("0");
+				mWrite.set("0");
+				shiftDir.set("1");
+				signed.set("1");
+				mRead.set("0");
+				regWrite.set("1");
+				ALUOpOut.setValue("0110");
 				break;
 			case "011000":
 				jumpR.set("0");
@@ -145,6 +156,7 @@ public class ALUControl
 				aShift.set("0");
 				mRead.set("0");
 				regWrite.set("1");
+				ALUOpOut.setValue("1111");
 				break;
 			case "100100"	:
 				shift.set("1");
@@ -154,6 +166,7 @@ public class ALUControl
 				signed.set("1");
 				mRead.set("0");
 				regWrite.set("1");
+				ALUOpOut.setValue("0000");
 				break;
 			case "100101"	:
 				shift.set("1");
@@ -163,6 +176,7 @@ public class ALUControl
 				signed.set("1");
 				mRead.set("0");
 				regWrite.set("1");
+				ALUOpOut.setValue("0001");
 				break;
 			case "101001"	:
 				shift.set("1");
@@ -172,19 +186,17 @@ public class ALUControl
 				signed.set("0");
 				mRead.set("0");
 				regWrite.set("1");
+				ALUOpOut.setValue("0111");
 				break;
 			case "100001"	:
 				shift.set("1");
 				jumpR.set("0");
-				div.set("");
-				divMult.set("");
-				lo.set("");
 				mWrite.set("0");
 				shift.set("1");
 				signed.set("0");
-				aShift.set("");
 				mRead.set("0");
 				regWrite.set("1");
+				ALUOpOut.setValue("0010");
 				break;
 			case "011010"	:
 				jumpR.set("0");
@@ -219,6 +231,7 @@ public class ALUControl
 				aShift.set("1");
 				mRead.set("0");
 				regWrite.set("1");
+				ALUOpOut.setValue("1111");
 				break;
 			case "100011"	:
 				shift.set("1");
@@ -228,6 +241,7 @@ public class ALUControl
 				signed.set("0");
 				mRead.set("0");
 				regWrite.set("1");
+				ALUOpOut.setValue("0110");
 				break;
 			case "100110"	:
 				shift.set("1");
@@ -237,10 +251,10 @@ public class ALUControl
 				signed.set("1");
 				mRead.set("0");
 				regWrite.set("1");
+				ALUOpOut.setValue("1101");
 				break;
 			case "010000"	:
 				jumpR.set("0");
-				divMult.set("");
 				lo.set("0");
 				mWrite.set("0");
 				mRead.set("1");
@@ -253,7 +267,7 @@ public class ALUControl
 				mRead.set("1");
 				regWrite.set("0");
 				break;
-			case "0000":
+			case "000000":
 				shift.set("1");
 				jumpR.set("0");
 				mWrite.set("0");
@@ -261,6 +275,7 @@ public class ALUControl
 				signed.set("1");
 				mRead.set("0");
 				regWrite.set("1");
+				ALUOpOut.setValue("1111");
 		}
 
 	}
