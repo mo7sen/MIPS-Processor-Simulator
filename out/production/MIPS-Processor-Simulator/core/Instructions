@@ -11,13 +11,10 @@ multu,011001,DivMult,Register       // hilo = rs * rt
 nor,100111,ArithLog,Register        // rd = ~(rs | rt)
 or,100101,ArithLog,Register         // rd = rs | rt
 ori,001101,ArithLogI,Immediate      // rd = rs | (unsigned) constant
-lui,001111,LoadStore,Immediate      // rd = constant << 16
+lui,001111,LoadI,Immediate      // rd = constant << 16
 sll,000000,Shift,Register           // rd = rt << amount
-sllv,000100,ShiftV,Register         // rd = rt << rs
 sra,000011,Shift,Register           // "SIGNED" rt >> amount
-srav,000111,ShiftV,Register         // rd = "SIGNED" rt >> rs
 srl,000010,Shift,Register           // rd = "UNSIGNED" rt >> amount
-srlv,000110,ShiftV,Register         // rd = "UNSIGNED" rt >> rs
 sub,100010,ArithLog,Register        // rd = rs - rt
 subu,100011,ArithLog,Register       // rd = rs - rt "UNSIGNED"
 xor,100110,ArithLog,Register        // rd = rs ^ rt

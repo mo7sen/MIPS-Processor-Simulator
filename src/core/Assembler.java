@@ -56,7 +56,7 @@ public class Assembler
 			if(codeLines.get(i).contains(":"))
 			{
 				labels.add(new Label(codeLines.get(i).split(":")[0].trim(), Integer.toBinaryString(i * 4)));
-				codeLines.set(i,"");
+				codeLines.remove(i);
 				continue;
 			}
 			i++;
@@ -135,7 +135,7 @@ public class Assembler
 						break;
 					case "beq":
 						pseudoData=sliced[1].split(",");
-						if(pseudoData[1].matches("-?\\d+"))
+						if(pseudoData[1].trim().matches("-?\\d+"))
 						{
 							codeLines.set(i, "beq " + pseudoData[0] + ", $at," + pseudoData[2]);
 							codeLines.add(i, "ori $at, $zero, " + pseudoData[1]);
@@ -143,7 +143,7 @@ public class Assembler
 						break;
 					case "bne":
 						pseudoData = sliced[1].split(",");
-						if(pseudoData[1].matches("-?\\d+"))
+						if(pseudoData[1].trim().matches("-?\\d+"))
 						{
 							codeLines.set(i, "bne " + pseudoData[0] + ", $at," + pseudoData[2]);
 							codeLines.add(i, "ori ,$at, $zero" + pseudoData[1]);
@@ -335,5 +335,5 @@ enum Encoding
 {Register,Immediate,Jump}
 
 enum Syntax
-{ArithLog,DivMult,Shift,ShiftV,JumpR,MoveFrom,MoveTo,ArithLogI,LoadI,Branch,BranchZ,LoadStore,Jump,Trap}
+{ArithLog,DivMult,Shift,ShiftV,JumpR,MoveFrom,MoveTo,ArithLogI,LoadI,Branch,BranchZ,LoadStore,Jump}
 

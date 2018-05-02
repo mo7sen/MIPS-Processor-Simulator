@@ -8,11 +8,16 @@ public class MasterController
 	private static int PC = 0;
 	public static int offsetLines = 0;
 	public static String codeFile = ".text\n" +
-			"hello: .asciiz \"hello world\" \n" +
-			"mo7senString: .asciiz \"this is mo7sen\" \n" +
+			" " +
 			".data\n" +
-			"la $t2, hello \n" +
-			"la $t3, mo7senString";
+			"main: addi $s0, $zero, 1\n" +
+			"loop:slti $s1, $s0, 10\n" +
+			"beq $s1, 0, exit\n" +
+			"addi $s0, $s0, 1\n" +
+			"j loop\n" +
+			"exit: addi $t0, $zero, 365";
+//			pricing questions from the sheet
+//
 
 	public static void prepareMips()
 	{
@@ -31,9 +36,11 @@ public class MasterController
 		ComponentManager.flowControlMux.output.set(SignExtend.extendUnsigned(Integer.toBinaryString(PC), 32));
 	}
 
-	public static void executeStep()
+	public static boolean executeStep()
 	{
 		ProgramCounter.execute();
+		if(Integer.parseInt(ProgramCounter.addressOut.get(),2)/4 >= InstructionMemory.inMem.size())
+			return false;
 		pcIncrementer.execute();
 		InstructionMemory.execute();
 		writeRegisterMux.execute();
@@ -68,12 +75,14 @@ public class MasterController
 		regWriteDataMux.execute();
 		writeRegisterMux.execute();
 		RegisterFile.execute();
+		return true;
 	}
 
 	public static void executeAll()
 	{
-		for(String s : InstructionMemory.inMem)
-			executeStep();
+			boolean state = true;
+			while(state)
+				state = executeStep();
 	}
 
 	public static void reset()
