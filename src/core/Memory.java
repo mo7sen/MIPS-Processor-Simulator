@@ -101,6 +101,7 @@ public class Memory
 	{
 		char[] datach = data.toCharArray();
 		variables.add(new Variable(name, instantiationPointer));
+//		System.out.println(instantiationPointer.toString());
 
 		for(char c : datach)
 		{
@@ -239,6 +240,6 @@ class Variable
 	Variable(String name, Pointer a)
 	{
 		this.name = name;
-		this.address = new Pointer(a.address + a.offset);
+		this.address = new Pointer(a.address*4 + a.offset);
 	}
 }

@@ -34,7 +34,7 @@ public class Assembler
 	{
 		if(s.contains(".text"))
 		{
-			String[] fn = s.split(".text");
+			String[] fn = s.split(".data");
 			directiveLines = new ArrayList<>(Arrays.asList(fn[0].trim().split("\\n+")));
 			codeLines = new ArrayList<>(Arrays.asList(fn[1].trim().replaceAll(":", ":\n").split("\\n+")));    //Labels now take a whole line for themselves
 		}
@@ -44,8 +44,8 @@ public class Assembler
 		}
 		labels.clear();
 		scanForDirectives();
-		scanForLabels();
 		replacePseudo();
+		scanForLabels();
 		assembleLines();
 	}
 
@@ -67,8 +67,8 @@ public class Assembler
 	static void replacePseudo()
 	{
 		for(int i=0;i<codeLines.size();i++)
-		{	String c_lo =null;
-			String[] pseudoData =null;
+		{
+			String[] pseudoData;
 			String newLine =codeLines.get(i).trim();
 			String[] sliced = newLine.split("\\s+", 2);
 			if(isPseudo(sliced[0]))
@@ -83,7 +83,8 @@ public class Assembler
 						codeLines.set(i,"addu "+pseudoData[0]+"$zero,$zero");
 						break;
 					case "li":
-						pseudoData = sliced[1].split(",");
+
+						pseudoData = sliced[1].replaceAll(","," ").trim().split("\\s+");
 						String immediateIn = SignExtend.extendUnsigned(Integer.toBinaryString(Integer.parseInt(pseudoData[1])),32);
 						int immediateHi = Integer.parseInt(immediateIn.substring(0,16), 2),
 								immediateLo = Integer.parseInt(immediateIn.substring(16), 2);
@@ -92,7 +93,7 @@ public class Assembler
 						break;
 					case "la":
 						pseudoData = sliced[1].split(",");
-						String varAddress = Memory.findVariable(pseudoData[1]).address.toString();
+						String varAddress = Memory.findVariable(pseudoData[1].trim()).address.toString();
 						int Address_Hi = Integer.parseInt(varAddress.substring(0, 16),2),
 								Address_Lo = Integer.parseInt(varAddress.substring(16),2);
 						codeLines.set(i , "ori " + pseudoData[0]+ ", " + pseudoData[0] + ", " + Address_Lo);
@@ -183,10 +184,10 @@ static void scanForDirectives()
 		String varName = null;
 		String varData = null;
 
-		String newLine = directiveLines.get(j);
+		String newLine = directiveLines.get(j).trim();
 		if(newLine.contains(":"))
 		{
-			varName = newLine.split(":")[0];
+			varName = newLine.split(":")[0].trim();
 
 			if (newLine.contains("."))
 				directiveType = newLine.split("\\.", 2)[1].split("\\s+")[0].trim();
@@ -238,7 +239,7 @@ static void scanForDirectives()
 			String str = codeLines.get(i).trim();
 			String s, t, d, imm, a;
 			s = t = d = imm = a = null;
-			String[] ss = str.replaceAll(",\\s+|\\s+", " ").split("\\s");
+			String[] ss = str.replaceAll(",\\s+|\\s+|,", " ").split("\\s");
 			Instruction instruction = Instruction.searchInstruction(ss[0].trim());
 			if (instruction != null)
 			{

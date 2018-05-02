@@ -82,6 +82,8 @@ public class ALU
 			case 13://xor   1101
 				semiResult = in1 ^ in2;
 				break;
+			default:
+				semiResult = in1;
 		}
 		if(Integer.parseUnsignedInt(shift.get(),2) != 0)
 		{

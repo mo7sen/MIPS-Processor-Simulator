@@ -9,6 +9,7 @@ public class InstructionMemory
 {
 	static StringProperty addressIn = new SimpleStringProperty("00000000000000000000000000000000");
 	static StringProperty instOut = new SimpleStringProperty("00000000000000000000000000000000");
+	public static ArrayList<String> inMem = new ArrayList<>();
 
 	static void bindIn(StringProperty stringProperty)
 	{
@@ -17,10 +18,9 @@ public class InstructionMemory
 
 	static void execute()
 	{
-		if(inMem.size() - 1 >= Integer.parseUnsignedInt(addressIn.get(), 2))
-			instOut.set(read(Integer.parseUnsignedInt(addressIn.get(), 2)));
+//		if(inMem.size() - 1 >= Integer.parseInt(addressIn.get(), 2))
+			instOut.set(read(Integer.parseInt(addressIn.get(), 2)));
 	}
-	public static ArrayList<String> inMem = new ArrayList<>();
 
 	public static void add(String ins)
 	{

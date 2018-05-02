@@ -7,10 +7,12 @@ public class MasterController
 {
 	private static int PC = 0;
 	public static int offsetLines = 0;
-	public static String codeFile = ".data\n" +
-			"hello: .asciiz \"hello there\" \n" +
-			".text" +
-			"move $t1, $t2";
+	public static String codeFile = ".text\n" +
+			"hello: .asciiz \"hello world\" \n" +
+			"mo7senString: .asciiz \"this is mo7sen\" \n" +
+			".data\n" +
+			"la $t2, hello \n" +
+			"la $t3, mo7senString";
 
 	public static void prepareMips()
 	{
@@ -64,7 +66,14 @@ public class MasterController
 		memWriteDataMux.execute();
 		Memory.execute();
 		regWriteDataMux.execute();
+		writeRegisterMux.execute();
 		RegisterFile.execute();
+	}
+
+	public static void executeAll()
+	{
+		for(String s : InstructionMemory.inMem)
+			executeStep();
 	}
 
 	public static void reset()
