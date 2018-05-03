@@ -7,15 +7,7 @@ public class MasterController
 {
 	private static int PC = 0;
 	public static int offsetLines = 0;
-	public static String codeFile = ".text\n" +
-			" " +
-			".data\n" +
-			"main: addi $s0, $zero, 1\n" +
-			"loop:slti $s1, $s0, 10\n" +
-			"beq $s1, 0, exit\n" +
-			"addi $s0, $s0, 1\n" +
-			"j loop\n" +
-			"exit: addi $t0, $zero, 365";
+	public static String codeFile = null;
 //			pricing questions from the sheet
 //
 
@@ -43,18 +35,28 @@ public class MasterController
 			return false;
 		pcIncrementer.execute();
 		InstructionMemory.execute();
-		writeRegisterMux.execute();
+		if(InstructionMemory.instOut.get().equals("00000000000000000000000000000000"))
+			switch (Integer.parseUnsignedInt(RegisterFile.findRegister("$v0").currentValue, 2))
+			{
+				case 1:
+					System.out.println(Integer.parseUnsignedInt(RegisterFile.findRegister("$a0").currentValue, 2));
+					break;
+				case 4:
+
+
+			}
 		ControlUnit.execute();
 		ALUControl.execute();
+		writeRegisterMux.execute();
 		immediateExtend.execute();
 		signedFlag.execute();
 		regWriteFlag.execute();
 		RegisterFile.execute();
+		shamtMux.execute();
 		setHiLo.execute();
 		DivMultUnit.execute();
 		hiLoReader.execute();
 		aluSrcMux.execute();
-		shamtMux.execute();
 		ALU.execute();
 		eqIdentifier.execute();
 		eqFlag.execute();
@@ -75,6 +77,7 @@ public class MasterController
 		regWriteDataMux.execute();
 		writeRegisterMux.execute();
 		RegisterFile.execute();
+
 		return true;
 	}
 
@@ -90,7 +93,4 @@ public class MasterController
 
 	}
 
-//	private static void execute(Data codeLine)
-//	{
-//	}
 }

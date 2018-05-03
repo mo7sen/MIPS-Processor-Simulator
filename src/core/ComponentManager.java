@@ -86,7 +86,7 @@ public class ComponentManager
 		regWriteDataMux.selectBits.get(0).bind(ControlUnit.link);
 
 		shamtMux.inputs.get(0).set("00000");
-		shamtMux.inputs.get(1).bind(Bindings.createStringBinding(() -> RegisterFile.readData2.get().substring(21,26), RegisterFile.readData2));
+		shamtMux.inputs.get(1).bind(Bindings.createStringBinding(() -> InstructionMemory.instOut.get().substring(21,26), InstructionMemory.instOut));
 		shamtMux.inputs.get(2).set("10000");
 		shamtMux.inputs.get(3).set("10000");
 		shamtMux.selectBits.get(0).bind(ControlUnit.lui);

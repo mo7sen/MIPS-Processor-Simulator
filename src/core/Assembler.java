@@ -250,12 +250,11 @@ static void scanForDirectives()
 					case ArithLog:
 					case JumpR:
 					case DivMult:
-					case ShiftV:
 					case MoveFrom:
 					case MoveTo:
 					case Shift:
-						s = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? RegisterFile.findRegister(ss[1]).address : (instruction.syn == Syntax.ShiftV) ? RegisterFile.findRegister(ss[3]).address : (instruction.syn != Syntax.MoveFrom) ? RegisterFile.findRegister(ss[2]).address : "00000";
-						t = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.MoveFrom || instruction.syn == Syntax.MoveTo || instruction.syn == Syntax.Shift) ? "00000" : (instruction.syn == Syntax.DivMult || instruction.syn == Syntax.ShiftV ) ? RegisterFile.findRegister(ss[2]).address : RegisterFile.findRegister(ss[3]).address;
+						s = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? RegisterFile.findRegister(ss[1]).address : (instruction.syn != Syntax.MoveFrom) ? RegisterFile.findRegister(ss[2]).address : "00000";
+						t = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.MoveFrom || instruction.syn == Syntax.MoveTo || instruction.syn == Syntax.Shift) ? "00000" : (instruction.syn == Syntax.DivMult) ? RegisterFile.findRegister(ss[2]).address : RegisterFile.findRegister(ss[3]).address;
 						d = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? "00000" : RegisterFile.findRegister(ss[1]).address;
 						a = (instruction.syn == Syntax.Shift) ? Integer.toBinaryString(Integer.parseInt(ss[3])) : "00000";
 						break;

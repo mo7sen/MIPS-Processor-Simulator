@@ -31,6 +31,7 @@ public class RegisterFile
 
 	static Register findRegister(String s)
 	{
+		s = s.trim();
 		for (Register r: registers)
 			if(r.name.equals(s) || r.alias.equals(s) || r.address.equals(s))
 				return r;

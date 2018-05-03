@@ -129,6 +129,24 @@ public class Memory
 		Pointer address = findVariable(name).address;
 		return Integer.parseUnsignedInt(loadWord(address),2);
 	}
+
+	public static String readStringFromAddress(String adr)
+	{
+		String res = null;
+		Pointer address = Pointer.fromBString(adr);
+		char c;
+
+		while (true)
+		{
+			c = (char) Integer.parseInt(loadByte(address), 2);
+			if ((int) c != 0)
+			{
+				res += c;
+				address.moveByte(1);
+			} else
+				break;
+		}
+	}
 	public static String readString(String name)
 	{
 		String res = "";
@@ -231,6 +249,8 @@ class Pointer
 	{
 		return SignExtend.extendUnsigned(Integer.toBinaryString((address * 4) + offset), 32);
 	}
+
+
 }
 
 class Variable

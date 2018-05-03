@@ -97,6 +97,7 @@ public class ALUControl
 			case "100000":
 				shift.set("1");
 				jumpR.set("0");
+				divMult.set("0");
 				mWrite.set("0");
 				shiftDir.set("1");
 				signed.set("1");
@@ -108,6 +109,7 @@ public class ALUControl
 				shift.set("1");
 				jumpR.set("0");
 				mWrite.set("0");
+				divMult.set("0");
 				shiftDir.set("1");
 				signed.set("1");
 				mRead.set("0");
@@ -117,6 +119,7 @@ public class ALUControl
 			case "001000":
 				jumpR.set("1");
 				mWrite.set("0");
+				divMult.set("0");
 				regWrite.set("0");
 				break;
 			case "101010":
@@ -127,11 +130,13 @@ public class ALUControl
 				signed.set("1");
 				mRead.set("0");
 				regWrite.set("1");
+				divMult.set("0");
 				ALUOpOut.setValue("0111");
 				break;
 			case "100010":
 				shift.set("1");
 				jumpR.set("0");
+				divMult.set("0");
 				mWrite.set("0");
 				shiftDir.set("1");
 				signed.set("1");
@@ -156,6 +161,7 @@ public class ALUControl
 				aShift.set("0");
 				mRead.set("0");
 				regWrite.set("1");
+				divMult.set("0");
 				ALUOpOut.setValue("1111");
 				break;
 			case "100100"	:
@@ -167,6 +173,7 @@ public class ALUControl
 				mRead.set("0");
 				regWrite.set("1");
 				ALUOpOut.setValue("0000");
+				divMult.set("0");
 				break;
 			case "100101"	:
 				shift.set("1");
@@ -177,6 +184,7 @@ public class ALUControl
 				mRead.set("0");
 				regWrite.set("1");
 				ALUOpOut.setValue("0001");
+				divMult.set("0");
 				break;
 			case "101001"	:
 				shift.set("1");
@@ -187,6 +195,7 @@ public class ALUControl
 				mRead.set("0");
 				regWrite.set("1");
 				ALUOpOut.setValue("0111");
+				divMult.set("0");
 				break;
 			case "100001"	:
 				shift.set("1");
@@ -197,6 +206,7 @@ public class ALUControl
 				mRead.set("0");
 				regWrite.set("1");
 				ALUOpOut.setValue("0010");
+				divMult.set("0");
 				break;
 			case "011010"	:
 				jumpR.set("0");
@@ -226,11 +236,11 @@ public class ALUControl
 				shift.set("1");
 				jumpR.set("0");
 				mWrite.set("0");
-				shift.set("0");
 				signed.set("1");
 				aShift.set("1");
 				mRead.set("0");
 				regWrite.set("1");
+				divMult.set("0");
 				ALUOpOut.setValue("1111");
 				break;
 			case "100011"	:
@@ -242,6 +252,7 @@ public class ALUControl
 				mRead.set("0");
 				regWrite.set("1");
 				ALUOpOut.setValue("0110");
+				divMult.set("0");
 				break;
 			case "100110"	:
 				shift.set("1");
@@ -251,6 +262,7 @@ public class ALUControl
 				signed.set("1");
 				mRead.set("0");
 				regWrite.set("1");
+				divMult.set("0");
 				ALUOpOut.setValue("1101");
 				break;
 			case "010000"	:
@@ -258,14 +270,16 @@ public class ALUControl
 				lo.set("0");
 				mWrite.set("0");
 				mRead.set("1");
-				regWrite.set("0");
+				regWrite.set("1");
+				divMult.set("0");
 				break;
 			case "010010"	:
 				jumpR.set("0");
 				lo.set("1");
 				mWrite.set("0");
 				mRead.set("1");
-				regWrite.set("0");
+				divMult.set("0");
+				regWrite.set("1");
 				break;
 			case "000000":
 				shift.set("1");
@@ -276,6 +290,22 @@ public class ALUControl
 				mRead.set("0");
 				regWrite.set("1");
 				ALUOpOut.setValue("1111");
+				divMult.set("0");
+				break;
+			case "010001":
+				jumpR.set("0");
+				divMult.set("0");
+				lo.set("0");
+				mWrite.set("1");
+				divMult.set("0");
+				regWrite.set("0");
+				break;
+			case "010011":
+				jumpR.set("0");
+				divMult.set("0");
+				lo.set("1");
+				mWrite.set("1");
+				regWrite.set("0");
 		}
 
 	}

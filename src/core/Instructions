@@ -11,7 +11,7 @@ multu,011001,DivMult,Register       // hilo = rs * rt
 nor,100111,ArithLog,Register        // rd = ~(rs | rt)
 or,100101,ArithLog,Register         // rd = rs | rt
 ori,001101,ArithLogI,Immediate      // rd = rs | (unsigned) constant
-lui,001111,LoadI,Immediate      // rd = constant << 16
+lui,001111,LoadI,Immediate          // rd = constant << 16
 sll,000000,Shift,Register           // rd = rt << amount
 sra,000011,Shift,Register           // "SIGNED" rt >> amount
 srl,000010,Shift,Register           // rd = "UNSIGNED" rt >> amount
@@ -38,3 +38,5 @@ sh,101001,LoadStore,Immediate       // Save Half-Word
 sw,101011,LoadStore,Immediate       // save Word
 mfhi,010000,MoveFrom,Register       // rd = hi
 mflo,010010,MoveFrom,Register       // rd = lo
+mthi,010001,MoveTo,Register
+mtlo,010011,MoveTo,Register

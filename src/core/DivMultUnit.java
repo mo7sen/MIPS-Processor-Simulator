@@ -72,9 +72,7 @@ public class DivMultUnit
 				}
 			}
 		}
-		if(!outHi.isBound())
 			outHi.bind(hi);
-		if(!outLo.isBound())
 			outLo.bind(lo);
 	}
 }
