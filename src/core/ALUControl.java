@@ -20,6 +20,23 @@ public class ALUControl
 	static StringProperty mRead = new SimpleStringProperty("0");
 	static StringProperty regWrite = new SimpleStringProperty("0");
 
+	static void reset()
+	{
+		controlIn = new SimpleStringProperty("000");
+		functIn = new SimpleStringProperty("000000");
+		ALUOpOut = new SimpleStringProperty("0000");
+		shift = new SimpleStringProperty("0");
+		jumpR = new SimpleStringProperty("0");
+		div = new SimpleStringProperty("0");
+		divMult = new SimpleStringProperty("0");
+		lo = new SimpleStringProperty("0");
+		mWrite = new SimpleStringProperty("0");
+		shiftDir = new SimpleStringProperty("0");
+		signed = new SimpleStringProperty("0");
+		aShift = new SimpleStringProperty("0");
+		mRead = new SimpleStringProperty("0");
+		regWrite = new SimpleStringProperty("0");
+	}
 	public static void execute()
 	{
 		switch(controlIn.get())
@@ -30,6 +47,7 @@ public class ALUControl
 			case "000"://add
 				shift.set("0");
 				jumpR.set("0");
+				shiftDir.set("1");
 				divMult.set("0");
 				mWrite.set("0");
 				signed.set("0");
@@ -87,6 +105,13 @@ public class ALUControl
 				regWrite.set("0");
 				ALUOpOut.setValue("1101");
 				break;
+			case "110":
+				jumpR.set("0");
+				divMult.set("0");
+				mWrite.set("0");
+				mRead.set("0");
+				ALUOpOut.set("1111");
+				shiftDir.set("1");
 		}
 	}
 
@@ -238,6 +263,7 @@ public class ALUControl
 				mWrite.set("0");
 				signed.set("1");
 				aShift.set("1");
+				shiftDir.set("0");
 				mRead.set("0");
 				regWrite.set("1");
 				divMult.set("0");

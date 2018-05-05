@@ -23,6 +23,27 @@ public class ControlUnit
 	static StringProperty lui = new SimpleStringProperty("0");
 	static StringProperty halfOp = new SimpleStringProperty("0");
 
+	static void reset()
+	{
+		opCodeIn = new SimpleStringProperty("000000");
+		ALUOpOut = new SimpleStringProperty("000");
+		regDst = new SimpleStringProperty("0");
+		branch = new SimpleStringProperty("0");
+		memRead = new SimpleStringProperty("0");
+		memToReg = new SimpleStringProperty("0");
+		memWrite = new SimpleStringProperty("0");
+		ALUSrc = new SimpleStringProperty("0");
+		regWrite = new SimpleStringProperty("0");
+		byteOp = new SimpleStringProperty("0");
+		memToMem = new SimpleStringProperty("0");
+		signed = new SimpleStringProperty("0");
+		jump = new SimpleStringProperty("0");
+		link = new SimpleStringProperty("0");
+		equal = new SimpleStringProperty("0");
+		lui = new SimpleStringProperty("0");
+		halfOp = new SimpleStringProperty("0");
+	}
+
 	public static void execute()
 	{
 		switch (opCodeIn.get())
@@ -279,7 +300,7 @@ public class ControlUnit
 				ALUSrc.set("1");		//26
 				regWrite.set("1");
 				memToMem.set("0");
-				signed.set("1");
+				signed.set("0");
 				ALUOpOut.set("101");
 				jump.set("0");
 				link.set("0");

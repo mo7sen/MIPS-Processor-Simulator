@@ -30,6 +30,6 @@ public class WordBuilder
 			wordOut.set(Integer.toBinaryString((Integer.parseInt(halfIn.get(),2) << ((3 - offset) * 8)) | Integer.parseInt(wordReserved)));
 
 		else
-			wordOut.set(Integer.toBinaryString((Integer.parseInt(byteIn.get(),2) << ((3 - offset) * 8)) | Integer.parseInt(wordReserved)));
+			wordOut.set(Integer.toBinaryString((Integer.parseUnsignedInt(byteIn.get(),2) << ((3 - offset) * 8)) | Integer.parseUnsignedInt(wordReserved)));
 	}
 }

@@ -22,6 +22,11 @@ public class MUX
 		}
 	}
 
+	void reset()
+	{
+
+	}
+
 	public void bindInputs(StringProperty... stringProperties)
 	{
 		for(int i = 0; i < stringProperties.length; i++)

@@ -8,11 +8,11 @@ public class Assembler
 	static ArrayList<Label> labels = new ArrayList<>();
 	static ArrayList<String> codeLines = new ArrayList<>();
 	static ArrayList<String> directiveLines = new ArrayList<>();
-	static ArrayList<String> pseudoIns = new ArrayList<>(Arrays.asList(new String[]{"move","clear","li","la","b","bal","bgt","blt","bge","ble","bgtu","beqz","beq","bne","mul","div","rem","jalr","not","nop"}));
+	static ArrayList<String> pseudoIns = new ArrayList<>(Arrays.asList(new String[]{"move","clear","li","la","b","bgt","blt","bge","ble","bgtu","beqz","beq","bne","mul","div","rem","jalr","not","nop"}));
 	
 
 	
-	private static Label findLabel(String name) // finds the address of a label
+	public static Label findLabel(String name) // finds the address of a label
 	{
 		for(Label lbl: labels)
 		{
@@ -55,13 +55,14 @@ public class Assembler
 		{
 			if(codeLines.get(i).contains(":"))
 			{
-				labels.add(new Label(codeLines.get(i).split(":")[0].trim(), Integer.toBinaryString(i * 4)));
+				labels.add(new Label(codeLines.get(i).trim().split(":")[0].trim(), Integer.toBinaryString(i * 4)));
 				codeLines.remove(i);
-				continue;
 			}
-			i++;
+			else
+			{
+				i++;
+			}
 		}
-		codeLines.removeIf(String::isEmpty);
 	}
 
 	static void replacePseudo()
@@ -85,17 +86,17 @@ public class Assembler
 					case "li":
 
 						pseudoData = sliced[1].replaceAll(","," ").trim().split("\\s+");
-						String immediateIn = SignExtend.extendUnsigned(Integer.toBinaryString(Integer.parseInt(pseudoData[1])),32);
-						int immediateHi = Integer.parseInt(immediateIn.substring(0,16), 2),
-								immediateLo = Integer.parseInt(immediateIn.substring(16), 2);
+						String immediateIn = SignExtend.extendUnsigned(Integer.toBinaryString(Integer.parseUnsignedInt(pseudoData[1].trim())),32);
+						int immediateHi = BinaryParser.parseUnsigned(immediateIn.substring(0,16)),
+								immediateLo = BinaryParser.parseUnsigned(immediateIn.substring(16));
 						codeLines.set(i , "ori " + pseudoData[0]+ ", " + pseudoData[0] + ", " + immediateLo);
 						codeLines.add(i , "lui " + pseudoData[0] + "," +immediateHi);
 						break;
 					case "la":
 						pseudoData = sliced[1].split(",");
 						String varAddress = Memory.findVariable(pseudoData[1].trim()).address.toString();
-						int Address_Hi = Integer.parseInt(varAddress.substring(0, 16),2),
-								Address_Lo = Integer.parseInt(varAddress.substring(16),2);
+						int Address_Hi = BinaryParser.parseUnsigned(varAddress.substring(0, 16)),
+								Address_Lo = BinaryParser.parseUnsigned(varAddress.substring(16));
 						codeLines.set(i , "ori " + pseudoData[0]+ ", " + pseudoData[0] + ", " + Address_Lo);
 						codeLines.add(i , "lui " + pseudoData[0] + "," +Address_Hi);
 						break;
@@ -239,7 +240,7 @@ static void scanForDirectives()
 			String str = codeLines.get(i).trim();
 			String s, t, d, imm, a;
 			s = t = d = imm = a = null;
-			String[] ss = str.replaceAll(",\\s+|\\s+|,", " ").split("\\s");
+			String[] ss = str.replaceAll(",\\s+|\\s+|,", " ").split("\\s+");
 			Instruction instruction = Instruction.searchInstruction(ss[0].trim());
 			if (instruction != null)
 			{
@@ -251,11 +252,12 @@ static void scanForDirectives()
 					case JumpR:
 					case DivMult:
 					case MoveFrom:
+					case syscall:
 					case MoveTo:
 					case Shift:
-						s = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? RegisterFile.findRegister(ss[1]).address : (instruction.syn != Syntax.MoveFrom) ? RegisterFile.findRegister(ss[2]).address : "00000";
-						t = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.MoveFrom || instruction.syn == Syntax.MoveTo || instruction.syn == Syntax.Shift) ? "00000" : (instruction.syn == Syntax.DivMult) ? RegisterFile.findRegister(ss[2]).address : RegisterFile.findRegister(ss[3]).address;
-						d = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? "00000" : RegisterFile.findRegister(ss[1]).address;
+						s = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? RegisterFile.findRegister(ss[1]).address : (instruction.syn != Syntax.MoveFrom && instruction.syn != Syntax.syscall) ? RegisterFile.findRegister(ss[2]).address : "00000";
+						t = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.MoveFrom || instruction.syn == Syntax.MoveTo || instruction.syn == Syntax.Shift || instruction.syn == Syntax.syscall) ? "00000" : (instruction.syn == Syntax.DivMult) ? RegisterFile.findRegister(ss[2]).address : RegisterFile.findRegister(ss[3]).address;
+						d = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo || instruction.syn == Syntax.syscall) ? "00000" : RegisterFile.findRegister(ss[1]).address;
 						a = (instruction.syn == Syntax.Shift) ? Integer.toBinaryString(Integer.parseInt(ss[3])) : "00000";
 						break;
 					case LoadI:	//Immediate
@@ -279,7 +281,7 @@ static void scanForDirectives()
 					case Jump:	//Jump
 						Label l2 = findLabel(ss[1]);
 						if (l2 != null)
-							imm = l2.getAddress().substring(4, 30);
+							imm = Integer.toBinaryString(BinaryParser.parseUnsigned(l2.getAddress().substring(4, 30)));
 						break;
 				}
 
@@ -334,5 +336,5 @@ enum Encoding
 {Register,Immediate,Jump}
 
 enum Syntax
-{ArithLog,DivMult,Shift,ShiftV,JumpR,MoveFrom,MoveTo,ArithLogI,LoadI,Branch,BranchZ,LoadStore,Jump}
+{ArithLog,DivMult,Shift,JumpR,MoveFrom,MoveTo,ArithLogI,LoadI,Branch,BranchZ,LoadStore,Jump,syscall}
 
