@@ -34,4 +34,9 @@ public class InstructionMemory
 	{
 		inMem.clear();
 	}
+	public static void showMe()
+	{
+		for(String instruction : inMem)
+			System.out.println(instruction);
+	}
 }

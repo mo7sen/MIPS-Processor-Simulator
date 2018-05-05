@@ -29,6 +29,12 @@ public class AndGate
 
 	public void execute()
 	{
-		out.set(Integer.toBinaryString(Integer.parseInt(in1.get(),2) & Integer.parseInt(in2.get(),2)));
+		out.set(Integer.toBinaryString(BinaryParser.parseUnsigned(in1.get()) & BinaryParser.parseUnsigned(in2.get())));
+	}
+	void reset()
+	{
+		in1 = new SimpleStringProperty("0");
+				in2 = new SimpleStringProperty("0");
+				out = new SimpleStringProperty("0");
 	}
 }

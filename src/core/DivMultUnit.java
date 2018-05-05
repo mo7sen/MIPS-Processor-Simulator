@@ -22,6 +22,20 @@ public class DivMultUnit
 	static StringProperty lo = new SimpleStringProperty("00000000000000000000000000000000");
 	static String hiLo = null;
 
+	static void reset()
+	{
+		input1 = new SimpleStringProperty("00000000000000000000000000000000");
+		input2 = new SimpleStringProperty("00000000000000000000000000000000");
+		inHi = new SimpleStringProperty("00000000000000000000000000000000");
+		inLo = new SimpleStringProperty("00000000000000000000000000000000");
+		write = new SimpleStringProperty("0");
+		div = new SimpleStringProperty("0");
+		outHi = new SimpleStringProperty("00000000000000000000000000000000");
+		outLo = new SimpleStringProperty("00000000000000000000000000000000");
+		active = new SimpleStringProperty(")");
+		signed = new SimpleStringProperty("0");
+	}
+
 	static void execute()
 	{
 		if(write.get().equals("1"))
@@ -41,13 +55,13 @@ public class DivMultUnit
 			{
 				if(signed.get().equals("1"))
 				{
-					hi.set(Integer.toBinaryString(Integer.parseInt(input1.get(), 2)%Integer.parseInt(input2.get(), 2)));
-					lo.set(Integer.toBinaryString(Integer.parseInt(input1.get(), 2)/Integer.parseInt(input2.get(), 2)));
+					hi.set(Integer.toBinaryString(BinaryParser.parseSigned(input1.get())%BinaryParser.parseSigned(input2.get())));
+					lo.set(Integer.toBinaryString(BinaryParser.parseSigned(input1.get())/BinaryParser.parseSigned(input2.get())));
 				}
 				else
 				{
-					hi.set(Integer.toBinaryString(Integer.parseUnsignedInt(input1.get(), 2)%Integer.parseUnsignedInt(input2.get(), 2)));
-					lo.set(Integer.toBinaryString(Integer.parseUnsignedInt(input1.get(), 2)/Integer.parseUnsignedInt(input2.get(), 2)));
+					hi.set(Integer.toBinaryString(BinaryParser.parseUnsigned(input1.get())%BinaryParser.parseUnsigned(input2.get())));
+					lo.set(Integer.toBinaryString(BinaryParser.parseUnsigned(input1.get())/BinaryParser.parseUnsigned(input2.get())));
 				}
 			}
 			else
@@ -72,9 +86,7 @@ public class DivMultUnit
 				}
 			}
 		}
-		if(!outHi.isBound())
 			outHi.bind(hi);
-		if(!outLo.isBound())
 			outLo.bind(lo);
 	}
 }

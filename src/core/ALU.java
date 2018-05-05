@@ -46,20 +46,33 @@ public class ALU
 		shift.bind(stringProperty);
 	}
 
+	static void reset()
+	{
+		input1 = new SimpleStringProperty("00000000000000000000000000000000");
+				input2 = new SimpleStringProperty("00000000000000000000000000000000");
+				ALUOp = new SimpleStringProperty("000");
+				output = new SimpleStringProperty("00000000000000000000000000000000");
+				zero = new SimpleStringProperty("0");
+				arithmetic = new SimpleStringProperty("0");
+				shiftDirection = new SimpleStringProperty("0");
+				signed = new SimpleStringProperty("0");
+				shift = new SimpleStringProperty("0");
+	}
+
 	static void execute()
 	{
 		int in1, in2, semiResult = 0;
 		if(signed.get().equals("1"))
 		{
-			in1 = Integer.parseInt(input1.get(),2);
-			in2 = Integer.parseInt(input2.get(),2);
+			in1 = BinaryParser.parseSigned(input1.get());
+			in2 = BinaryParser.parseSigned(input2.get());
 		}
 		else
 		{
-			in1 = Integer.parseUnsignedInt(input1.get(),2);
-			in2 = Integer.parseUnsignedInt(input2.get(),2);
+			in1 = BinaryParser.parseUnsigned(input1.get());
+			in2 = BinaryParser.parseUnsigned(input2.get());
 		}
-		switch (Integer.parseUnsignedInt(ALUOp.get(), 2))
+		switch (BinaryParser.parseUnsigned(ALUOp.get()))
 		{
 			case 0://and    0000
 				semiResult = in1 & in2;
@@ -85,9 +98,9 @@ public class ALU
 			default:
 				semiResult = in1;
 		}
-		if(Integer.parseUnsignedInt(shift.get(),2) != 0)
+		if(BinaryParser.parseUnsigned(shift.get()) != 0)
 		{
-			int shamt = Integer.parseUnsignedInt(shift.get(),2);
+			int shamt = BinaryParser.parseUnsigned(shift.get());
 			if (shiftDirection.get().equals("1")) //Checks for shift-left
 				semiResult = semiResult << shamt;
 			else

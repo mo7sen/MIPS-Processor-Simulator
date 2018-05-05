@@ -11,8 +11,8 @@ public class Memory
 {
 	private static boolean device[][] = new boolean[2621440][32];
 	static ArrayList<Variable> variables = new ArrayList<>();
-	private static Pointer instantiationPointer = new Pointer(0);
-	public static int startingMemoryOffset = 0;
+	static Pointer instantiationPointer = new Pointer(0);
+	public static int startingMemoryOffset = 1000;
 	static StringProperty   addressIn = new SimpleStringProperty("00000000000000000000000000000000"),
 							dataOut = new SimpleStringProperty("00000000000000000000000000000000"),
 							dataIn = new SimpleStringProperty("00000000000000000000000000000000"),
@@ -21,10 +21,13 @@ public class Memory
 
 	static void execute()
 	{
-		if(memReadFlag.get().equals("1"))
-			dataOut.set(loadWord(new Pointer(Integer.parseInt(addressIn.get(),2))));
-		if(memWriteFlag.get().equals("1"))
-			saveWord(dataIn.get(), new Pointer(Integer.parseInt(addressIn.get(),2)));
+		if(Integer.parseUnsignedInt(addressIn.get(), 2) > 0)
+		{
+			if (memReadFlag.get().equals("1"))
+				dataOut.set(loadWord(new Pointer(Integer.parseUnsignedInt(addressIn.get(), 2))));
+			if (memWriteFlag.get().equals("1"))
+				saveWord(dataIn.get(), new Pointer(BinaryParser.parseUnsigned(addressIn.get())));
+		}
 	}
 
 	static Variable findVariable(String var)
@@ -37,6 +40,15 @@ public class Memory
 			}
 		}
 		return null;
+	}
+
+	static void reset()
+	{
+		addressIn = new SimpleStringProperty("00000000000000000000000000000000");
+		dataOut = new SimpleStringProperty("00000000000000000000000000000000");
+		dataIn = new SimpleStringProperty("00000000000000000000000000000000");
+		memReadFlag = new SimpleStringProperty("0");
+		memWriteFlag = new SimpleStringProperty("0");
 	}
 
 	public static void refresh()
@@ -101,7 +113,6 @@ public class Memory
 	{
 		char[] datach = data.toCharArray();
 		variables.add(new Variable(name, instantiationPointer));
-//		System.out.println(instantiationPointer.toString());
 
 		for(char c : datach)
 		{
@@ -129,6 +140,25 @@ public class Memory
 		Pointer address = findVariable(name).address;
 		return Integer.parseUnsignedInt(loadWord(address),2);
 	}
+
+	public static String readStringFromAddress(String adr)
+	{
+		String res = null;
+		Pointer address = Pointer.fromBString(adr);
+		char c;
+
+		while (true)
+		{
+			c = (char) Integer.parseInt(loadByte(address), 2);
+			if ((int) c != 0)
+			{
+				res += String.valueOf(c);
+			} else
+				break;
+		}
+
+		return res;
+	}
 	public static String readString(String name)
 	{
 		String res = "";
@@ -143,8 +173,7 @@ public class Memory
 				c = (char) Integer.parseInt(loadByte(address), 2);
 				if ((int) c != 0)
 				{
-					res += c;
-					address.moveByte(1);
+					res += String.valueOf(c);
 				} else
 					break;
 			}
@@ -156,7 +185,9 @@ public class Memory
 	{
 		String ret = "";
 		for(int i = 0; i < 8; i++)
-			ret += (device[address.address][(address.offset * 8) + i])?"1":"0";
+			ret += (device[address.address][(address.offset * 8) + i]) ? "1" : "0";
+		address.moveByte(1);
+//		System.out.println(InstructionMemory.instOut.get());
 		return ret;
 	}
 
@@ -164,7 +195,6 @@ public class Memory
 	{
 		String ret = "";
 		ret += loadByte(address);
-		address.moveByte(1);
 		ret += loadByte(address);
 		return ret;
 	}
@@ -173,7 +203,6 @@ public class Memory
 	{
 		String ret = "";
 		ret += loadHWord(address);
-		address.moveByte(1);
 		ret += loadHWord(address);
 		return ret;
 	}
@@ -231,6 +260,11 @@ class Pointer
 	{
 		return SignExtend.extendUnsigned(Integer.toBinaryString((address * 4) + offset), 32);
 	}
+	public static Pointer fromBString(String b)
+	{
+		return new Pointer(BinaryParser.parseUnsigned(b));
+	}
+
 }
 
 class Variable

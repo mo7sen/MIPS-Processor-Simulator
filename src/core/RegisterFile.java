@@ -31,6 +31,7 @@ public class RegisterFile
 
 	static Register findRegister(String s)
 	{
+		s = s.trim();
 		for (Register r: registers)
 			if(r.name.equals(s) || r.alias.equals(s) || r.address.equals(s))
 				return r;
@@ -50,6 +51,7 @@ public class RegisterFile
 				String[] parts = line.split(",");
 				registers.add(new Register(parts[0], parts[1], parts[2]));
 			}
+			findRegister("$sp").setValue(SignExtend.extendUnsigned(Integer.toBinaryString(2621439 * 4),32));
 		} catch (FileNotFoundException e)
 		{
 			e.printStackTrace();
@@ -68,10 +70,7 @@ class Register
 		this.name = name;
 		this.alias = alias;
 		this.address = address;
-		if(name.equals("$sp"))
-			currentValue = SignExtend.extendUnsigned(Integer.toBinaryString(2621439 * 4), 32);
-		else
-			currentValue = "00000000000000000000000000000000";
+		currentValue = "00000000000000000000000000000000";
 	}
 
 	public void setValue(String newValue)

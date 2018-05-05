@@ -22,6 +22,6 @@ public class Shifter
 
 	void execute()
 	{
-		out.set(Integer.toBinaryString(Integer.parseInt(in.get(),2) << 2));
+		out.set(Integer.toBinaryString(BinaryParser.parseUnsigned(in.get()) << 2));
 	}
 }
