@@ -13,48 +13,69 @@ public class MasterController
 	static Scanner scan = new Scanner(System.in);
 	public static String codeFile =
 			".text\n" +
-					"msg1: .asciiz \"Enter n: \"\n" +
-					"msg2: .asciiz \"Factorial of n is: \"\n" +
-					".data\n" +
-					"    la        $a0, msg1\n" +
-					"    li        $v0, 4\n" +
-					"    syscall\n" +
-					"    li        $v0, 5\n" +
-					"    syscall\n" +
-					"    move      $t0, $v0\n" +
-					"    addi      $sp, $sp, -12 \n" +
-					"    sw        $t0, 0($sp)   \n" +
-					"    sw        $ra, 8($sp) \n" +
-					"    jal       factorial\n" +
-					"    lw        $ra, 8($sp) \n" +
-					"    lw        $s0, 4($sp)  \n" +
-					"    addi      $sp, $sp, 12 \n" +
-					"    la        $a0, msg2\n" +
-					"    li        $v0, 4\n" +
-					"    syscall\n" +
-					"    move      $a0, $s0\n" +
-					"    li        $v0, 1\n" +
-					"    syscall\n" +
-					"    li        $v0, 10\n" +
-					"    syscall\n" +
-					"factorial:" +
-					"    lw        $t0, 0($sp)\n" +
-					"    beq       $t0, 0, return1\n" +
-					"    addi      $t0, $t0, -1\n" +
-					"    addi      $sp, $sp, -12\n" +
-					"    sw        $t0, 0($sp)\n" +
-					"    sw        $ra, 8($sp)\n" +
-					"    jal       factorial\n" +
-					"    lw        $ra, 8($sp)\n" +
-					"    lw        $t1, 4($sp)\n" +
-					"    lw        $t0, 12($sp)\n" +
-					"    mul       $t2, $t1, $t0\n" +
-					"    sw        $t2, 16($sp)\n" +
-					"    addiu     $sp, $sp, 12\n" +
-					"    jr        $ra\n" +
-					"return1:li        $t0, 1\n"+
-	"sw        $t0, 4($sp)\n"+
-	"jr        $ra";
+                    "msg1: .asciiz \"Enter n: \"\n" +
+                    "msg2: .asciiz \"th Fibonacci is: \"\n" +
+                    " \n" +
+                    ".data\n" +
+                    "    li          $v0, 4\n" +
+                    "    la          $a0, msg1\n" +
+                    "    syscall\n" +
+                    "    li          $v0, 5\n" +
+                    "    syscall\n" +
+                    "    move        $s1, $v0\n" +
+                    "    addi        $v0, $v0, -1\n" +
+                    "    addi        $sp, $sp, -12\n" +
+                    "    sw          $v0, 0($sp)\n" +
+                    "    sw          $ra, 8($sp)\n" +
+                    "    jal         fibonacci\n" +
+                    "    lw          $ra, 8($sp)\n" +
+                    "    lw          $s0, 4($sp)\n" +
+                    "    addi        $sp, $sp, 12\n" +
+                    "    move        $a0, $s1\n" +
+                    "    li          $v0, 1\n" +
+                    "    syscall\n" +
+                    "    la          $a0, msg2\n" +
+                    "    li          $v0, 4\n" +
+                    "    syscall\n" +
+                    "    move        $a0, $s0\n" +
+                    "    li          $v0, 1\n" +
+                    "    syscall\n" +
+                    "    li          $v0, 10\n" +
+                    "    syscall\n" +
+                    "fibonacci:" +
+                    "    lw          $t0, 0($sp)\n" +
+                    "li $t8, 46\n"+
+                    "    bge         $t0, $t8, return0\n" +
+                    "    ble         $t0, $0, return0\n" +
+                    "li $t8, 1\n" +
+                    "    beq         $t0, $t8, return1\n" +
+                    "    addi        $t0, $t0, -1\n" +
+                    "    addi        $sp, $sp, -12\n" +
+                    "    sw          $t0, 0($sp)\n" +
+                    "    sw          $ra, 8($sp)\n" +
+                    "    jal         fibonacci\n" +
+                    "    lw          $ra, 8($sp)\n" +
+                    "    lw          $t0, 12($sp)\n" +
+                    "    addi        $t0, $t0, -2\n" +
+                    "    addi        $sp, $sp, -12\n" +
+                    "    sw          $t0, 0($sp)\n" +
+                    "    sw          $ra, 8($sp)\n" +
+                    "    jal         fibonacci\n" +
+                    "    lw          $ra, 8($sp)\n" +
+                    "    lw          $t2, 4($sp)\n" +
+                    "    lw          $t1, 16($sp)\n" +
+                    "    add         $t3, $t1, $t2\n" +
+                    "    sw          $t3, 28($sp)\n" +
+                    "    addi        $sp, $sp, 12\n" +
+                    "    addi        $sp, $sp, 12\n" +
+                    "    jr          $ra\n" +
+                    "return0:" +
+                    "    sw          $0, 4($sp)\n" +
+                    "    jr          $ra\n" +
+                    "return1:" +
+                    "    li          $t0, 1\n" +
+                    "    sw          $t0, 4($sp)\n" +
+                    "    jr          $ra\n" ;
 
 //			pricing questions from the sheet
 //
@@ -151,7 +172,7 @@ public class MasterController
 //		System.out.println(InstructionMemory.instOut.get());
 //		System.out.println(Memory.addressIn.get());
 //		System.out.println(Integer.parseUnsignedInt(ProgramCounter.addressOut.get(),2) / 4);
-//		System.out.println(RegisterFile.findRegister("$a0").currentValue);
+		System.out.println(RegisterFile.findRegister("$v0").currentValue);
 //		System.out.println(Assembler.findLabel("done").address);
 
 		return true;

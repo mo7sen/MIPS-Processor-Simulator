@@ -118,7 +118,7 @@ public class Assembler
 					case "bge":
 						pseudoData = sliced[1].split(",");
 						codeLines.set(i,"beq $at, $zero,"+pseudoData[2]);
-						codeLines.add("slt $at,"+pseudoData[0]+","+pseudoData[1]);
+						codeLines.add(i,"slt $at,"+pseudoData[0].trim()+","+pseudoData[1].trim());
 						break;
 					case "ble":
 						pseudoData=sliced[1].split(",");
@@ -306,6 +306,7 @@ static void scanForDirectives()
 				if (syn != null)
 				{
 					InstructionMemory.add(syn);
+					System.out.println(str);
 				}
 			}
 		}

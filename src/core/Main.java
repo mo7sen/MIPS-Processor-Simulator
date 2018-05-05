@@ -9,6 +9,7 @@ public class Main
         MasterController.executeAll();
 
 
+
 //        System.out.println(InstructionMemory.instOut.get());
 
 //        InstructionMemory.showMe();
@@ -28,7 +29,7 @@ public class Main
 //        System.out.println(RegisterFile.findRegister("$zero").currentValue);
 //        System.out.println(RegisterFile.findRegister("$t1").currentValue);
 //        System.out.println(RegisterFile.findRegister("$t0").currentValue);
-        System.out.println(RegisterFile.findRegister("$a0").currentValue);
+//        System.out.println(RegisterFile.findRegister("$a0").currentValue);
 //        System.out.println((int) Math.pow(2,31));
 //        System.out.println((char) 98);
 //        System.out.println(ProgramCounter.addressIn.get());
