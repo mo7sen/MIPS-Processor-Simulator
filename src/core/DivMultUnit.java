@@ -55,13 +55,13 @@ public class DivMultUnit
 			{
 				if(signed.get().equals("1"))
 				{
-					hi.set(Integer.toBinaryString(BinaryParser.parseSigned(input1.get())%BinaryParser.parseSigned(input2.get())));
-					lo.set(Integer.toBinaryString(BinaryParser.parseSigned(input1.get())/BinaryParser.parseSigned(input2.get())));
+					hi.set(SignExtend.extendUnsigned(Integer.toBinaryString(BinaryParser.parseSigned(input1.get())%BinaryParser.parseSigned(input2.get())), 32));
+					lo.set(SignExtend.extendUnsigned(Integer.toBinaryString(BinaryParser.parseSigned(input1.get())/BinaryParser.parseSigned(input2.get())), 32));
 				}
 				else
 				{
-					hi.set(Integer.toBinaryString(BinaryParser.parseUnsigned(input1.get())%BinaryParser.parseUnsigned(input2.get())));
-					lo.set(Integer.toBinaryString(BinaryParser.parseUnsigned(input1.get())/BinaryParser.parseUnsigned(input2.get())));
+					hi.set(SignExtend.extendUnsigned(Integer.toBinaryString(BinaryParser.parseUnsigned(input1.get())%BinaryParser.parseUnsigned(input2.get())), 32));
+					lo.set(SignExtend.extendUnsigned(Integer.toBinaryString(BinaryParser.parseUnsigned(input1.get())/BinaryParser.parseUnsigned(input2.get())), 32));
 				}
 			}
 			else

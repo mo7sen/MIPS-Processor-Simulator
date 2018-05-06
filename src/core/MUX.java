@@ -37,11 +37,9 @@ public class MUX
 
 	public void execute()
 	{
-		String selection = "";
+		String selection = "0";
 		for(StringProperty stringProperty : selectBits)
-			selection += stringProperty.get();
-		if(output.isBound())
-			output.unbind();
-		output.set(inputs.get(Integer.parseInt(selection, 2)).get());
+			selection += stringProperty.get().charAt(stringProperty.get().length()-1);
+		output.set(inputs.get(BinaryParser.parseUnsigned(selection)).get());
 	}
 }

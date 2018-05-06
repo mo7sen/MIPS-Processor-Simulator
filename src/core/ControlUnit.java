@@ -300,7 +300,7 @@ public class ControlUnit
 				ALUSrc.set("1");		//26
 				regWrite.set("1");
 				memToMem.set("0");
-				signed.set("0");
+				signed.set("1");
 				ALUOpOut.set("101");
 				jump.set("0");
 				link.set("0");

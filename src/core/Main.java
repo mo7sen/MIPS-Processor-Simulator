@@ -4,10 +4,11 @@ public class Main
 {
     public static void main(String[] args)
     {
+//        System.out.println(6%4);
         MasterController.prepareMips();
         MasterController.run();
         MasterController.executeAll();
-
+//System.out.println(Integer.toBinaryString((65535<<16) | 65524));
 
 //        System.out.println(InstructionMemory.instOut.get());
 
@@ -20,15 +21,18 @@ public class Main
 //        System.out.println(InstructionMemory.inMem.get(0));
 //        System.out.println(InstructionMemory.inMem.get(1));
 //        System.out.println(InstructionMemory.inMem.get(2));
-
+System.out.println(Memory.loadWord(new Pointer(0)));
 //        MasterController.executeStep();
 //        System.out.println(RegisterFile.writeReg.get());
 //        MasterController.executeStep();
 //        System.out.println(DivMultUnit.lo.get());
 //        System.out.println(RegisterFile.findRegister("$zero").currentValue);
 //        System.out.println(RegisterFile.findRegister("$t1").currentValue);
-//        System.out.println(RegisterFile.findRegister("$t0").currentValue);
-        System.out.println(RegisterFile.findRegister("$a0").currentValue);
+//        System.out.println();
+//        for(int i = 0; i < Assembler.codeLines.size();i++)
+//        		System.out.println(Assembler.codeLines.get(i).trim());
+//        System.out.println(BinaryParser.parseUnsigned("10"));
+//        System.out.println(RegisterFile.findRegister("$v0").currentValue);
 //        System.out.println((int) Math.pow(2,31));
 //        System.out.println((char) 98);
 //        System.out.println(ProgramCounter.addressIn.get());

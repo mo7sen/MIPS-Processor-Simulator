@@ -19,17 +19,18 @@ public class WordBuilder
 		String reserveValue = null, wordReserved = null;
 		if(hOp.get().equals("1"))
 		{
-			reserveValue = placeReserveHalf[offset];
 			if(offset == 3)
 				return;
+			reserveValue = placeReserveHalf[offset];
 		}
 		else
 			reserveValue = placeReserveByte[offset];
-		wordReserved = Integer.toBinaryString(Integer.parseUnsignedInt(reserveValue,2) & Integer.parseUnsignedInt(wordIn.get(),2));
-		if(hOp.get().equals("1"))
-			wordOut.set(Integer.toBinaryString((Integer.parseInt(halfIn.get(),2) << ((3 - offset) * 8)) | Integer.parseInt(wordReserved)));
 
+		wordReserved = SignExtend.extendUnsigned(Integer.toBinaryString(BinaryParser.parseUnsigned(reserveValue) & BinaryParser.parseUnsigned(wordIn.get())), 32);
+
+		if(hOp.get().equals("1"))
+			wordOut.set(SignExtend.extendUnsigned(Integer.toBinaryString((BinaryParser.parseUnsigned(halfIn.get()) << ((2 - offset) * 8)) | BinaryParser.parseUnsigned(wordReserved)),32));
 		else
-			wordOut.set(Integer.toBinaryString((Integer.parseUnsignedInt(byteIn.get(),2) << ((3 - offset) * 8)) | Integer.parseUnsignedInt(wordReserved)));
+			wordOut.set(SignExtend.extendUnsigned(Integer.toBinaryString((BinaryParser.parseUnsigned(byteIn.get()) << ((3 - offset) * 8)) | BinaryParser.parseUnsigned(wordReserved)),32));
 	}
 }

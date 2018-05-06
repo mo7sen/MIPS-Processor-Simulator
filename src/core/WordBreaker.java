@@ -17,15 +17,19 @@ public class WordBreaker
 	static void execute()
 	{
 		int offset = Integer.parseUnsignedInt(offsetIn.get(), 2);
-		if(signedFlag.get().equals("1"))
-		{
-			byteOut.set(SignExtend.extendSigned(Integer.toBinaryString(Integer.parseUnsignedInt(wordIn.get() , 2) & Integer.parseUnsignedInt(bytePicker[offset], 2)), 32));
-			halfOut.set(SignExtend.extendSigned(Integer.toBinaryString(Integer.parseUnsignedInt(wordIn.get(), 2) & Integer.parseUnsignedInt(halfPicker[offset], 2)), 32));
-		}
-		else
-		{
-			byteOut.set(SignExtend.extendUnsigned(Integer.toBinaryString(Integer.parseUnsignedInt(wordIn.get(), 2) & Integer.parseUnsignedInt(bytePicker[offset], 2)), 32));
-			halfOut.set(SignExtend.extendUnsigned(Integer.toBinaryString(Integer.parseUnsignedInt(wordIn.get(), 2) & Integer.parseUnsignedInt(halfPicker[offset], 2)), 32));
-		}
+
+		int b = BinaryParser.parseUnsigned(wordIn.get()) & BinaryParser.parseUnsigned(bytePicker[offset]);
+		int h = BinaryParser.parseUnsigned(wordIn.get()) & BinaryParser.parseUnsigned(halfPicker[offset]);
+
+		for(int i = 0; i < 3-offset; i++)
+			b = b >>> 8;
+
+		for(int i = 0; i < 2-offset; i++)
+			h = h >>> 8;
+
+
+		byteOut.set(SignExtend.extendUnsigned(Integer.toBinaryString(b), 32));
+		halfOut.set(SignExtend.extendUnsigned(Integer.toBinaryString(h), 32));
+
 	}
 }

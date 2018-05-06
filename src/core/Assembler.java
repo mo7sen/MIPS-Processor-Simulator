@@ -43,11 +43,19 @@ public class Assembler
 			codeLines = new ArrayList<>(Arrays.asList(s.trim().replaceAll(":", ":\n").split("\\n+")));
 		}
 		labels.clear();
+//		removeComments();
 		scanForDirectives();
 		replacePseudo();
 		scanForLabels();
 		assembleLines();
 	}
+
+//	private static void removeComments()
+//	{
+//		for (String codeLine : codeLines)
+//			if(codeLine.trim().charAt(0)=='#')
+//				codeLine = "\n";
+//	}
 
 	static void scanForLabels()
 	{
@@ -81,12 +89,17 @@ public class Assembler
 						break;
 					case "clear":
 						pseudoData = sliced[1].split("\\s+");
-						codeLines.set(i,"addu "+pseudoData[0]+"$zero,$zero");
+						codeLines.set(i,"add "+pseudoData[0]+"$zero,$zero");
 						break;
 					case "li":
 
 						pseudoData = sliced[1].replaceAll(","," ").trim().split("\\s+");
-						String immediateIn = SignExtend.extendUnsigned(Integer.toBinaryString(Integer.parseUnsignedInt(pseudoData[1].trim())),32);
+						String immediateIn;
+						if(Integer.parseInt(pseudoData[1].trim()) >= 0)
+							immediateIn = SignExtend.extendUnsigned(Integer.toBinaryString(Integer.parseUnsignedInt(pseudoData[1].trim())),32);
+						else
+							immediateIn = SignExtend.extendUnsigned(Integer.toBinaryString(Integer.parseInt(pseudoData[1].trim())), 32);
+
 						int immediateHi = BinaryParser.parseUnsigned(immediateIn.substring(0,16)),
 								immediateLo = BinaryParser.parseUnsigned(immediateIn.substring(16));
 						codeLines.set(i , "ori " + pseudoData[0]+ ", " + pseudoData[0] + ", " + immediateLo);
@@ -117,7 +130,7 @@ public class Assembler
 						break;
 					case "bge":
 						pseudoData = sliced[1].split(",");
-						codeLines.set(i,"beq $at, $zero,"+pseudoData[2]);
+						codeLines.set(i,"bne $at, $zero,"+pseudoData[2]);
 						codeLines.add("slt $at,"+pseudoData[0]+","+pseudoData[1]);
 						break;
 					case "ble":
@@ -157,8 +170,11 @@ public class Assembler
 						break;
 					case "div":
 						pseudoData=sliced[1].split(",");
-						codeLines.set(i,"mflo "+pseudoData[0]);
-						codeLines.add(i,"div "+pseudoData[1]+","+pseudoData[2]);
+						if(pseudoData.length > 2)
+						{
+							codeLines.set(i, "mflo " + pseudoData[0]);
+							codeLines.add(i, "div " + pseudoData[1] + "," + pseudoData[2]);
+						}
 						break;
 					case "rem":
 						pseudoData=sliced[1].split(",");

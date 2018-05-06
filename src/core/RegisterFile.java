@@ -39,6 +39,22 @@ public class RegisterFile
 
 	}
 
+	public static void showAll()
+	{
+		for (Register r: registers)
+		{
+			System.out.println(r.name + ": " + r.currentValue);
+		}
+	}
+
+	public static void showAllHex()
+	{
+		for (Register r: registers)
+		{
+			System.out.println(r.name + ": " + Integer.toHexString(BinaryParser.parseUnsigned(r.currentValue)));
+		}
+	}
+
 	public static void initialize(String file)
 	{
 		try

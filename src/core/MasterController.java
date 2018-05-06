@@ -12,52 +12,10 @@ public class MasterController
 	public static int offsetLines = 0;
 	static Scanner scan = new Scanner(System.in);
 	public static String codeFile =
-			".text\n" +
-					"msg1: .asciiz \"Enter n: \"\n" +
-					"msg2: .asciiz \"Factorial of n is: \"\n" +
-					".data\n" +
-					"    la        $a0, msg1\n" +
-					"    li        $v0, 4\n" +
-					"    syscall\n" +
-					"    li        $v0, 5\n" +
-					"    syscall\n" +
-					"    move      $t0, $v0\n" +
-					"    addi      $sp, $sp, -12 \n" +
-					"    sw        $t0, 0($sp)   \n" +
-					"    sw        $ra, 8($sp) \n" +
-					"    jal       factorial\n" +
-					"    lw        $ra, 8($sp) \n" +
-					"    lw        $s0, 4($sp)  \n" +
-					"    addi      $sp, $sp, 12 \n" +
-					"    la        $a0, msg2\n" +
-					"    li        $v0, 4\n" +
-					"    syscall\n" +
-					"    move      $a0, $s0\n" +
-					"    li        $v0, 1\n" +
-					"    syscall\n" +
-					"    li        $v0, 10\n" +
-					"    syscall\n" +
-					"factorial:" +
-					"    lw        $t0, 0($sp)\n" +
-					"    beq       $t0, 0, return1\n" +
-					"    addi      $t0, $t0, -1\n" +
-					"    addi      $sp, $sp, -12\n" +
-					"    sw        $t0, 0($sp)\n" +
-					"    sw        $ra, 8($sp)\n" +
-					"    jal       factorial\n" +
-					"    lw        $ra, 8($sp)\n" +
-					"    lw        $t1, 4($sp)\n" +
-					"    lw        $t0, 12($sp)\n" +
-					"    mul       $t2, $t1, $t0\n" +
-					"    sw        $t2, 16($sp)\n" +
-					"    addiu     $sp, $sp, 12\n" +
-					"    jr        $ra\n" +
-					"return1:li        $t0, 1\n"+
-	"sw        $t0, 4($sp)\n"+
-	"jr        $ra";
-
-//			pricing questions from the sheet
-//
+									"li $t3, 12\n" +
+											"li $t4, 36\n" +
+											"sb $t3, 0($s1)\n" +
+											"sb $t4, 1($s1)";
 
 	public static void prepareMips()
 	{
@@ -80,6 +38,7 @@ public class MasterController
 
 	public static boolean executeStep()
 	{
+//		System.out.println(Integer.parseUnsignedInt(ProgramCounter.addressIn.get(),2) / 4);
 		ProgramCounter.execute();
 		if(Integer.parseInt(ProgramCounter.addressOut.get(),2)/4 >= InstructionMemory.inMem.size())
 			return false;
@@ -90,10 +49,10 @@ public class MasterController
 			switch (Integer.parseUnsignedInt(RegisterFile.findRegister("$v0").currentValue, 2))
 			{
 				case 1:
-					System.out.println(BinaryParser.parseSigned(RegisterFile.findRegister("$a0").currentValue));
+					System.out.print(BinaryParser.parseSigned(RegisterFile.findRegister("$a0").currentValue));
 					break;
 				case 4:
-					System.out.println(Memory.readStringFromAddress(RegisterFile.findRegister("$a0").currentValue));
+					System.out.print(Memory.readStringFromAddress(RegisterFile.findRegister("$a0").currentValue));
 					break;
 				case 5:
 					RegisterFile.findRegister("$v0").setValue(Integer.toBinaryString(scan.nextInt()));
@@ -104,7 +63,7 @@ public class MasterController
 				case 10:
 					return false;
 				case 11:
-					System.out.println((char) BinaryParser.parseUnsigned(RegisterFile.findRegister("$a0").currentValue));
+					System.out.print((char) BinaryParser.parseUnsigned(RegisterFile.findRegister("$a0").currentValue));
 					break;
 				case 12:
 					RegisterFile.findRegister("$v0").setValue(String.valueOf(scan.next().charAt(0)));
@@ -131,6 +90,8 @@ public class MasterController
 		jumpRMux.execute();
 		left2BitShifter.execute();
 		branchCalculator.execute();
+//		System.out.println(flowControlMux.selectBits.toString());
+//		System.out.println(flowControlMux.selectBits.get(0).get() + flowControlMux.selectBits.get(1).get());
 		flowControlMux.execute();
 		Memory.execute();
 		WordBreaker.execute();
@@ -143,16 +104,26 @@ public class MasterController
 		regWriteDataMux.execute();
 		writeRegisterMux.execute();
 		RegisterFile.execute();
+//		System.out.println(Memory.addressIn.get());
+//		System.out.println("------------------------");
+//		System.out.println(RegisterFile.regWrite.get());
+//		System.out.println(RegisterFile.writeData.get());
 //		System.out.println(Memory.readStringFromAddress(Memory.findVariable("newString").address.toString()));
 //		System.out.println(Memory.findVariable("string").address);
 //		System.out.println(Memory.instantiationPointer.toString());
 //		System.out.println(Assembler.codeLines.get(Integer.parseInt(ProgramCounter.addressOut.get(), 2) / 4).trim());
 //		System.out.println(ALU.output.get());
+//		System.out.println(jumpRFlag.out.get() + equalMux.output.get());
 //		System.out.println(InstructionMemory.instOut.get());
 //		System.out.println(Memory.addressIn.get());
-//		System.out.println(Integer.parseUnsignedInt(ProgramCounter.addressOut.get(),2) / 4);
-//		System.out.println(RegisterFile.findRegister("$a0").currentValue);
 //		System.out.println(Assembler.findLabel("done").address);
+//		System.out.println(Memory.memWriteFlag.get());
+//		System.out.println(WordBreaker.wordIn.get());
+//		System.out.println(Memory.loadByte(new Pointer(2)));
+//		System.out.println(RegisterFile.findRegister("$a0").currentValue);
+//		System.out.println(RegisterFile.findRegister("$s1").currentValue);
+//		System.out.println(RegisterFile.findRegister("$t4").currentValue);
+//		System.out.println("--------------------------------------------------------------");
 
 		return true;
 	}

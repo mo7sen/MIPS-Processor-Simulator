@@ -21,13 +21,14 @@ public class Memory
 
 	static void execute()
 	{
-		if(Integer.parseUnsignedInt(addressIn.get(), 2) > 0)
+		if(BinaryParser.parseUnsigned(addressIn.get())/4 < 2621440)
 		{
 			if (memReadFlag.get().equals("1"))
-				dataOut.set(loadWord(new Pointer(Integer.parseUnsignedInt(addressIn.get(), 2))));
+				dataOut.set(loadWord(new Pointer(BinaryParser.parseUnsigned(addressIn.get()))));
 			if (memWriteFlag.get().equals("1"))
 				saveWord(dataIn.get(), new Pointer(BinaryParser.parseUnsigned(addressIn.get())));
 		}
+
 	}
 
 	static Variable findVariable(String var)
@@ -143,13 +144,13 @@ public class Memory
 
 	public static String readStringFromAddress(String adr)
 	{
-		String res = null;
+		String res = "";
 		Pointer address = Pointer.fromBString(adr);
 		char c;
 
 		while (true)
 		{
-			c = (char) Integer.parseInt(loadByte(address), 2);
+			c = (char) BinaryParser.parseUnsigned(loadByte(address));
 			if ((int) c != 0)
 			{
 				res += String.valueOf(c);
@@ -170,7 +171,7 @@ public class Memory
 			Pointer address = v.address;
 			while (true)
 			{
-				c = (char) Integer.parseInt(loadByte(address), 2);
+				c = (char) BinaryParser.parseUnsigned(loadByte(address));
 				if ((int) c != 0)
 				{
 					res += String.valueOf(c);
