@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="layout_instscene" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.inst_controller">
+   <top>
+      <MenuBar fx:id="mnubar_menu" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu fx:id="mnu_file" mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem fx:id="mnuitm_import" mnemonicParsing="false" onAction="#importfile" text="Import" />
+              <MenuItem fx:id="mnuitm_close" mnemonicParsing="false" onAction="#close" text="Close" />
+            </items>
+          </Menu>
+          <Menu fx:id="mnu_view" mnemonicParsing="false" text="View">
+            <items>
+              <MenuItem fx:id="mnuitm_instview" mnemonicParsing="false" text="Instruction view" />
+                  <MenuItem fx:id="mnuitm_excview" mnemonicParsing="false" onAction="#switchscene" text="Execution view" />
+            </items>
+          </Menu>
+          <Menu fx:id="mnuitm_help" mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem fx:id="mnuitm_instmanual" mnemonicParsing="false" text="instruction manual" />
+            </items>
+          </Menu>
+            <Menu fx:id="mnui_about" mnemonicParsing="false" text="About...">
+               <items>
+                  <MenuItem fx:id="mnuitm_abtdevs" mnemonicParsing="false" onAction="#showalertbox1" text="Developers" />
+                  <MenuItem fx:id="mnuitm_abtprg" mnemonicParsing="false" onAction="#showalertbox2" text="program" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <TextArea fx:id="textarea_isntarea" prefHeight="200.0" prefWidth="200.0" promptText="&quot;Type in instructions or import form menu&quot;" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Droid Sans" size="14.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </padding>
+      </TextArea>
+   </center>
+   <bottom>
+      <Button fx:id="btn_run" mnemonicParsing="false" onAction="#switchscene" text="Run" textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="30.0" />
+         </BorderPane.margin>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+   </bottom>
+</BorderPane>
