@@ -12,7 +12,7 @@ public class Assembler
 	
 
 	
-	public static Label findLabel(String name) // finds the address of a label
+	public static Label findLabel(String name) // finds the addressProperty of a label
 	{
 		for(Label lbl: labels)
 		{
@@ -271,26 +271,26 @@ static void scanForDirectives()
 					case syscall:
 					case MoveTo:
 					case Shift:
-						s = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? RegisterFile.findRegister(ss[1]).address : (instruction.syn != Syntax.MoveFrom && instruction.syn != Syntax.syscall) ? RegisterFile.findRegister(ss[2]).address : "00000";
-						t = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.MoveFrom || instruction.syn == Syntax.MoveTo || instruction.syn == Syntax.Shift || instruction.syn == Syntax.syscall) ? "00000" : (instruction.syn == Syntax.DivMult) ? RegisterFile.findRegister(ss[2]).address : RegisterFile.findRegister(ss[3]).address;
-						d = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo || instruction.syn == Syntax.syscall) ? "00000" : RegisterFile.findRegister(ss[1]).address;
+						s = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo) ? RegisterFile.findRegister(ss[1]).addressProperty.get() : (instruction.syn != Syntax.MoveFrom && instruction.syn != Syntax.syscall) ? RegisterFile.findRegister(ss[2]).addressProperty.get() : "00000";
+						t = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.MoveFrom || instruction.syn == Syntax.MoveTo || instruction.syn == Syntax.Shift || instruction.syn == Syntax.syscall) ? "00000" : (instruction.syn == Syntax.DivMult) ? RegisterFile.findRegister(ss[2]).addressProperty.get() : RegisterFile.findRegister(ss[3]).addressProperty.get();
+						d = (instruction.syn == Syntax.JumpR || instruction.syn == Syntax.DivMult || instruction.syn == Syntax.MoveTo || instruction.syn == Syntax.syscall) ? "00000" : RegisterFile.findRegister(ss[1]).addressProperty.get();
 						a = (instruction.syn == Syntax.Shift) ? Integer.toBinaryString(Integer.parseInt(ss[3])) : "00000";
 						break;
 					case LoadI:	//Immediate
 					case ArithLogI:	//Immediate
-						t = RegisterFile.findRegister(ss[1]).address;
-						s = (instruction.syn == Syntax.LoadI) ? "00000" : RegisterFile.findRegister(ss[2]).address;
+						t = RegisterFile.findRegister(ss[1]).addressProperty.get();
+						s = (instruction.syn == Syntax.LoadI) ? "00000" : RegisterFile.findRegister(ss[2]).addressProperty.get();
 						imm = (instruction.syn == Syntax.LoadI) ? Integer.toBinaryString(Integer.parseInt(ss[2])) : Integer.toBinaryString(Integer.parseInt(ss[3]));
 						break;
 					case LoadStore:	//Immediate
-						t = RegisterFile.findRegister(ss[1]).address;
+						t = RegisterFile.findRegister(ss[1]).addressProperty.get();
 						imm = Integer.toBinaryString(Integer.parseInt(ss[2].split("\\(")[0]));
-						s = RegisterFile.findRegister(ss[2].split("\\(")[1].split("\\)")[0]).address;
+						s = RegisterFile.findRegister(ss[2].split("\\(")[1].split("\\)")[0]).addressProperty.get();
 						break;
 					case BranchZ:	//Immediate
 					case Branch:	//Immediate
-						s = RegisterFile.findRegister(ss[1]).address;
-						t = RegisterFile.findRegister(ss[2]).address;
+						s = RegisterFile.findRegister(ss[1]).addressProperty.get();
+						t = RegisterFile.findRegister(ss[2]).addressProperty.get();
 						Label l = findLabel(ss[3].trim());
 						if (l != null)
 							imm = Integer.toBinaryString((Integer.parseInt(l.getAddress(), 2)/4) - (i + 1));
@@ -322,6 +322,7 @@ static void scanForDirectives()
 				if (syn != null)
 				{
 					InstructionMemory.add(syn);
+					InstructionLine.instructionLines.add(new InstructionLine(str ,syn));
 				}
 			}
 		}
