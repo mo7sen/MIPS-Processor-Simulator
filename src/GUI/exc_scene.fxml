@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -17,7 +22,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="bordermainlayout_exc" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.exc_controller">
+<BorderPane fx:id="bordermainlayout_exc" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.exc_controller">
 
     <center>
       <GridPane fx:id="gridlayout_exclayout" hgap="10.0" vgap="10.0" BorderPane.alignment="CENTER">
@@ -69,9 +74,9 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
                <children>
-                  <TextArea fx:id="txtarea_console" prefHeight="344.0" prefWidth="715.0" promptText="console">
+                  <TextArea fx:id="txtarea_console" prefHeight="352.0" prefWidth="715.0" promptText="console">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="34.0" />
                      </VBox.margin>
                   </TextArea>
                </children>
@@ -94,7 +99,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
                <GridPane.margin>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                  <Insets bottom="-40.0" left="15.0" right="15.0" top="15.0" />
                </GridPane.margin>
             </TableView>
          </children>
