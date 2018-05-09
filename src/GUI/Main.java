@@ -24,12 +24,16 @@ public class Main extends Application
         stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("inst_scene.fxml"));
         Parent root2 = FXMLLoader.load(getClass().getResource("exc_scene.fxml"));
+//        System.setIn(exc_controller.getIn());
+//        System.setOut(exc_controller.getOut());
+//        System.setErr(exc_controller.getOut());
         primaryStage.setTitle("MIPS simulator");
         primaryStage.centerOnScreen();
         instScene = new Scene(root, 1000, 500);
         excScene = new Scene(root2, 2000, 1000);
         primaryStage.setScene(instScene);
         primaryStage.show();
+
 
     }
 
@@ -38,3 +42,11 @@ public class Main extends Application
         launch(args);
     }
 }
+
+
+//    li $v0, 5
+//        syscall
+//        move $s1, $v0
+//        addi $a0, $s1, 10
+//        li $v0, 1
+//        syscall

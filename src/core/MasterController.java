@@ -1,5 +1,6 @@
 package core;
 
+import GUI.exc_controller;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -13,8 +14,9 @@ public class MasterController extends Thread
 {
 	private static int PC = 0;
 	public static int offsetLines = 0;
-	static Scanner scan = new Scanner(System.in);
+	public static Scanner scan = new Scanner(System.in);
 	public static StringProperty codeFile = new SimpleStringProperty();
+	public static boolean paused = false;
 
 	public static void prepareMips()
 	{
@@ -142,14 +144,84 @@ public class MasterController extends Thread
 	public static void executeAll()
 	{
 		boolean state = true;
-		while(state)
-		try {
-			state = executeStep();
-			int speedOfExecution = GUI.exc_controller.getSpeed();
-			if(speedOfExecution != 0)
-				Thread.sleep(1000 * (1 / GUI.exc_controller.getSpeed()));
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		while (state)
+		{
+			//if(!GUI.exc_controller.paused)
+			//{
+			while(paused)
+			{
+				try
+				{
+					Thread.sleep(100);
+				} catch (InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			}
+
+				try
+				{
+					state = executeStep();
+					int speedOfExecution = GUI.exc_controller.getSpeed();
+					if (speedOfExecution != 0)
+						Thread.sleep(1000 * (1 / GUI.exc_controller.getSpeed()));
+				} catch (InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			//}
 		}
 	}
 }
+
+//.text
+//		msg1: .asciiz "Enter n: "
+//		msg2: .asciiz "Factorial of n is: "
+//		.data
+//		la        $a0, msg1
+//		li        $v0, 4
+//		syscall
+//		li        $v0, 5
+//		syscall
+//		move      $t0, $v0
+//		addi      $sp, $sp, -12
+//		sw        $t0, 0($sp)
+//		sw        $ra, 8($sp)
+//		jal       factorial
+//		lw        $ra, 8($sp)
+//		lw        $s0, 4($sp)
+//		addi      $sp, $sp, 12
+//		la        $a0, msg2
+//		li        $v0, 4
+//		syscall
+//
+//		move      $a0, $s0
+//		li        $v0, 1
+//		syscall
+//
+//		li        $v0, 10
+//		syscall
+//
+//		factorial:
+//		lw        $t0, 0($sp)
+//		beq       $t0, 0, return1
+//
+//		addi      $t0, $t0, -1
+//		addi      $sp, $sp, -12
+//		sw        $t0, 0($sp)
+//		sw        $ra, 8($sp)
+//		jal       factorial
+//		lw        $t1, 4($sp)
+//		lw        $ra, 8($sp)
+//		addiu     $sp, $sp, 12
+//		lw        $t0, 0($sp)
+//		mul       $t2, $t1, $t0
+//		sw        $t2, 4($sp)
+//
+//		jr        $ra
+//
+//		return1:
+//		li        $t0, 1
+//		sw        $t0, 4($sp)
+//		jr        $ra
+//

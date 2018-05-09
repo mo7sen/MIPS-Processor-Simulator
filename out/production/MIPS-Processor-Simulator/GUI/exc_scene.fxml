@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import jp.uphy.javafx.console.*?>
 
-<BorderPane fx:id="bordermainlayout_exc" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.exc_controller">
+<BorderPane fx:id="bordermainlayout_exc" blendMode="EXCLUSION" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.exc_controller">
 
     <center>
       <GridPane fx:id="gridlayout_exclayout" hgap="10.0" vgap="10.0" BorderPane.alignment="CENTER">
@@ -30,37 +22,55 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <VBox fx:id="Vbox_regarea" alignment="CENTER" spacing="15.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1">
+            <VBox fx:id="Vbox_regarea" alignment="CENTER" prefHeight="363.0" prefWidth="715.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="5.0" />
+                  <Insets left="15.0" right="15.0" />
                </GridPane.margin>
                <children>
-                  <HBox alignment="CENTER" prefHeight="29.0" prefWidth="715.0">
+                  <HBox alignment="CENTER" maxHeight="10.0" prefHeight="0.0" prefWidth="715.0" spacing="5.0">
                      <children>
                         <Slider fx:id="slider_speed" max="30.0" prefHeight="14.0" prefWidth="315.0" />
-                        <TextField fx:id="sliderValue" maxWidth="40.0" minWidth="30.0" prefHeight="25.0" prefWidth="30.0">
+                        <TextField fx:id="sliderValue" maxWidth="40.0" minHeight="25.0" minWidth="32.0" prefHeight="15.0" prefWidth="30.0" style="-fx-background-radius: 0; -fx-border-width: 2; -fx-border-color: #000000;">
                            <HBox.margin>
-                              <Insets left="20.0" />
+                              <Insets />
                            </HBox.margin>
                         </TextField>
+                        <Button fx:id="pauseXresumeBtn" mnemonicParsing="false" onAction="#pauseXresumeAction" text="Pause">
+                           <font>
+                              <Font name="Consolas Bold" size="13.0" />
+                           </font>
+                        </Button>
                      </children>
                   </HBox>
-                  <TableView fx:id="table_registers" prefHeight="330.0" prefWidth="715.0">
+                  <TableView fx:id="table_registers" prefHeight="319.0" prefWidth="715.0">
                     <columns>
                       <TableColumn fx:id="col_reg" prefWidth="245.99998474121094" text="Registers">
                           <cellValueFactory>
                               <PropertyValueFactory property="name" />
                           </cellValueFactory>
                       </TableColumn>
-                      <TableColumn fx:id="col_data" prefWidth="257.00001525878906" text="Data">
+                      <TableColumn fx:id="col_data" prefWidth="257.00001525878906" text="Binary">
                           <cellValueFactory>
                               <PropertyValueFactory property="currentValue" />
                           </cellValueFactory>
                       </TableColumn>
+                        <TableColumn fx:id="col_reg1" prefWidth="245.99998474121094" text="Hexadecimal">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="hexaDecimal" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="col_reg11" prefWidth="245.99998474121094" text="Decimal">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="decimal" />
+                           </cellValueFactory>
+                        </TableColumn>
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
+                     <VBox.margin>
+                        <Insets top="6.0" />
+                     </VBox.margin>
                   </TableView>
                </children>
             </VBox>
@@ -69,11 +79,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
                <children>
-                  <TextArea fx:id="txtarea_console" prefHeight="344.0" prefWidth="715.0" promptText="console">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </VBox.margin>
-                  </TextArea>
+                  <ConsoleView fx:id="consoleView" prefHeight="352.0" prefWidth="715.0" />
                </children>
             </VBox>
             <TableView fx:id="table_inst" prefHeight="200.0" prefWidth="200.0" GridPane.hgrow="NEVER">
@@ -94,7 +100,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
                <GridPane.margin>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                  <Insets bottom="-40.0" left="15.0" right="15.0" top="15.0" />
                </GridPane.margin>
             </TableView>
          </children>
