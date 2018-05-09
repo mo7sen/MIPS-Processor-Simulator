@@ -30,7 +30,8 @@ import static core.MasterController.codeFile;
 public class inst_controller {
 
     @FXML
-    public Button btn_run;
+    public Button btn_run, 
+            oneStepBtn;
     public MenuItem mnuitm_close;
     public MenuItem mnuitm_excview;
     public MenuItem mnuitm_import;
@@ -38,43 +39,20 @@ public class inst_controller {
     public MenuItem mnuitm_abtdevs;
     public MenuItem mnuitm_abtprg;
     private int txtcount=0;
+    static MasterController masterController;
 
     //menu functionality---------------------------------------------------\
     public void switchscene()
     {
         Main.stage.setScene(Main.excScene);
         Main.stage.setFullScreen(true);
-//        if(Main.stage.getHeight()==Main.screensize.getHeight()&&Main.stage.getWidth()==Main.screensize.getWidth())
-//        {
-//            try {
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("exc_scene.fxml"));
-//                Scene scene = new Scene(loader.load());
-//                Main.stage.setX(Main.stage.getX() + Main.stage.getWidth());
-//                Main.stage.setY(Main.stage.getY() + Main.stage.getHeight());
-//                Main.stage.setHeight(Main.screensize.getHeight());
-//                Main.stage.setWidth(Main.screensize.getWidth());
-//                Main.stage.setScene(scene);
-//            }catch (IOException io){
-//                io.printStackTrace();
-//            }
-//            Main.stage.show();
-//        }
-//
-//        try {
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("exc_scene.fxml"));
-//        Scene scene = new Scene(loader.load());
-//        Main.stage.setScene(scene);
-//        }catch (IOException io){
-//            io.printStackTrace();
-//        }
-
-        new MasterController().start();
-
+	    masterController.start();
     }
 
     @FXML
     public void initialize()
     {
+	    masterController = new MasterController();
         new Thread(MasterController::prepareMips).start();
         codeFile.bindBidirectional(textarea_isntarea.textProperty());
     }
@@ -88,8 +66,8 @@ public class inst_controller {
     {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("about developers");
-        Label label = new Label("developed by:\n\n\nRobear Wagih Nabih Selwans\n\nYoussef Ossama Eid\n\nMohamed Alaa\n\nAhmed Tawfeek");
+        window.setTitle("About the Developers");
+        Label label = new Label("MIPS Processor Simulator\n\nDeveloped by:\nRobear Wagih Nabih Selwans\nYoussef Ossama Eid\nMohamed Alaa\nAhmed Tawfeek");
         label.setFont(Font.font("serif",14));
         Button close = new Button("close");
         close.setOnAction(e -> window.close());
@@ -107,8 +85,11 @@ public class inst_controller {
     {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("About Program");
-        Label label = new Label("About program :\n\nMips simulator\nProject Computer Architecture CSE-116\nSubmitted to: DR. Cherif Salama\n Semester : Spring 2018");
+        window.setTitle("About the Program");
+        Label label = new Label("About :\n\nMips simulator\nProject Computer Architecture CSE-116\nSubmitted to:\n" +
+                                        "DR. Cheriff Salama\n" +
+                                        "Eng. Ahmed Fathi\n" +
+                                        "Semester: Spring 2018");
         label.setTextAlignment(TextAlignment.CENTER);
         label.setFont(Font.font("serif",14));
         Button close = new Button("close");
@@ -134,16 +115,16 @@ public class inst_controller {
         FileReader fileReader = new FileReader(new File(String.valueOf(file)));
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line;
-        line = bufferedReader.readLine();
-        if(line != null)
+        while((line = bufferedReader.readLine()) != null)
         {
-            int count = 1;
-            textarea_isntarea.setText(count+" "+line);
-            while ((line = bufferedReader.readLine()) != null) {
-                count++;
-                textarea_isntarea.setText(textarea_isntarea.getText() + "\n"+count+ " " + line);
-            }
+            textarea_isntarea.appendText(line + "\n");
         }
+    }
+
+    public void oneStepSwitchScene(ActionEvent actionEvent)
+    {
+        exc_controller.setSpeed(1);
+        switchscene();
     }
 
 

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="yfiles-for-javafx">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/yfiles-for-javafx.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://D:/Downloads/yFiles-for-JavaFX-Complete-3.1.0.1-Evaluation(1)/yFiles-for-JavaFX-Complete-3.1.0.1-Evaluation/doc/javadoc" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

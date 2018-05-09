@@ -21,11 +21,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
+import jp.uphy.javafx.console.ConsoleView;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class exc_controller {
 
@@ -35,43 +37,22 @@ public class exc_controller {
     public MenuBar mnubar_menu;
     public MenuItem mnuitm_instview ;
     public MenuItem mnuitm_save;
-    public TextArea txtarea_console;
+    public ConsoleView consoleView;
     public TableView table_registers,
             table_inst;
     public Slider slider_speed;
     public TextField sliderValue;
+    public Button pauseXresumeBtn;
     static TextField placeHolder;
+    public static boolean paused = false;
+	MasterController masterController;
 
-    //menu functionality---------------------------------------------------\
+	//menu functionality---------------------------------------------------\
     public void switchinstscene()
     {
-//        Main.stage.show();
-//
-//        if(Main.stage.getHeight()==Main.screensize.getHeight()&&Main.stage.getWidth()==Main.screensize.getWidth())
-//        {
-//            try {
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("inst_scene.fxml"));
-//                Scene scene = new Scene(loader.load());
-//                Main.stage.setX(Main.stage.getX() + Main.stage.getWidth());
-//                Main.stage.setY(Main.stage.getY() + Main.stage.getHeight());
-//                Main.stage.setHeight(Main.screensize.getHeight());
-//                Main.stage.setWidth(Main.screensize.getWidth());
-//                Main.stage.setScene(scene);
-//            }catch (IOException io){
-//                io.printStackTrace();
-//            }
-//            Main.stage.show();
-//        }
-//
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("inst_scene.fxml"));
-//            Scene scene = new Scene(loader.load());
-//            Main.stage.setScene(scene);
-//        }catch (IOException io){
-//            io.printStackTrace();
-//        }
         Main.stage.setScene(Main.instScene);
         Main.stage.setFullScreen(false);
+        RegisterFile.showAll();
         MasterController.reset();
 
     }
@@ -102,8 +83,11 @@ public class exc_controller {
 
     public void initialize()
     {
-//        col_reg.setCellValueFactory(new PropertyValueFactory<>("name"));
-//        col_data.setCellValueFactory(new PropertyValueFactory<>("currentValue"));
+    	masterController = inst_controller.masterController;
+        System.setIn(consoleView.getIn());
+        System.setOut(consoleView.getOut());
+        System.setErr(consoleView.getOut());
+        MasterController.scan = new Scanner(consoleView.getIn());
         table_registers.setItems(RegisterFile.registers);
         table_inst.setItems(InstructionLine.instructionLines);
         StringConverter<Number> converter = new NumberStringConverter();
@@ -139,9 +123,27 @@ public class exc_controller {
         return (int) Double.parseDouble(placeHolder.getText());
     }
 
+    public static void setSpeed(int n)
+    {
+        placeHolder.setText(String.valueOf(n));
+    }
+
+	public void pauseXresumeAction(ActionEvent actionEvent)
+	{
+		if(MasterController.paused)
+		{
+			MasterController.paused = false;
+			pauseXresumeBtn.setText("Pause");
+		}
+		else
+		{
+			MasterController.paused = true;
+			pauseXresumeBtn.setText("Resume");
+		}
+	}
 
 
-    //menu functionality---------------------------------------------------/
+	//menu functionality---------------------------------------------------/
 
 
 
