@@ -48,11 +48,6 @@ public class Memory
 		dataOut = new SimpleStringProperty("00000000000000000000000000000000");
 	}
 
-	public static void refresh()
-	{
-
-	}
-
 	public static void initialize()
 	{
 		instantiationPointer = new Pointer(startingMemoryOffset);
@@ -66,18 +61,21 @@ public class Memory
 		for (int i = 0; i < 8; i++)
 			device[address.address][(address.offset*8)+i] = (data.charAt(i) == '1');
 		address.moveByte(1);
+		instantiationPointer = address;
 	}
 
 	public static void saveHWord(String data, Pointer address)
 	{
 		saveByte(data.substring(0,8), address);
 		saveByte(data.substring(8,16),address);
+		instantiationPointer = address;
 	}
 
 	public static void saveWord(String data, Pointer address)
 	{
 		saveHWord(data.substring(0,16),address);
 		saveHWord(data.substring(16,32),address);
+		instantiationPointer = address;
 	}
 	
 	public static void saveArrayEmpty(int sizeBytes,  String name) 
@@ -86,7 +84,22 @@ public class Memory
 		instantiationPointer.moveByte(sizeBytes);
 	} 
 	
-	
+	public static void saveStringByAddress(String data, Pointer address)
+	{
+		char[] datach = data.toCharArray();
+		for(char c : datach)
+		{
+			if(c != 0)
+			{
+				saveByte(SignExtend.extendUnsigned(Integer.toBinaryString((int) c), 8), address);
+			}
+			else
+				break;
+		}
+		saveByte("00000000", address);
+		instantiationPointer = address;
+
+	}
 	
 	public static void saveB(String name, String data)
 	{
@@ -223,44 +236,6 @@ public class Memory
 			}
 		}
 	}
-}
-class Pointer
-{
-	int address;
-	int offset;
-	void moveByte(int bytes)
-	{
-		if(bytes + offset >= 4)
-		{
-			address+=1;
-			bytes-=4;
-			moveByte(bytes);
-		}
-		else if (bytes + offset < 0)
-		{
-			address-=1;
-			bytes+=4;
-			moveByte(bytes);
-		}
-		else
-		{
-			offset += bytes;
-		}
-	}
-	Pointer(int address)
-	{
-		this.address = address/4;
-		this.offset = address%4;
-	}
-	public String toString()
-	{
-		return SignExtend.extendUnsigned(Integer.toBinaryString((address * 4) + offset), 32);
-	}
-	public static Pointer fromBString(String b)
-	{
-		return new Pointer(BinaryParser.parseUnsigned(b));
-	}
-
 }
 
 class Variable

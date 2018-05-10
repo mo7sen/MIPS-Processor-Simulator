@@ -32,6 +32,8 @@ public class Assembler
 
 	static void assembleProgram(String s)
 	{
+		for(int i = 0; i < MasterController.PC.get(); i++)
+			InstructionMemory.add("00000000000000000000000000000000");
 		if(s.contains(".text"))
 		{
 			String[] fn = s.split(".data");
@@ -59,7 +61,7 @@ public class Assembler
 
 	static void scanForLabels()
 	{
-		for (int i = 0; i < codeLines.size();)
+		for (int i = MasterController.PC.get(); i < codeLines.size();)
 		{
 			if(codeLines.get(i).contains(":"))
 			{

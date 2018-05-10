@@ -1,6 +1,10 @@
 package core;
 
 import GUI.exc_controller;
+import GUI.inst_controller;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -12,7 +16,7 @@ import static core.ComponentManager.*;
 
 public class MasterController extends Thread
 {
-	private static int PC = 0;
+	protected static IntegerProperty PC = new SimpleIntegerProperty();
 	public static int offsetLines = 0;
 	public static Scanner scan = new Scanner(System.in);
 	public static StringProperty codeFile = new SimpleStringProperty();
@@ -20,12 +24,13 @@ public class MasterController extends Thread
 
 	public static void prepareMips()
 	{
+
 		Instruction.initialize("src/core/Instructions");
 		System.out.println("Instructions initialized");
 		RegisterFile.initialize("src/core/Registers");
 		System.out.println("Register initialized");
 		Memory.initialize();
-
+		PC.bind(Bindings.createIntegerBinding(() -> Integer.parseInt(inst_controller.pcinit.textProperty().get()), inst_controller.pcinit.textProperty()));
 		ComponentManager.provoke();
 	}
 
@@ -39,7 +44,7 @@ public class MasterController extends Thread
 	public static void configure()
 	{
 		Assembler.assembleProgram(codeFile.get());
-		ComponentManager.flowControlMux.output.set(SignExtend.extendUnsigned(Integer.toBinaryString(PC), 32));
+		ComponentManager.flowControlMux.output.set(SignExtend.extendUnsigned(Integer.toBinaryString(PC.get()), 32));
 	}
 
 	public static boolean executeStep()

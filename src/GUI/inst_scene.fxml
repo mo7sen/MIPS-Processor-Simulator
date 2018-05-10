@@ -12,6 +12,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="layout_instscene" blendMode="EXCLUSION" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.inst_controller">
@@ -21,6 +22,7 @@
           <Menu fx:id="mnu_file" mnemonicParsing="false" text="File">
             <items>
                   <MenuItem fx:id="mnuitm_import" mnemonicParsing="false" onAction="#importfile" text="Import" />
+                  <MenuItem fx:id="mnuitm_save" mnemonicParsing="false" onAction="#savecode" text="save" />
               <MenuItem fx:id="mnuitm_close" mnemonicParsing="false" onAction="#close" text="Close" />
             </items>
           </Menu>
@@ -30,6 +32,11 @@
                   <MenuItem fx:id="mnuitm_excview" mnemonicParsing="false" onAction="#switchscene" text="Execution view" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Memory">
+              <items>
+                <MenuItem fx:id="mnuitm_addtomem" mnemonicParsing="false" onAction="#addmemPOPUP" text="add to memory..." />
+              </items>
+            </Menu>
           <Menu fx:id="mnuitm_help" mnemonicParsing="false" text="Help">
             <items>
               <MenuItem fx:id="mnuitm_instmanual" mnemonicParsing="false" text="instruction manual" />
@@ -57,12 +64,12 @@
    <bottom>
       <HBox alignment="TOP_RIGHT" spacing="20.0">
          <children>
-            <Text fontSmoothingType="LCD" stroke="BLACK" text="Instruction Memory initial Line" translateX="-400.0">
+            <Text fx:id="instAdd" strokeType="OUTSIDE" strokeWidth="0.0" text="Initial Instruction Address" translateX="-500.0">
                <HBox.margin>
                   <Insets top="3.0" />
                </HBox.margin>
             </Text>
-            <TextField fx:id="pC" translateX="-400.0" />
+            <TextField fx:id="startingAddress" prefWidth="50.0" text="0" translateX="-500.0" />
             <Button fx:id="oneStepBtn" mnemonicParsing="false" onAction="#oneStepSwitchScene" text="One Step / Second" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="30.0" />

@@ -25,6 +25,7 @@ import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
 import jp.uphy.javafx.console.ConsoleView;
 
+import javax.swing.text.html.ImageView;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -63,7 +64,7 @@ public class exc_controller {
 
     public void close()
     {
-        Main.stage.close();
+        System.exit(0);
     }
 
     public void showalertbox1()

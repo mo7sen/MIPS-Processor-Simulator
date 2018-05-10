@@ -41,6 +41,7 @@ public class InstructionMemory
 	public static void showMe()
 	{
 		for(String instruction : inMem)
-			System.out.println(instruction);
+			if(!instruction.equals("00000000000000000000000000000000"))
+				System.out.println(instruction);
 	}
 }

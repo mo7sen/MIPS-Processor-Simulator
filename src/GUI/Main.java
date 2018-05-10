@@ -27,6 +27,7 @@ public class Main extends Application
 //        System.setIn(exc_controller.getIn());
 //        System.setOut(exc_controller.getOut());
 //        System.setErr(exc_controller.getOut());
+        primaryStage.setFullScreen(true);
         primaryStage.setTitle("MIPS simulator");
         primaryStage.centerOnScreen();
         instScene = new Scene(root, 1000, 500);
