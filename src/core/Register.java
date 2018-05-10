@@ -31,7 +31,8 @@ public class Register
 	}
 	public void setValue(String newValue)
 	{
-		this.currentValueProperty.set(newValue);
+		if(!this.nameProperty.get().equals("$zero"))
+			this.currentValueProperty.set(newValue);
 	}
 
 	public StringProperty hexaDecimalProperty()

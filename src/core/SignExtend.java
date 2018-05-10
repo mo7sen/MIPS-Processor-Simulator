@@ -25,6 +25,11 @@ public class SignExtend
 		signFlag.bind(stringProperty);
 	}
 
+	void reset()
+	{
+		out.set("00000000000000000000000000000000");
+	}
+
 	void execute()
 	{
 		if(signFlag.get().equals("1"))

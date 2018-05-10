@@ -26,11 +26,15 @@ public class WordBuilder
 		else
 			reserveValue = placeReserveByte[offset];
 
-		wordReserved = SignExtend.extendUnsigned(Integer.toBinaryString(BinaryParser.parseUnsigned(reserveValue) & BinaryParser.parseUnsigned(wordIn.get())), 32);
+		wordReserved = SignExtend.extendUnsigned(Integer.toBinaryString(Integer.parseUnsignedInt(reserveValue,2) & Integer.parseUnsignedInt(wordIn.get(),2)), 32);
 
 		if(hOp.get().equals("1"))
-			wordOut.set(SignExtend.extendUnsigned(Integer.toBinaryString((BinaryParser.parseUnsigned(halfIn.get()) << ((2 - offset) * 8)) | BinaryParser.parseUnsigned(wordReserved)),32));
+			wordOut.set(SignExtend.extendUnsigned(Integer.toBinaryString((BinaryParser.parseSigned(halfIn.get()) << ((2 - offset) * 8)) | BinaryParser.parseSigned(wordReserved)),32));
 		else
-			wordOut.set(SignExtend.extendUnsigned(Integer.toBinaryString((BinaryParser.parseUnsigned(byteIn.get()) << ((3 - offset) * 8)) | BinaryParser.parseUnsigned(wordReserved)),32));
+			wordOut.set(SignExtend.extendUnsigned(Integer.toBinaryString((BinaryParser.parseSigned(byteIn.get()) << ((3 - offset) * 8)) | BinaryParser.parseSigned(wordReserved)),32));
+	}
+	static void reset()
+	{
+		wordOut .set("00000000000000000000000000000000");
 	}
 }

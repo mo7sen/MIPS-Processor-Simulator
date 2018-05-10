@@ -56,7 +56,7 @@ public class ComponentManager
 		setHiLo.outputs.get(0).bind(ALUControl.lo);
 
 		memOrReg.bindInput(dataOutMux.output);
-		memOrReg.outputs.get(0).bind(ControlUnit.memToMem);
+		memOrReg.selectBits.get(0).bind(ControlUnit.memToMem);
 
 		hiLoReader.bindInputs(DivMultUnit.outHi, DivMultUnit.outLo);
 		hiLoReader.selectBits.get(0).bind(ALUControl.lo);
@@ -152,40 +152,3 @@ public class ComponentManager
 	}
 
 }
-//00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
-//31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 09 08 07 06 05 04 03 02 01 00
-
-//Connections:
-//
-//signedFlag                //Done
-//jumpRFlag                 //Done
-//regWriteFlag              //Done
-//eqFlag                    //Done
-//eqIdentifier              //Done
-//left2BitShifter           //Done
-//immediateExtend           //Done
-//pcIncrementer             //Done
-//branchCalculator          //Done
-//setHiLo                   //Done
-//memOrReg                  //Done
-//hiLoReader                //Done
-//aluSrcMux                 //Done
-//jumpRMux                  //Done
-//equalMux                  //Done
-//flowControlMux            //Done
-//writeRegisterMux          //Done
-//regWriteDataMux           //Done
-//shamtMux                  //Done
-//memWriteDataMux           //Done
-//memReadDataMux            //Done
-//dataOutMux                //Done
-//ProgramCounter            //Done
-//ALU                       //Done
-//ALU Control               //Done
-//ControlUnit               //Done
-//DivMultUnit               //Done
-//InstructionMemory         //Done
-//Memory                    //Done
-//RegisterFile              //Done
-//WordBreaker               //Done
-//WordBuilder               //Done

@@ -17,4 +17,9 @@ public class NotGate
 	{
 		out.set(Integer.toBinaryString(~(Integer.parseInt(in.get()))));
 	}
+
+	void reset()
+	{
+		out.set("0");
+	}
 }

@@ -30,9 +30,13 @@ public class InstructionMemory
 	{
 			return inMem.get(address/4);
 	}
-	public static void reset()
+	public static void clear()
 	{
 		inMem.clear();
+	}
+	public static void reset()
+	{
+		instOut.set("00000000000000000000000000000000");
 	}
 	public static void showMe()
 	{

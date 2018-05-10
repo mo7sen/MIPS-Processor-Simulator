@@ -57,6 +57,12 @@
    <bottom>
       <HBox alignment="TOP_RIGHT" spacing="20.0">
          <children>
+            <Text fontSmoothingType="LCD" stroke="BLACK" text="Instruction Memory initial Line" translateX="-400.0">
+               <HBox.margin>
+                  <Insets top="3.0" />
+               </HBox.margin>
+            </Text>
+            <TextField fx:id="pC" translateX="-400.0" />
             <Button fx:id="oneStepBtn" mnemonicParsing="false" onAction="#oneStepSwitchScene" text="One Step / Second" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="30.0" />

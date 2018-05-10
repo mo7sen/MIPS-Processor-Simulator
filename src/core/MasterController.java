@@ -40,13 +40,10 @@ public class MasterController extends Thread
 	{
 		Assembler.assembleProgram(codeFile.get());
 		ComponentManager.flowControlMux.output.set(SignExtend.extendUnsigned(Integer.toBinaryString(PC), 32));
-//		System.out.println(Integer.parseUnsignedInt(Assembler.findLabel("print int").addressProperty,2) / 4);
-//		InstructionMemory.showMe();
 	}
 
 	public static boolean executeStep()
 	{
-//		System.out.println(Integer.parseUnsignedInt(ProgramCounter.addressIn.get(),2) / 4);
 		ProgramCounter.execute();
 		if(Integer.parseInt(ProgramCounter.addressOut.get(),2)/4 >= InstructionMemory.inMem.size())
 			return false;
@@ -60,10 +57,10 @@ public class MasterController extends Thread
 					System.out.print(BinaryParser.parseSigned(RegisterFile.findRegister("$a0").currentValueProperty.get()));
 					break;
 				case 4:
-					System.out.print(Memory.readStringFromAddress(RegisterFile.findRegister("$a0").currentValueProperty.get()));
+					System.out.println(Memory.readStringFromAddress(RegisterFile.findRegister("$a0").currentValueProperty.get()));
 					break;
 				case 5:
-					RegisterFile.findRegister("$v0").setValue(Integer.toBinaryString(scan.nextInt()));
+					RegisterFile.findRegister("$v0").setValue(SignExtend.extendUnsigned(Integer.toBinaryString(scan.nextInt()),32));
 					break;
 				case 8:
 					Memory.saveString(scan.next(Pattern.compile(".{0," + Integer.parseUnsignedInt(RegisterFile.findRegister("$a1").currentValueProperty.get()) + "}?")), "this is a saved string that I donot want anyone to find please", true);
@@ -98,8 +95,6 @@ public class MasterController extends Thread
 		jumpRMux.execute();
 		left2BitShifter.execute();
 		branchCalculator.execute();
-//		System.out.println(flowControlMux.selectBits.toString());
-//		System.out.println(flowControlMux.selectBits.get(0).get() + flowControlMux.selectBits.get(1).get());
 		flowControlMux.execute();
 		Memory.execute();
 		WordBreaker.execute();
@@ -112,33 +107,48 @@ public class MasterController extends Thread
 		regWriteDataMux.execute();
 		writeRegisterMux.execute();
 		RegisterFile.execute();
-//		System.out.println(Memory.addressIn.get());
-//		System.out.println("------------------------");
-//		System.out.println(RegisterFile.regWrite.get());
-//		System.out.println(RegisterFile.writeData.get());
-//		System.out.println(Memory.readStringFromAddress(Memory.findVariable("newString").addressProperty.toString()));
-//		System.out.println(Memory.findVariable("string").addressProperty);
-//		System.out.println(Memory.instantiationPointer.toString());
-//		System.out.println(Assembler.codeLines.get(Integer.parseInt(ProgramCounter.addressOut.get(), 2) / 4).trim());
-//		System.out.println(ALU.output.get());
-//		System.out.println(jumpRFlag.out.get() + equalMux.output.get());
-//		System.out.println(InstructionMemory.instOut.get());
-//		System.out.println(Memory.addressIn.get());
-//		System.out.println(Assembler.findLabel("done").addressProperty);
-//		System.out.println(Memory.memWriteFlag.get());
-//		System.out.println(WordBreaker.wordIn.get());
-//		System.out.println(Memory.loadByte(new Pointer(2)));
-//		System.out.println(RegisterFile.findRegister("$a0").currentValueProperty);
-//		System.out.println(RegisterFile.findRegister("$s1").currentValueProperty);
-//		System.out.println(RegisterFile.findRegister("$t4").currentValueProperty);
-//		System.out.println("--------------------------------------------------------------");
-
 		return true;
 	}
 
 	public static void reset()
 	{
-		ComponentManager.flowControlMux.output.set(SignExtend.extendUnsigned(Integer.toBinaryString(PC), 32));
+		pcIncrementer.reset();
+		InstructionMemory.reset();
+		ControlUnit.reset();
+		ALUControl.reset();
+		signedFlag.reset();
+		writeRegisterMux.reset();
+		immediateExtend.reset();
+		regWriteFlag.reset();
+		RegisterFile.reset();
+		shamtMux.reset();
+		setHiLo.reset();
+		DivMultUnit.reset();
+		hiLoReader.reset();
+		aluSrcMux.reset();
+		ALU.reset();
+		eqIdentifier.reset();
+		eqFlag.reset();
+		equalMux.reset();
+		jumpRFlag.reset();
+		jumpRMux.reset();
+		left2BitShifter.reset();
+		branchCalculator.reset();
+		flowControlMux.reset();
+		Memory.reset();
+		WordBreaker.reset();
+		memReadDataMux.reset();
+		dataOutMux.reset();
+		memOrReg.reset();
+		WordBuilder.reset();
+		memWriteDataMux.reset();
+		regWriteDataMux.reset();
+	}
+
+	public static void hardReset()
+	{
+		reset();
+		InstructionMemory.clear();
 	}
 
 	public static void executeAll()
@@ -146,8 +156,6 @@ public class MasterController extends Thread
 		boolean state = true;
 		while (state)
 		{
-			//if(!GUI.exc_controller.paused)
-			//{
 			while(paused)
 			{
 				try
@@ -169,7 +177,6 @@ public class MasterController extends Thread
 				{
 					e.printStackTrace();
 				}
-			//}
 		}
 	}
 }

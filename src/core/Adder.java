@@ -26,8 +26,6 @@ public class Adder
 
 	void reset()
 	{
-		in1 = new SimpleStringProperty("00000000000000000000000000000000");
-		in2 = new SimpleStringProperty("00000000000000000000000000000000");
 		out = new SimpleStringProperty("00000000000000000000000000000000");
 	}
 }

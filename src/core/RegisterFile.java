@@ -30,6 +30,12 @@ public class RegisterFile
 		}
 	}
 
+	static void reset()
+	{
+		readData2.set("00000000000000000000000000000000");
+		readData1.set("00000000000000000000000000000000");
+	}
+
 	static Register findRegister(String s)
 	{
 		s = s.trim();

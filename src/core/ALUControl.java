@@ -22,8 +22,6 @@ public class ALUControl
 
 	static void reset()
 	{
-		controlIn = new SimpleStringProperty("000");
-		functIn = new SimpleStringProperty("000000");
 		ALUOpOut = new SimpleStringProperty("0000");
 		shift = new SimpleStringProperty("0");
 		jumpR = new SimpleStringProperty("0");

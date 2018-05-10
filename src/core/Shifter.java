@@ -24,4 +24,8 @@ public class Shifter
 	{
 		out.set(Integer.toBinaryString(BinaryParser.parseUnsigned(in.get()) << 2));
 	}
+	void reset()
+	{
+		out.set("00000000000000000000000000000000");
+	}
 }

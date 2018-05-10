@@ -24,16 +24,8 @@ public class DivMultUnit
 
 	static void reset()
 	{
-		input1 = new SimpleStringProperty("00000000000000000000000000000000");
-		input2 = new SimpleStringProperty("00000000000000000000000000000000");
-		inHi = new SimpleStringProperty("00000000000000000000000000000000");
-		inLo = new SimpleStringProperty("00000000000000000000000000000000");
-		write = new SimpleStringProperty("0");
-		div = new SimpleStringProperty("0");
 		outHi = new SimpleStringProperty("00000000000000000000000000000000");
 		outLo = new SimpleStringProperty("00000000000000000000000000000000");
-		active = new SimpleStringProperty(")");
-		signed = new SimpleStringProperty("0");
 	}
 
 	static void execute()

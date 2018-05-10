@@ -24,7 +24,7 @@ public class MUX
 
 	void reset()
 	{
-
+		output.set("00000000000000000000000000000000");
 	}
 
 	public void bindInputs(StringProperty... stringProperties)

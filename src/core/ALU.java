@@ -48,15 +48,8 @@ public class ALU
 
 	static void reset()
 	{
-		input1 = new SimpleStringProperty("00000000000000000000000000000000");
-				input2 = new SimpleStringProperty("00000000000000000000000000000000");
-				ALUOp = new SimpleStringProperty("000");
 				output = new SimpleStringProperty("00000000000000000000000000000000");
 				zero = new SimpleStringProperty("0");
-				arithmetic = new SimpleStringProperty("0");
-				shiftDirection = new SimpleStringProperty("0");
-				signed = new SimpleStringProperty("0");
-				shift = new SimpleStringProperty("0");
 	}
 
 	static void execute()

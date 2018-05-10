@@ -29,4 +29,9 @@ public class OrGate
 	{
 		out.set(Integer.toBinaryString(Integer.parseInt(in1.get(),2) | Integer.parseInt(in2.get(), 2)));
 	}
+
+	void reset()
+	{
+		out.set("0");
+	}
 }

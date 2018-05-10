@@ -26,10 +26,6 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
-
-/**
- * @author Yuhi Ishikura
- */
 public class ConsoleView extends BorderPane {
 
   private final PrintStream out;

@@ -8,7 +8,7 @@ public class Assembler
 	static ArrayList<Label> labels = new ArrayList<>();
 	static ArrayList<String> codeLines = new ArrayList<>();
 	static ArrayList<String> directiveLines = new ArrayList<>();
-	static ArrayList<String> pseudoIns = new ArrayList<>(Arrays.asList(new String[]{"move","clear","li","la","b","bgt","blt","bge","ble","bgtu","beqz","beq","bne","mul","div","rem","jalr","not","nop"}));
+	static ArrayList<String> pseudoIns = new ArrayList<>(Arrays.asList(new String[]{"move","clear","li","la","b","bgt","blt","bge","ble","bgtu","beqz","beq","bne","mul","div","rem","not","nop"}));
 	
 
 	

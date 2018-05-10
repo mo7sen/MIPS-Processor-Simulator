@@ -45,11 +45,7 @@ public class Memory
 
 	static void reset()
 	{
-		addressIn = new SimpleStringProperty("00000000000000000000000000000000");
 		dataOut = new SimpleStringProperty("00000000000000000000000000000000");
-		dataIn = new SimpleStringProperty("00000000000000000000000000000000");
-		memReadFlag = new SimpleStringProperty("0");
-		memWriteFlag = new SimpleStringProperty("0");
 	}
 
 	public static void refresh()
@@ -188,7 +184,6 @@ public class Memory
 		for(int i = 0; i < 8; i++)
 			ret += (device[address.address][(address.offset * 8) + i]) ? "1" : "0";
 		address.moveByte(1);
-//		System.out.println(InstructionMemory.instOut.get());
 		return ret;
 	}
 

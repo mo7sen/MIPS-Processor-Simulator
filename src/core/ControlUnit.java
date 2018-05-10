@@ -25,7 +25,6 @@ public class ControlUnit
 
 	static void reset()
 	{
-		opCodeIn = new SimpleStringProperty("000000");
 		ALUOpOut = new SimpleStringProperty("000");
 		regDst = new SimpleStringProperty("0");
 		branch = new SimpleStringProperty("0");
@@ -156,10 +155,11 @@ public class ControlUnit
 				memWrite.set("1");
 				ALUSrc.set("1");
 				regWrite.set("0");
-				byteOp.set("1");
+				byteOp.set("0");
 				memToMem.set("1");
 				signed.set("1");
 				ALUOpOut.set("000");
+				memToReg.set("1");
 				jump.set("0");
 				equal.set("1");
 				lui.set("0");
@@ -260,7 +260,8 @@ public class ControlUnit
 				jump.set("0");
 				equal.set("1");
 				lui.set("0");
-				halfOp.set("1");
+				halfOp.set("0");
+				memToReg.set("1");
 				break;
 			case "001111"://
 				regDst.set("0");

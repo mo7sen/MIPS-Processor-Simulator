@@ -33,8 +33,6 @@ public class AndGate
 	}
 	void reset()
 	{
-		in1 = new SimpleStringProperty("0");
-				in2 = new SimpleStringProperty("0");
 				out = new SimpleStringProperty("0");
 	}
 }

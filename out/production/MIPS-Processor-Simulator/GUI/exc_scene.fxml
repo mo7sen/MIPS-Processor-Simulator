@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -8,6 +9,9 @@
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 <?import jp.uphy.javafx.console.*?>
+<?import javafx.scene.shape.Path?>
+<?import javafx.scene.shape.MoveTo?>
+<?import javafx.scene.shape.LineTo?>
 
 <BorderPane fx:id="bordermainlayout_exc" blendMode="EXCLUSION" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.exc_controller">
 
@@ -22,7 +26,8 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <VBox fx:id="Vbox_regarea" alignment="CENTER" prefHeight="363.0" prefWidth="715.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1">
+
+             <VBox fx:id="Vbox_regarea" alignment="CENTER" prefHeight="363.0" prefWidth="715.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="15.0" right="15.0" />
                </GridPane.margin>
@@ -103,6 +108,14 @@
                   <Insets bottom="-40.0" left="15.0" right="15.0" top="15.0" />
                </GridPane.margin>
             </TableView>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+              </content>
+               <GridPane.margin>
+                  <Insets bottom="-40.0" left="15.0" right="15.0" top="15.0" />
+               </GridPane.margin>
+            </ScrollPane>
          </children>
       </GridPane>
    </center>

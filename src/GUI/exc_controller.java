@@ -14,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
@@ -44,6 +46,8 @@ public class exc_controller {
     public TextField sliderValue;
     public Button pauseXresumeBtn;
     static TextField placeHolder;
+
+
     public static boolean paused = false;
 	MasterController masterController;
 
@@ -53,7 +57,7 @@ public class exc_controller {
         Main.stage.setScene(Main.instScene);
         Main.stage.setFullScreen(false);
         RegisterFile.showAll();
-        MasterController.reset();
+        MasterController.hardReset();
 
     }
 

@@ -32,4 +32,9 @@ public class WordBreaker
 		halfOut.set(SignExtend.extendUnsigned(Integer.toBinaryString(h), 32));
 
 	}
+	static void reset()
+	{
+		halfOut .set("0000000000000000");
+		byteOut .set("00000000");
+	}
 }

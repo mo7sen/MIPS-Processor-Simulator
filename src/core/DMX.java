@@ -26,11 +26,8 @@ public class DMX
 
 	void reset()
 	{
-		for(StringProperty stringProperty:selectBits)
-			stringProperty.set("0");
 		for(StringProperty stringProperty:outputs)
 			stringProperty.set("00000000000000000000000000000000");
-		input.set("00000000000000000000000000000000");
 	}
 
 	public void bindInput(StringProperty stringProperty)

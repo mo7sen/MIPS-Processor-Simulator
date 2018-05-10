@@ -45,7 +45,7 @@ public class inst_controller {
     public void switchscene()
     {
         Main.stage.setScene(Main.excScene);
-        Main.stage.setFullScreen(true);
+//        Main.stage.setFullScreen(true);
 	    masterController.start();
     }
 
