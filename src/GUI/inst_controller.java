@@ -4,27 +4,29 @@ import core.MasterController;
 import core.Memory;
 import core.Pointer;
 import javafx.fxml.FXML;
-//import javafx.fxml.FXMLLoader;
-//import javafx.scene.Scene;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
-import javafx.stage.*;
-import javafx.event.*;
-
-import java.io.*;
-import java.awt.Desktop;
-
 import static core.MasterController.codeFile;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 public class inst_controller {
@@ -39,25 +41,26 @@ public class inst_controller {
     public MenuItem mnuitm_abtdevs;
     public MenuItem mnuitm_abtprg;
     public TextField startingAddress;
-    private int txtcount=0;
     static MasterController masterController;
     public static TextField pcinit;
     private TextField addMemAddr, addMemData;
 
-    //menu functionality---------------------------------------------------\
     public void switchscene()
     {
+        if(exc_controller.consoleview2 != null)
+            exc_controller.consoleview2.textArea.setText("");
+            
+        pcinit = startingAddress;
+        new Thread(MasterController::prepareMips).start();
         Main.stage.setScene(Main.excScene);
         Main.stage.setFullScreen(true);
-	    masterController.start();
+        new MasterController().start();
     }
 
     @FXML
     public void initialize()
     {
-        pcinit = startingAddress;
-	    masterController = new MasterController();
-        new Thread(MasterController::prepareMips).start();
+        
         codeFile.bindBidirectional(textarea_isntarea.textProperty());
     }
 
@@ -83,6 +86,53 @@ public class inst_controller {
         Scene scene = new Scene(layout,300,300);
         window.setScene(scene);
         window.showAndWait();
+    }
+    
+    public void helpTheUser()
+    {
+        textarea_isntarea.appendText("\n\nadd,100000,ArithLog,Register        // rd = rs + rt\n" +
+"addu,100001,ArithLog,Register       // rd = rs + rt \"UNSIGNED\"\n" +
+"addi,001000,ArithLogI,Immediate     // rd = rs + constant\n" +
+"addiu,001001,ArithLogI,Immediate    // rd = rs + constant\n" +
+"and,100100,ArithLog,Register        // rd = rs & rt\n" +
+"andi,001100,ArithLogI,Immediate     // rd = rs & (unsigned) constant\n" +
+"div,011010,DivMult,Register         // hi = rs % rt; lo = rs / rt;\n" +
+"divu,011011,DivMult,Register        // hi = rs % rt; lo = rs / rt;\n" +
+"mult,011000,DivMult,Register        // hilo = rs * rt\n" +
+"multu,011001,DivMult,Register       // hilo = rs * rt\n" +
+"nor,100111,ArithLog,Register        // rd = ~(rs | rt)\n" +
+"or,100101,ArithLog,Register         // rd = rs | rt\n" +
+"ori,001101,ArithLogI,Immediate      // rd = rs | (unsigned) constant\n" +
+"lui,001111,LoadI,Immediate          // rd = constant << 16\n" +
+"sll,000000,Shift,Register           // rd = rt << amount\n" +
+"sra,000011,Shift,Register           // \"SIGNED\" rt >> amount\n" +
+"srl,000010,Shift,Register           // rd = \"UNSIGNED\" rt >> amount\n" +
+"sub,100010,ArithLog,Register        // rd = rs - rt\n" +
+"subu,100011,ArithLog,Register       // rd = rs - rt \"UNSIGNED\"\n" +
+"xor,100110,ArithLog,Register        // rd = rs ^ rt\n" +
+"xori,001110,ArithLogI,Immediate     // rd = rs ^ (unsigned) constant\n" +
+"slt,101010,ArithLog,Register        // rd = (rs < rt)\n" +
+"sltu,101001,ArithLog,Register       // rd = (rs < rt)\n" +
+"slti,001010,ArithLogI,Immediate     // rd = (rs < constant)\n" +
+"sltiu,001011,ArithLogI,Immediate    // rd = (rs < constant)\n" +
+"beq,000100,Branch,Immediate         // if (rs == rt) goto label\n" +
+"bne,000101,Branch,Immediate         // if (rs != rt) goto label\n" +
+"j,000010,Jump,Jump                  // goto label\n" +
+"jal,000011,Jump,Jump                // label()\n" +
+"jr,001000,JumpR,Register            // (Used w/$31 to translate return)\n" +
+"lb,100000,LoadStore,Immediate       // Load Byte\n" +
+"lbu,100100,LoadStore,Immediate      // Load Byte \"UNSIGNED\"\n" +
+"lh,100001,LoadStore,Immediate       // Load Half-Word\n" +
+"lhu,100101,LoadStore,Immediate      // Load Half-Word \"UNSIGNED\"\n" +
+"lw,100011,LoadStore,Immediate       // Load Word\n" +
+"sb,101000,LoadStore,Immediate       // Save Byte\n" +
+"sh,101001,LoadStore,Immediate       // Save Half-Word\n" +
+"sw,101011,LoadStore,Immediate       // save Word\n" +
+"mfhi,010000,MoveFrom,Register       // rd = hi\n" +
+"mflo,010010,MoveFrom,Register       // rd = lo\n" +
+"mthi,010001,MoveTo,Register         // hi = rs\n" +
+"mtlo,010011,MoveTo,Register         // lo = rs\n" +
+"syscall,000000,syscall,Register     // executes a command depending on the value in $v0");
     }
     public void savecode()
     {
@@ -243,21 +293,4 @@ public class inst_controller {
         exc_controller.setSpeed(1);
         switchscene();
     }
-
-
-    //menu functionality---------------------------------------------------/
-
-
-    //txt area functionality-----------------------------------------------/
-
-    /*public void handleenterkey(KeyEvent e)
-    {
-        if(e.getCode()==KeyCode.ENTER)
-        {
-            ++txtcount;
-            textarea_isntarea.setText(textarea_isntarea.getText()++txtcount+"\t");
-        }
-    }*/
-
-    //txt area functionality-----------------------------------------------\
 }

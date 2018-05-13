@@ -27,7 +27,7 @@ public class DMX
 	void reset()
 	{
 		for(StringProperty stringProperty:outputs)
-			stringProperty.set("00000000000000000000000000000000");
+			stringProperty = new SimpleStringProperty("00000000000000000000000000000000");
 	}
 
 	public void bindInput(StringProperty stringProperty)

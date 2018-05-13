@@ -29,7 +29,7 @@ import java.nio.charset.Charset;
 public class ConsoleView extends BorderPane {
 
   private final PrintStream out;
-  private final TextArea textArea;
+  public final TextArea textArea;
   private final InputStream in;
 
   public ConsoleView() {

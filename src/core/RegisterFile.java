@@ -18,6 +18,13 @@ public class RegisterFile
 	static StringProperty readData1 = new SimpleStringProperty("00000000000000000000000000000000");
 	static StringProperty readData2 = new SimpleStringProperty("00000000000000000000000000000000");
 	static StringProperty regWrite = new SimpleStringProperty("0");
+        
+        static void resetRegs()
+        {
+            for(Register r: registers)
+                if(!r.nameProperty.get().equals("$sp"))
+                    r.setValue("00000000000000000000000000000000");
+        }
 
 	static void execute()
 	{
@@ -66,6 +73,7 @@ public class RegisterFile
 	{
 		try
 		{
+                        registers.clear();
 			FileReader fileReader = new FileReader(new File(file));
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			String line;
@@ -74,7 +82,7 @@ public class RegisterFile
 				String[] parts = line.split(",");
 				registers.add(new Register(parts[0], parts[1], parts[2]));
 			}
-			findRegister("$sp").setValue(SignExtend.extendUnsigned(Integer.toBinaryString(2621439 * 4),32));
+			findRegister("$sp").setValue(SignExtend.extendUnsigned(Integer.toBinaryString(2621438 * 4),32));
 		} catch (FileNotFoundException e)
 		{
 			e.printStackTrace();

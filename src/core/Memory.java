@@ -12,12 +12,20 @@ public class Memory
 	private static boolean device[][] = new boolean[2621440][32];
 	static ArrayList<Variable> variables = new ArrayList<>();
 	static Pointer instantiationPointer = new Pointer(0);
-	public static int startingMemoryOffset = 1000;
+	public static int startingMemoryOffset = 0;
 	static StringProperty   addressIn = new SimpleStringProperty("00000000000000000000000000000000"),
 							dataOut = new SimpleStringProperty("00000000000000000000000000000000"),
 							dataIn = new SimpleStringProperty("00000000000000000000000000000000"),
 							memReadFlag = new SimpleStringProperty("0"),
 							memWriteFlag = new SimpleStringProperty("0");
+        
+        static void resetMem()
+        {
+            for(int i = 0; i< 2621440; i++)
+                for(int j = 0; j < 32 ; j++)
+                    device[i][j] = false;
+            instantiationPointer = new Pointer(startingMemoryOffset);
+        }
 
 	static void execute()
 	{

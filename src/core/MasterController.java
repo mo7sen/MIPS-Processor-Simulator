@@ -1,6 +1,5 @@
 package core;
 
-import GUI.exc_controller;
 import GUI.inst_controller;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
@@ -24,22 +23,19 @@ public class MasterController extends Thread
 
 	public static void prepareMips()
 	{
-
 		Instruction.initialize("src/core/Instructions");
-		System.out.println("Instructions initialized");
 		RegisterFile.initialize("src/core/Registers");
-		System.out.println("Register initialized");
 		Memory.initialize();
 		PC.bind(Bindings.createIntegerBinding(() -> Integer.parseInt(inst_controller.pcinit.textProperty().get()), inst_controller.pcinit.textProperty()));
 		ComponentManager.provoke();
 	}
 
 	@Override
-    public void run()
-    {
+        public void run()
+        {
         MasterController.configure();
         MasterController.executeAll();
-    }
+        }
 
 	public static void configure()
 	{
@@ -154,6 +150,10 @@ public class MasterController extends Thread
 	{
 		reset();
 		InstructionMemory.clear();
+                RegisterFile.resetRegs();
+                Memory.resetMem();
+                ComponentManager.flowControlMux.output.set(SignExtend.extendUnsigned(Integer.toBinaryString(PC.get()), 32));
+                
 	}
 
 	public static void executeAll()
@@ -183,6 +183,7 @@ public class MasterController extends Thread
 					e.printStackTrace();
 				}
 		}
+                reset();
 	}
 }
 
@@ -236,4 +237,4 @@ public class MasterController extends Thread
 //		li        $t0, 1
 //		sw        $t0, 4($sp)
 //		jr        $ra
-//
+
