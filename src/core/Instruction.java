@@ -39,7 +39,7 @@ public class Instruction
 			while((line = bufferedReader.readLine())!= null)
 			{
 				String[] parts = line.split("//")[0].trim().split(",");
-				instructions.add(new Instruction(parts[0], Syntax.valueOf(parts[2]), Encoding.valueOf(parts[3]), parts[1]));
+				instructions.add(new Instruction(parts[0].trim(), Syntax.valueOf(parts[2].trim()), Encoding.valueOf(parts[3].trim()), parts[1].trim()));
 			}
 		} catch (FileNotFoundException e)
 		{

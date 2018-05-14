@@ -1,10 +1,27 @@
 package core;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Shifter
 {
-	static Data input, output;
-	static void getOutput()
+
+	SimpleStringProperty in, out;
+
+	Shifter()
 	{
-		output.write(Integer.toBinaryString(Integer.parseInt(input.read(),2) << 2));
+		in = new SimpleStringProperty("00000000000000000000000000000000");
+		out = new SimpleStringProperty("00000000000000000000000000000000");
+	}
+
+	void bindIn(StringProperty stringProperty)
+	{
+		in.bind(stringProperty);
+	}
+
+	void execute()
+	{
+		out.set(Integer.toBinaryString(BinaryParser.parseUnsigned(in.get()) << 2));
 	}
 }
