@@ -30,6 +30,9 @@
             <items>
               <MenuItem fx:id="mnuitm_instview" mnemonicParsing="false" text="Instruction view" />
                   <MenuItem fx:id="mnuitm_excview" mnemonicParsing="false" onAction="#switchscene" text="Execution view" />
+                  <SeparatorMenuItem mnemonicParsing="false" text="Switch Theme" />
+                  <RadioMenuItem fx:id="lightThemeMenuButton" mnemonicParsing="false" onAction="#applyLight" text="Light Theme" />
+                  <RadioMenuItem fx:id="darkThemeMenuButton" mnemonicParsing="false" onAction="#applyDark" text="Dark Theme" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Memory">

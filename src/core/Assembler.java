@@ -33,12 +33,12 @@ public class Assembler
 	static void assembleProgram(String s)
 	{
 		for(int i = 0; i < MasterController.PC.get(); i++)
-			InstructionMemory.add("00000000000000000000000000000000");
+			InstructionMemory.add("");
 		if(s.contains(".text"))
 		{
 			String[] fn = s.split(".data");
 			directiveLines = new ArrayList<>(Arrays.asList(fn[0].trim().split("\\n+")));
-			codeLines = new ArrayList<>(Arrays.asList(fn[1].trim().replaceAll(":", ":\n").split("\\n+")));    //Labels now take a whole line for themselves
+			codeLines = new ArrayList<>(Arrays.asList(fn[1].trim().replaceAll(":", ":\n").split("\\n+")));
 		}
 		else if(!s.contains(".data"))
 		{
@@ -65,7 +65,7 @@ public class Assembler
 		{
 			if(codeLines.get(i).contains(":"))
 			{
-				labels.add(new Label(codeLines.get(i).trim().split(":")[0].trim(), Integer.toBinaryString(i * 4)));
+				labels.add(new Label(codeLines.get(i).trim().split(":")[0].trim(), Integer.toBinaryString((i + MasterController.PC.get()) * 4)));
 				codeLines.remove(i);
 			}
 			else
@@ -200,8 +200,7 @@ static void scanForDirectives()
 	for(int j=0; j<directiveLines.size();j++)
 	{
 		String directiveType = null;
-		String varName = null;
-		String varData = null;
+		String varName, varData;
 
 		String newLine = directiveLines.get(j).trim();
 		if(newLine.contains(":"))
@@ -295,7 +294,7 @@ static void scanForDirectives()
 						t = RegisterFile.findRegister(ss[2]).addressProperty.get();
 						Label l = findLabel(ss[3].trim());
 						if (l != null)
-							imm = Integer.toBinaryString((Integer.parseInt(l.getAddress(), 2)/4) - (i + 1));
+							imm = Integer.toBinaryString((Integer.parseInt(l.getAddress(), 2)/4) - (i + MasterController.PC.get() + 1));
 					case Jump:	//Jump
 						Label l2 = findLabel(ss[1]);
 						if (l2 != null)
@@ -324,7 +323,7 @@ static void scanForDirectives()
 				if (syn != null)
 				{
 					InstructionMemory.add(syn);
-					InstructionLine.instructionLines.add(new InstructionLine(str ,syn));
+					InstructionLine.instructionLines.add(new InstructionLine(MasterController.PC.get() + i, str ,syn));
 				}
 			}
 		}

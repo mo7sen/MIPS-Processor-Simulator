@@ -23,14 +23,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
-public class inst_controller {
+public class inst_controller 
+{
 
+    
+
+    static RadioMenuItem lightButton, darkButton;
     @FXML
     public Button btn_run, 
             oneStepBtn;
@@ -41,10 +48,14 @@ public class inst_controller {
     public MenuItem mnuitm_abtdevs;
     public MenuItem mnuitm_abtprg;
     public TextField startingAddress;
+    public BorderPane layout_instscene;
     static MasterController masterController;
     public static TextField pcinit;
     private TextField addMemAddr, addMemData;
-
+    static BorderPane instScenePane;
+    public RadioMenuItem darkThemeMenuButton,
+            lightThemeMenuButton;
+    
     public void switchscene()
     {
         if(exc_controller.consoleview2 != null)
@@ -56,11 +67,34 @@ public class inst_controller {
         Main.stage.setFullScreen(true);
         new MasterController().start();
     }
+    
+    public void applyLight()
+    {
+        layout_instscene.setBlendMode(null);
+        exc_controller.excScenePane.setBlendMode(null);
+        darkThemeMenuButton.setSelected(false);
+        exc_controller.lightButton.setSelected(true);
+        exc_controller.darkButton.setSelected(false);
+    }
+    
+    public void applyDark()
+    {
+        exc_controller.lightButton.setSelected(false);
+        exc_controller.darkButton.setSelected(true);
+        layout_instscene.setBlendMode(BlendMode.EXCLUSION);
+        exc_controller.excScenePane.setBlendMode(BlendMode.EXCLUSION);
+        lightThemeMenuButton.setSelected(false);
+        darkThemeMenuButton.setSelected(true);
+    }
 
     @FXML
     public void initialize()
     {
-        
+        lightButton = lightThemeMenuButton;
+        darkButton = darkThemeMenuButton;
+        darkThemeMenuButton.setSelected(true);
+        lightThemeMenuButton.setSelected(false);
+        instScenePane = layout_instscene;
         codeFile.bindBidirectional(textarea_isntarea.textProperty());
     }
 

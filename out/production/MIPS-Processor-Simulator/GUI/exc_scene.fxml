@@ -96,13 +96,18 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
                <children>
-                  <jp.uphy.javafx.console.ConsoleView fx:id="consoleView" prefHeight="352.0" prefWidth="715.0" >
+                  <jp.uphy.javafx.console.ConsoleView fx:id="consoleView" prefHeight="352.0" prefWidth="715.0">
                   </jp.uphy.javafx.console.ConsoleView>
                </children>
             </VBox>
             <TableView fx:id="table_inst" prefHeight="200.0" prefWidth="200.0" GridPane.hgrow="NEVER">
               <columns>
-                <TableColumn fx:id="col_inst" prefWidth="287.0" text="Instructions">
+                <TableColumn fx:id="lineNumCol" prefWidth="287.0" text="Index">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="index" />
+                    </cellValueFactory>
+                </TableColumn>
+                  <TableColumn fx:id="col_inst" prefWidth="287.0" text="Instructions">
                     <cellValueFactory>
                         <PropertyValueFactory property="instructionAssembly" />
                     </cellValueFactory>
@@ -125,7 +130,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="920.0" prefWidth="1731.0">
                      <children>
-                        <ImageView fitHeight="920.0" fitWidth="1731.0" pickOnBounds="true" preserveRatio="true" >
+                        <ImageView fitHeight="920.0" fitWidth="1731.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@FinalCirc.png" />
                             </image>
@@ -144,7 +149,6 @@
         <menus>
           <Menu fx:id="mnu_file" mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem fx:id="mnuitm_save" mnemonicParsing="false" text="save" />
               <MenuItem fx:id="mnuitm_close" mnemonicParsing="false" onAction="#close" text="Close" />
             </items>
           </Menu>
@@ -152,11 +156,14 @@
             <items>
               <MenuItem fx:id="mnuitm_instview" mnemonicParsing="false" onAction="#switchinstscene" text="Instruction view" />
               <MenuItem fx:id="mnuitm_excview" mnemonicParsing="false" text="Execution view" />
+              <SeparatorMenuItem mnemonicParsing="false" text="Switch Theme" />
+                  <RadioMenuItem fx:id="lightThemePls" mnemonicParsing="false" onAction="#applyLight" text="Light Theme" />
+                  <RadioMenuItem fx:id="darkThemePls" mnemonicParsing="false" onAction="#applyDark" text="Dark Theme" />
             </items>
           </Menu>
           <Menu fx:id="mnuitm_help" mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem fx:id="mnuitm_instmanual" mnemonicParsing="false" text="instruction manual" />
+              <MenuItem fx:id="mnuitm_instmanual" mnemonicParsing="false" onAction="#helpTheUser" text="instruction manual" />
             </items>
           </Menu>
           <Menu fx:id="mnui_about" mnemonicParsing="false" text="About...">

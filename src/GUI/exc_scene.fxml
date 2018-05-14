@@ -102,7 +102,12 @@
             </VBox>
             <TableView fx:id="table_inst" prefHeight="200.0" prefWidth="200.0" GridPane.hgrow="NEVER">
               <columns>
-                <TableColumn fx:id="col_inst" prefWidth="287.0" text="Instructions">
+                <TableColumn fx:id="lineNumCol" prefWidth="287.0" text="Index">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="index" />
+                    </cellValueFactory>
+                </TableColumn>
+                  <TableColumn fx:id="col_inst" prefWidth="287.0" text="Instructions">
                     <cellValueFactory>
                         <PropertyValueFactory property="instructionAssembly" />
                     </cellValueFactory>
@@ -151,6 +156,9 @@
             <items>
               <MenuItem fx:id="mnuitm_instview" mnemonicParsing="false" onAction="#switchinstscene" text="Instruction view" />
               <MenuItem fx:id="mnuitm_excview" mnemonicParsing="false" text="Execution view" />
+              <SeparatorMenuItem mnemonicParsing="false" text="Switch Theme" />
+                  <RadioMenuItem fx:id="lightThemePls" mnemonicParsing="false" onAction="#applyLight" text="Light Theme" />
+                  <RadioMenuItem fx:id="darkThemePls" mnemonicParsing="false" onAction="#applyDark" text="Dark Theme" />
             </items>
           </Menu>
           <Menu fx:id="mnuitm_help" mnemonicParsing="false" text="Help">

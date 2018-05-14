@@ -40,7 +40,7 @@ public class MasterController extends Thread
 	public static void configure()
 	{
 		Assembler.assembleProgram(codeFile.get());
-		ComponentManager.flowControlMux.output.set(SignExtend.extendUnsigned(Integer.toBinaryString(PC.get()), 32));
+		ComponentManager.flowControlMux.output.set(SignExtend.extendUnsigned(Integer.toBinaryString(PC.get() * 4), 32));
 	}
 
 	public static boolean executeStep()
@@ -150,9 +150,10 @@ public class MasterController extends Thread
 	{
 		reset();
 		InstructionMemory.clear();
-                RegisterFile.resetRegs();
-                Memory.resetMem();
-                ComponentManager.flowControlMux.output.set(SignExtend.extendUnsigned(Integer.toBinaryString(PC.get()), 32));
+		InstructionLine.instructionLines.clear();
+		RegisterFile.resetRegs();
+		Memory.resetMem();
+		ComponentManager.flowControlMux.output.set(SignExtend.extendUnsigned(Integer.toBinaryString(PC.get() * 4), 32));
                 
 	}
 

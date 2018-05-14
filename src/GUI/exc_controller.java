@@ -21,13 +21,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.layout.BorderPane;
 
 public class exc_controller {
 
     static ConsoleView consoleview2;
+    static RadioMenuItem darkButton, lightButton;
 
     @FXML
     public MenuBar mnubar_menu;
@@ -35,10 +39,13 @@ public class exc_controller {
     public ConsoleView consoleView;
     public TableView table_registers,
             table_inst;
+    public RadioMenuItem lightThemePls, darkThemePls;
+    public BorderPane bordermainlayout_exc;
     public Slider slider_speed;
     public TextField sliderValue;
     public Button pauseXresumeBtn;
     static TextField placeHolder;
+    static BorderPane excScenePane;
 
     public static boolean paused = false;
 
@@ -47,6 +54,26 @@ public class exc_controller {
     {
         Main.stage.setScene(Main.instScene);
         MasterController.hardReset();
+    }
+    
+    public void applyLight()
+    {
+        bordermainlayout_exc.setBlendMode(null);
+        inst_controller.instScenePane.setBlendMode(null);
+        inst_controller.lightButton.setSelected(true);
+        inst_controller.darkButton.setSelected(false);
+        lightThemePls.setSelected(true);
+        darkThemePls.setSelected(false);
+    }
+    
+    public void applyDark()
+    {
+        bordermainlayout_exc.setBlendMode(BlendMode.EXCLUSION);
+        inst_controller.instScenePane.setBlendMode(BlendMode.EXCLUSION);
+        inst_controller.lightButton.setSelected(false);
+        inst_controller.darkButton.setSelected(true);
+        lightThemePls.setSelected(false);
+        darkThemePls.setSelected(true);
     }
 
     public void close()
@@ -59,7 +86,7 @@ public class exc_controller {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("about developers");
-        Label label = new Label("developed by:\n\n\nRobear Wagih Selwans\n\nYoussef Ossma Eid\n\nMohamed Alaa\n\nAhmed Tawfeek");
+        Label label = new Label("developed by:\n\n\nRobear Wagih Selwans\n\nYoussef Ossama Eid\n\nMohamed Alaa\n\nAhmed Tawfeek");
         label.setFont(Font.font("serif",14));
         Button close = new Button("close");
         close.setOnAction(e -> window.close());
@@ -75,6 +102,10 @@ public class exc_controller {
 
     public void initialize()
     {
+        darkButton = darkThemePls;
+        lightButton = lightThemePls;
+        darkThemePls.setSelected(true);
+        excScenePane = bordermainlayout_exc;
         consoleview2 = consoleView;
         System.setIn(consoleView.getIn());
         System.setOut(consoleView.getOut());
